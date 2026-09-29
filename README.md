@@ -3,8 +3,9 @@
 The site and payment server for Paul Chege — insurance broker with Bizsure,
 financial coach, and author of *The Anatomy of Smart Borrowing*.
 
-See `SPECIFICATION.md` for what this is meant to be and `PROGRESS.md` for
-where it has got to.
+See `SPECIFICATION.md` for what this is meant to be, `PROGRESS.md` for
+where it has got to, and `FLOWS.md` for every path a visitor can take and
+what happens when each dependency fails.
 
 ## Layout
 
