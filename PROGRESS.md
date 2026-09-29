@@ -194,7 +194,7 @@ the only booking button was in the hero.
 
 #### Tasks
 - [x] Give away a chapter in exchange for an email address
-- [ ] Keep a booking button reachable on a phone
+- [x] Keep a booking button reachable on a phone
 
 ### P2-M13 — Deploy to Vercel ⬜ NOT STARTED
 
