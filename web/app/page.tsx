@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
+import { StickyBook } from "@/components/layout/StickyBook";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { Hero } from "@/components/sections/Hero";
@@ -41,6 +42,8 @@ export default function Home() {
       </main>
 
       <Footer />
+
+      <StickyBook onBook={() => openBooking()} />
 
       <BookSession open={booking.open} initialType={booking.type}
                    onClose={() => setBooking({ open: false })} />

@@ -5,6 +5,7 @@ import type { Payee, Session } from "@/lib/api";
 
 type Health = {
   live?: boolean;
+  chapterReady?: boolean;
   catalogue?: Record<string, { price: number; label: string; digital: boolean }>;
   sessions?: Record<string, Session>;
   payee?: Payee;
@@ -49,5 +50,5 @@ export function usePrices() {
   const fmt = (sku: string) =>
     "KES " + price(sku).toLocaleString("en-KE", { maximumFractionDigits: 0 });
 
-  return { health, price, fmt, live: !!health?.live };
+  return { health, price, fmt, live: !!health?.live, chapterReady: !!health?.chapterReady };
 }
