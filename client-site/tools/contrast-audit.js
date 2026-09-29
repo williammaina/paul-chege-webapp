@@ -24,10 +24,66 @@
 (() => {
   const AA = { normal: 4.5, large: 3 };
 
+  /* Colour parsing.
+   *
+   * This used to be `match(/[\d.]+/g)` and take the first three numbers as
+   * r, g, b. That works for rgb() and rgba() and is catastrophically wrong
+   * for everything else: Tailwind v4 resolves `bg-white/90` to
+   * `oklab(0.999994 0.0000455678 0.0000200868 / 0.9)`, which the old
+   * parser read as near-BLACK at 90% alpha. Pure white became pure black,
+   * and six passing elements on this page were reported as failures.
+   *
+   * A contrast tool that cannot read the colours it is auditing is worse
+   * than no tool, because its numbers are believed.
+   */
+  const srgb = (v) => {
+    const u = v <= 0.0031308 ? 12.92 * v : 1.055 * Math.pow(v, 1 / 2.4) - 0.055;
+    return Math.max(0, Math.min(255, Math.round(u * 255)));
+  };
+
+  // Björn Ottosson's Oklab, back to linear sRGB and then gamma-encoded.
+  const oklabToRgb = (L, A, B) => {
+    const l_ = L + 0.3963377774 * A + 0.2158037573 * B;
+    const m_ = L - 0.1055613458 * A - 0.0638541728 * B;
+    const s_ = L - 0.0894841775 * A - 1.2914855480 * B;
+    const l = l_ ** 3, m = m_ ** 3, s2 = s_ ** 3;
+    return {
+      r: srgb(+4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s2),
+      g: srgb(-1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s2),
+      b: srgb(-0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s2),
+    };
+  };
+
+  const nums = (c) => (String(c).match(/-?[\d.]+(?:e-?\d+)?%?/g) || [])
+    .map((n) => (n.endsWith("%") ? parseFloat(n) / 100 : parseFloat(n)));
+
   const parse = (c) => {
-    const m = String(c).match(/[\d.]+/g);
-    if (!m) return null;
-    return { r: +m[0], g: +m[1], b: +m[2], a: m[3] === undefined ? 1 : +m[3] };
+    const str = String(c).trim();
+    if (!str || str === "transparent") return { r: 0, g: 0, b: 0, a: 0 };
+
+    const n = nums(str);
+    if (!n.length) return null;
+
+    if (/^oklch/i.test(str)) {
+      const [L, C, H, a] = n;
+      const rad = (H || 0) * Math.PI / 180;
+      return { ...oklabToRgb(L, C * Math.cos(rad), C * Math.sin(rad)), a: a === undefined ? 1 : a };
+    }
+    if (/^oklab/i.test(str)) {
+      const [L, A, B, a] = n;
+      return { ...oklabToRgb(L, A, B), a: a === undefined ? 1 : a };
+    }
+    if (/^color\(\s*display-p3/i.test(str)) {
+      // P3 is wider than sRGB, so a P3 colour read as sRGB comes out a
+      // little less saturated than it really is. Every P3 value on these
+      // pages is decorative — no text is declared in it — and a slightly
+      // conservative reading of a decorative layer is the safe direction
+      // to be wrong in.
+      const [r, g, b, a] = n;
+      return { r: srgb(r), g: srgb(g), b: srgb(b), a: a === undefined ? 1 : a };
+    }
+    // rgb(), rgba(), and the space-separated `rgb(r g b / a)` form.
+    return { r: n[0], g: n[1], b: n[2], a: n[3] === undefined ? 1 : n[3] };
   };
   const over = (f, b) => ({
     r: f.r * f.a + b.r * (1 - f.a),

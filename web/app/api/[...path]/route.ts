@@ -14,3 +14,9 @@ const serve = (request: Request) => runNodeHandler(handleRequest, request);
 export const GET = serve;
 export const POST = serve;
 export const OPTIONS = serve;
+
+/* HEAD is not optional. Next answers 404 for a method with no export, and
+   uptime monitors and load balancers probe with HEAD — without this the
+   health endpoint reports the service as permanently down. The router
+   treats it as a GET and the runtime drops the body. */
+export const HEAD = serve;

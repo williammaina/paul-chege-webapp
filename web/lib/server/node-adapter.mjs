@@ -47,8 +47,11 @@ async function toNodeRequest(request) {
     ? Readable.fromWeb(request.body)
     : Readable.from([]);
 
-  // The router reads `req.url` as a path plus query, the way Node gives it.
-  body.method = request.method;
+  // The router matches on `method === "GET"`, so a HEAD arrives as a 404
+  // from our own routing table rather than from Next. HEAD is a GET whose
+  // body is discarded, so it is presented as one and the body is dropped
+  // on the way out.
+  body.method = request.method === "HEAD" ? "GET" : request.method;
   body.url = url.pathname + url.search;
   body.headers = headers;
   body.socket = { remoteAddress: headers["x-forwarded-for"]?.split(",")[0]?.trim() || "127.0.0.1" };
@@ -62,10 +65,15 @@ export async function runNodeHandler(handler, request) {
   // Start the handler but do not await it: a streamed download writes its
   // body over many ticks and only settles once the stream is finished.
   const done = Promise.resolve(handler(req, res)).catch((err) => {
+    // The router turns everything it expects into a message written for
+    // the buyer. Anything reaching here is unexpected, and its message is
+    // for us — it can carry a path, a driver's internals, or the shape of
+    // a query. It goes to the log; the caller gets a sentence.
+    console.error("[api]", req.method, req.url, err);
     if (!res.headersSent) {
       res.writeHead(500, { "Content-Type": "application/json" });
     }
-    res.end(JSON.stringify({ error: err?.message || "Something went wrong." }));
+    res.end(JSON.stringify({ error: "Something went wrong. Please try again." }));
   });
 
   await Promise.race([res._ready, done]);
@@ -81,6 +89,11 @@ export async function runNodeHandler(handler, request) {
   }
 
   const status = res.statusCode;
-  const empty = status === 204 || status === 304;
-  return new Response(empty ? null : Readable.toWeb(res), { status, headers });
+  const empty = status === 204 || status === 304 || request.method === "HEAD";
+  if (empty) {
+    // Drain, or the stream stays open holding the handler's write side.
+    res.resume();
+    return new Response(null, { status, headers });
+  }
+  return new Response(Readable.toWeb(res), { status, headers });
 }

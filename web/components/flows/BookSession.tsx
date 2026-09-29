@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { api, money, type Booking, type Day, type Payee, type Session } from "@/lib/api";
+import { site } from "@/lib/content/site";
 import { Modal } from "./Modal";
 import { Assurance } from "./Assurance";
 import { usePayment } from "./usePayment";
@@ -30,12 +31,21 @@ export function BookSession({
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [confirmed, setConfirmed] = useState<Booking | null>(null);
-  const { state, watch, reset } = usePayment();
+  const [diary, setDiary] = useState<"loading" | "ready" | "down">("loading");
+  const { state, watch, reset, busy: paying, generation } = usePayment();
 
   useEffect(() => { if (initialType) setType(initialType); }, [initialType]);
 
-  const load = () =>
-    api.slots().then((d) => { setDays(d.days); setSessions(d.sessions); setPayee(d.payee); }).catch(() => {});
+  /* A failed diary used to be swallowed, leaving an empty grid, a dead
+     button and no explanation — the exact state a visitor hits if the API
+     is down or the page was deployed without it. It says so now, and
+     gives them the phone number instead of a dead end. */
+  const load = () => {
+    setDiary("loading");
+    return api.slots()
+      .then((d) => { setDays(d.days); setSessions(d.sessions); setPayee(d.payee); setDiary("ready"); })
+      .catch(() => setDiary("down"));
+  };
   useEffect(() => { if (open) load(); }, [open]);
 
   // The countdown reads the hold's own deadline, not a tick counter: a
@@ -72,15 +82,20 @@ export function BookSession({
   async function go() {
     if (!held) return;
     setBusy(true); setError(null);
+    const mine = generation.current;
     try {
       if (!held.amount) {
         const r = await api.confirmFree({ bookingRef: held.ref, ...form });
+        if (generation.current !== mine) return;
         setConfirmed(r.booking);
       } else {
         const r = await api.checkout({ bookingRef: held.ref, ...form });
+        // The dialog may have been closed while Safaricom was thinking.
+        if (generation.current !== mine) return;
         watch(r.orderId, r.amount);
       }
     } catch (e) {
+      if (generation.current !== mine) return;
       setError(e instanceof Error ? e.message : "Something went wrong.");
     } finally { setBusy(false); }
   }
@@ -89,7 +104,8 @@ export function BookSession({
   const mm = String(Math.floor(left / 60)); const ss = String(left % 60).padStart(2, "0");
 
   return (
-    <Modal open={open} onClose={close} kicker="Consultation" title="Book a Session with Paul">
+    <Modal open={open} onClose={close} locked={paying}
+           kicker="Consultation" title="Book a Session with Paul">
       {done ? (
         <Confirmed b={done} onClose={close} />
       ) : state.phase === "prompting" ? (
@@ -116,7 +132,25 @@ export function BookSession({
             ))}
           </div>
 
-          <p className="mt-4 text-[.68rem] font-extrabold uppercase tracking-[.13em] text-[#8d9aa8]">Choose a date</p>
+          {diary === "down" && (
+            <div className="mt-4 rounded-[13px] border border-[#f1c9c9] bg-[#fdf2f2] px-4 py-3.5 text-[.88rem] leading-relaxed text-[#8c2f2f]">
+              We cannot reach the diary right now, so we cannot show you what is free.
+              Call <a href={site.phoneHref} className="font-bold underline">{site.phone}</a> and
+              a person will book you in.
+            </div>
+          )}
+          {diary === "loading" && (
+            <p className="mt-4 text-[.88rem] text-[#8d9aa8]">Loading the diary…</p>
+          )}
+          {diary === "ready" && days.length === 0 && (
+            <div className="mt-4 rounded-[13px] bg-[#f5f8fa] px-4 py-3.5 text-[.88rem] leading-relaxed text-[#5a6a7c]">
+              Every slot in the next two weeks is taken. Call{" "}
+              <a href={site.phoneHref} className="font-bold text-navy underline">{site.phone}</a>{" "}
+              and we will find you a time.
+            </div>
+          )}
+
+          <p className={`mt-4 text-[.68rem] font-extrabold uppercase tracking-[.13em] text-[#8d9aa8] ${diary === "ready" && days.length ? "" : "hidden"}`}>Choose a date</p>
           <div className="mt-2 grid grid-cols-3 gap-1.5 sm:grid-cols-6">
             {days.map((d) => {
               const free = d.slots.some((s) => s.available);
