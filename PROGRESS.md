@@ -20,7 +20,7 @@
 Everything built before the repository existed, landing as one milestone.
 
 #### Tasks
-- [ ] Add the advisory site, its build scripts and its contrast audit
+- [x] Add the advisory site, its build scripts and its contrast audit
 - [ ] Add the payment, booking, Meet, email and YouTube server
 - [ ] Keep the earlier React prototype for reference
 
