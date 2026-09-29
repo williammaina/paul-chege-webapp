@@ -1,6 +1,6 @@
 # Paul Chege Financial Advisory — Progress
 
-**Phase 2 of 4 · P2-M11 next · 10 of 18 milestones complete**
+**Phase 2 of 4 · P2-M11 in progress · 10 of 19 milestones complete**
 
 ## How this file works
 
@@ -165,9 +165,27 @@ three entry points all opened the same dialog the hero's own button does.
 #### Tasks
 - [x] Remove the side panel and give the hero two columns
 
-### P2-M11 — Deploy to Vercel ⬜ NOT STARTED
+### P2-M11 — Correct the Bizsure relationship 🔄 IN PROGRESS
 
-**Branch:** `feat/p2-m11-vercel`
+**Branch:** `fix/p2-m11-bizsure-and-hero-panel`
+
+Paul told us Bizsure is a brand he has worked with, not part of his
+business. The site said otherwise in eleven places, and one of them was
+not merely wording: the M-Pesa payee defaulted to Bizsure, so the
+assurance panel would have told real buyers to cancel a genuine payment
+because the name on their handset did not match.
+
+The hero panel removed in P2-M10 is restored in the same branch, at
+Paul's request and to his wording.
+
+#### Tasks
+- [x] Remove every claim that Bizsure is part of the business
+- [x] Use Paul's own contact details and payee name
+- [ ] Restore the perspective panel to the hero
+
+### P2-M12 — Deploy to Vercel ⬜ NOT STARTED
+
+**Branch:** `feat/p2-m12-vercel`
 
 Two things make this a storage decision before it is a deployment one,
 and both let money go wrong rather than merely breaking a page:
