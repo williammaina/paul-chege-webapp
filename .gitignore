@@ -1,0 +1,32 @@
+# The workflow plugin marketplace is its own repository (ledgry/claude) that
+# happens to live in this folder. It is not part of this project and must not
+# be committed into it, as a submodule or otherwise.
+claude/
+
+# Dependencies
+node_modules/
+
+# Build output. `viewable/index.html` is the source of truth; everything
+# below is regenerated from it by the scripts in README-BUILD.md, and a
+# committed copy is a copy that drifts.
+client-site/Paul_Chege_Financial_Advisory_Website/
+client-site/viewable/js/
+client-site/build/
+client-site/.tw.css
+*.zip
+
+# Runtime state, not source. The booking and order stores are written by the
+# server as people use it; committing them publishes test bookings and makes
+# every run a merge conflict.
+paul-chege-tv/server/data/*.json
+
+# Secrets. Every integration reads its credentials from the environment.
+.env
+.env.*
+!.env.example
+
+# Local noise
+*.log
+.DS_Store
+__pycache__/
+.venv/
