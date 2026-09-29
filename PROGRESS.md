@@ -1,6 +1,6 @@
 # Paul Chege Financial Advisory — Progress
 
-**Phase 2 of 4 · P2-M08 next · 7 of 15 milestones complete**
+**Phase 2 of 4 · P2-M09 next · 8 of 16 milestones complete**
 
 ## How this file works
 
@@ -137,9 +137,19 @@ visitor only reaches when something is already wrong.
 - [x] Drop GSAP, which was installed and never used
 - [x] Re-check the static site with the corrected contrast parser
 
-### P2-M08 — Deploy to Vercel ⬜ NOT STARTED
+### P2-M08 — Sixth hunt: what a stranger's machine sees ✅ COMPLETE
 
-**Branch:** `feat/p2-m08-vercel`
+**Branch:** `fix/p2-m08-hunt-round-six` · merged into `development`
+
+#### Tasks
+- [x] Add robots and a sitemap, and keep crawlers out of the API
+- [x] Replace Next's blank "Application error" with a page that helps
+- [x] Add structured data built only from claims the page already makes
+- [x] Add a skip link and declare the language as Kenyan English
+
+### P2-M09 — Deploy to Vercel ⬜ NOT STARTED
+
+**Branch:** `feat/p2-m09-vercel`
 
 Two things make this a storage decision before it is a deployment one,
 and both let money go wrong rather than merely breaking a page:
