@@ -1,6 +1,6 @@
 # Paul Chege Financial Advisory — Progress
 
-**Phase 2 of 4 · P2-M06 next · 5 of 13 milestones complete**
+**Phase 2 of 4 · P2-M07 next · 6 of 14 milestones complete**
 
 ## How this file works
 
@@ -120,13 +120,31 @@ visitor only reaches when something is already wrong.
 - [x] Ignore a checkout that resolves after its dialog was closed
 - [x] Stop a stray click dismissing a dialog while money is moving
 
-### P2-M06 — Deploy to Vercel ⬜ NOT STARTED
+### P2-M06 — Fourth hunt: the server's edges ✅ COMPLETE
 
-**Branch:** `feat/p2-m06-vercel`
+**Branch:** `fix/p2-m06-hunt-round-four` · merged into `development`
 
-The file-backed order and booking stores do not survive a serverless
-filesystem, so this milestone is a storage decision before it is a
-deployment one.
+#### Tasks
+- [x] Answer HEAD, which monitors use and the router was refusing
+- [x] Stop returning an unexpected error's own message to the caller
+
+### P2-M07 — Deploy to Vercel ⬜ NOT STARTED
+
+**Branch:** `feat/p2-m07-vercel`
+
+Two things make this a storage decision before it is a deployment one,
+and both let money go wrong rather than merely breaking a page:
+
+- **The order and booking stores are JSON files.** A serverless filesystem
+  is per-invocation, so a slot held by one request is invisible to the
+  next and two people can pay for the same hour.
+- **The rate limiter is an in-memory `Map`.** It resets on every cold
+  start and is per-instance, so the five-prompts-per-phone rule that
+  stops somebody using Paul's shortcode to spam STK pushes at a stranger
+  is unenforced the moment there is more than one instance.
+
+Both need shared storage — Postgres, Redis or Vercel KV — before this can
+be deployed rather than after.
 
 ---
 
