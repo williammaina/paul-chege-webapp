@@ -1,6 +1,6 @@
 # Paul Chege Financial Advisory — Progress
 
-**Phase 2 of 4 · P2-M09 next · 8 of 16 milestones complete**
+**Phase 2 of 4 · P2-M10 next · 9 of 17 milestones complete**
 
 ## How this file works
 
@@ -147,9 +147,16 @@ visitor only reaches when something is already wrong.
 - [x] Add structured data built only from claims the page already makes
 - [x] Add a skip link and declare the language as Kenyan English
 
-### P2-M09 — Deploy to Vercel ⬜ NOT STARTED
+### P2-M09 — Map the flows ✅ COMPLETE
 
-**Branch:** `feat/p2-m09-vercel`
+**Branch:** `docs/p2-m09-flow-map` · merged into `development`
+
+#### Tasks
+- [x] Write down every path and every failure, from walking them
+
+### P2-M10 — Deploy to Vercel ⬜ NOT STARTED
+
+**Branch:** `feat/p2-m10-vercel`
 
 Two things make this a storage decision before it is a deployment one,
 and both let money go wrong rather than merely breaking a page:
