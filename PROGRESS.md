@@ -1,6 +1,6 @@
 # Paul Chege Financial Advisory — Progress
 
-**Phase 1 of 3 · P1-M02 next · 1 of 6 milestones complete**
+**Phase 2 of 4 · P2-M02 in progress · 2 of 10 milestones complete**
 
 ## How this file works
 
@@ -47,13 +47,59 @@ supply, and the site is honest but incomplete until they exist.
 
 ---
 
-## Phase 2 — Hardening ⬜ NOT STARTED
+## Phase 2 — The Next.js rebuild 🔄 IN PROGRESS
 
-### P2-M01 — Analytics and error reporting ⬜ NOT STARTED
-### P2-M02 — Deployment and CI ⬜ NOT STARTED
+Ships as `v0.2.0`. The static page and its hand-rolled server become a
+Next.js application: App Router, Tailwind, React Three Fiber, GSAP and
+Lenis, deployable to Vercel.
+
+The domain modules are **not** rewritten. `daraja`, `bookings`, `store`,
+`google`, `email`, `templates` and `youtube` carry 185 assertions between
+them, including the Daraja query that must not be read as a verdict while
+the buyer is still holding their phone. Only the HTTP layer changes.
+
+### P2-M01 — Scaffold and design tokens ✅ COMPLETE
+
+**Branch:** `feat/p2-m01-nextjs-scaffold` · merged into `development`
+
+#### Tasks
+- [x] Scaffold the app, the design tokens and the self-hosted fonts
+- [x] Move the domain modules under `web/lib/server`
+
+### P2-M02 — The application 🔄 IN PROGRESS
+
+**Branch:** `feat/p2-m02-route-handlers`
+
+Originally planned as three milestones — the API, the page, the motion.
+They were built and verified together against one running server, so
+splitting them into three branches after the fact would have meant three
+pull requests that could not be reviewed independently. Folded into one
+and recorded here rather than left to look like the plan was followed.
+
+#### Tasks
+- [x] Serve the whole API through Route Handlers on the shared router
+- [x] Build every section as a component with the real content
+- [x] Port the hero shader, the R3F book, Lenis, magnets and the skew
+- [x] Port the hold-then-pay booking flow and the book checkout
+- [x] Give the API suite a harness that runs against Next
+
+### P2-M03 — Deploy to Vercel ⬜ NOT STARTED
+
+**Branch:** `feat/p2-m03-vercel`
+
+The file-backed order and booking stores do not survive a serverless
+filesystem, so this milestone is a storage decision before it is a
+deployment one.
 
 ---
 
-## Phase 3 — After delivery ⬜ NOT STARTED
+## Phase 3 — Hardening ⬜ NOT STARTED
 
-### P3-M01 — Content editing without a developer ⬜ NOT STARTED
+### P3-M01 — Analytics and error reporting ⬜ NOT STARTED
+### P3-M02 — Deployment and CI ⬜ NOT STARTED
+
+---
+
+## Phase 4 — After delivery ⬜ NOT STARTED
+
+### P4-M01 — Content editing without a developer ⬜ NOT STARTED

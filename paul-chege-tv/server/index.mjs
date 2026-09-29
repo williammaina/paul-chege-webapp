@@ -9,16 +9,18 @@
  * No dependencies: Node 18+ only. Start it with `npm run server`.
  */
 import { createServer } from "node:http";
+import { fileURLToPath } from "node:url";
 import { createReadStream, statSync, existsSync, realpathSync } from "node:fs";
-import { resolve, basename, join, extname, normalize } from "node:path";
-import { loadEnv } from "./env.mjs";
-import * as store from "./store.mjs";
-import * as daraja from "./daraja.mjs";
-import * as diary from "./bookings.mjs";
-import * as google from "./google.mjs";
-import * as email from "./email.mjs";
-import * as youtube from "./youtube.mjs";
-import * as tpl from "./templates.mjs";
+import { resolve, basename, dirname, join, extname, normalize } from "node:path";
+const HERE = dirname(fileURLToPath(import.meta.url));
+import { loadEnv } from "../../web/lib/server/env.mjs";
+import * as store from "../../web/lib/server/store.mjs";
+import * as daraja from "../../web/lib/server/daraja.mjs";
+import * as diary from "../../web/lib/server/bookings.mjs";
+import * as google from "../../web/lib/server/google.mjs";
+import * as email from "../../web/lib/server/email.mjs";
+import * as youtube from "../../web/lib/server/youtube.mjs";
+import * as tpl from "../../web/lib/server/templates.mjs";
 
 loadEnv();
 
@@ -52,7 +54,7 @@ const PAYEE = {
   licence: process.env.IRA_LICENCE || null,
 };
 
-const EBOOK = resolve(process.env.EBOOK_PATH || new URL("./assets/anatomy-of-smart-borrowing.pdf", import.meta.url).pathname);
+const EBOOK = resolve(process.env.EBOOK_PATH || join(HERE, "assets", "anatomy-of-smart-borrowing.pdf"));
 const EBOOK_NAME = process.env.EBOOK_FILENAME || "The Anatomy of Smart Borrowing — Paul Chege.pdf";
 
 /** Identity block every email signs off with. */
@@ -662,7 +664,7 @@ async function episodes(res, sort) {
    URL to configure, and no CORS to get wrong.
    ──────────────────────────────────────────────────────────────────────── */
 
-const SITE_DIR = resolve(process.env.SITE_DIR || new URL("../dist", import.meta.url).pathname);
+const SITE_DIR = resolve(process.env.SITE_DIR || join(HERE, "..", "dist"));
 const SERVE_SITE = process.env.SERVE_SITE !== "0" && existsSync(SITE_DIR);
 
 const MIME = {
@@ -737,7 +739,15 @@ function serveStatic(req, res, urlPath) {
 
 /* ── wiring ───────────────────────────────────────────────────────────── */
 
-const server = createServer(async (req, res) => {
+/**
+ * The router, as a plain Node request handler.
+ *
+ * Exported rather than left buried inside `createServer` so the Next.js app
+ * can serve the identical API by adapting a Web `Request` onto it, instead
+ * of carrying a second copy of six hundred lines of orchestration that
+ * would drift from this one the first time either was touched.
+ */
+export const handleRequest = async (req, res) => {
   cors(req, res);
   if (req.method === "OPTIONS") { res.writeHead(204); return res.end(); }
 
@@ -798,7 +808,9 @@ const server = createServer(async (req, res) => {
     if (status >= 500) console.error("[error]", req.method, path, err);
     if (!res.headersSent) json(res, status, { error: err.message || "Something went wrong." });
   }
-});
+};
+
+const server = createServer(handleRequest);
 
 /** Sweep: catches orders whose callback never arrived at all. */
 setInterval(async () => {
@@ -853,7 +865,12 @@ setInterval(async () => {
   }
 }, 60_000).unref();
 
-server.listen(PORT, () => {
+/* Listen only when this file was run, never when it was imported. Next.js
+   imports it for the router and must not also open a socket. */
+const RAN_DIRECTLY = process.argv[1]
+  && resolve(process.argv[1]) === resolve(fileURLToPath(import.meta.url));
+
+if (RAN_DIRECTLY) server.listen(PORT, () => {
   const live = daraja.configured();
   console.log("┌─ Paul Chege payments · :" + PORT);
   console.log("│  mode      " + (live ? "LIVE — " + (process.env.MPESA_BASE || "sandbox.safaricom.co.ke") : "DEMO (no credentials; nothing is charged)"));

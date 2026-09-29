@@ -9,9 +9,18 @@
  */
 import { randomBytes, randomUUID, timingSafeEqual } from "node:crypto";
 import { readFileSync, writeFileSync, renameSync, mkdirSync, existsSync } from "node:fs";
-import { dirname, resolve } from "node:path";
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const FILE = resolve(process.env.ORDER_STORE || new URL("./data/orders.json", import.meta.url).pathname);
+/* `new URL("./x", import.meta.url).pathname` looks tidy and has two faults:
+   a bundler reads it as a static asset reference and fails the build when
+   the file is not there yet, and on Windows it yields "/C:/..." with a
+   leading slash that no filesystem call accepts. Resolve the directory
+   once, properly, instead. */
+const HERE = dirname(fileURLToPath(import.meta.url));
+
+
+const FILE = resolve(process.env.ORDER_STORE || join(HERE, "data", "orders.json"));
 const TOKEN_HOURS = Number(process.env.DOWNLOAD_TTL_HOURS || 72);
 const MAX_DOWNLOADS = Number(process.env.DOWNLOAD_MAX || 6);
 
