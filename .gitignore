@@ -31,6 +31,11 @@ paul-chege-tv/server/data/*.json
 .env.*
 !.env.example
 
+# An editor's automatic recovery points: a full copy of the working tree
+# taken before bulk edits, build artifacts and all. 842 files and 20MB of
+# it reached a commit through `git add -A` before this line existed.
+.punam-snapshots/
+
 # Local noise
 *.log
 .DS_Store
