@@ -1,6 +1,6 @@
 # Paul Chege Financial Advisory — Progress
 
-**Phase 2 of 4 · P2-M10 next · 9 of 17 milestones complete**
+**Phase 2 of 4 · P2-M11 next · 10 of 18 milestones complete**
 
 ## How this file works
 
@@ -154,9 +154,20 @@ visitor only reaches when something is already wrong.
 #### Tasks
 - [x] Write down every path and every failure, from walking them
 
-### P2-M10 — Deploy to Vercel ⬜ NOT STARTED
+### P2-M10 — Drop the hero side panel ✅ COMPLETE
 
-**Branch:** `feat/p2-m10-vercel`
+**Branch:** `fix/p2-m10-drop-hero-aside` · merged into `development`
+
+Asked for directly. The hero is two columns now, and nothing was lost
+with it: its quote is Paul's own words rather than a client's, and its
+three entry points all opened the same dialog the hero's own button does.
+
+#### Tasks
+- [x] Remove the side panel and give the hero two columns
+
+### P2-M11 — Deploy to Vercel ⬜ NOT STARTED
+
+**Branch:** `feat/p2-m11-vercel`
 
 Two things make this a storage decision before it is a deployment one,
 and both let money go wrong rather than merely breaking a page:
