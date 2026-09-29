@@ -14,7 +14,7 @@ export function Hero({ onBook }: { onBook: () => void }) {
       <HeroCanvas />
 
       <div className="relative z-10 mx-auto grid w-[min(1500px,calc(100%-32px))] gap-4
-                      lg:grid-cols-[minmax(320px,.92fr)_minmax(340px,1.3fr)_minmax(205px,.58fr)]">
+                      lg:grid-cols-[minmax(340px,1fr)_minmax(380px,1.05fr)]">
         {/* Frosted, so the shader behind is felt rather than hidden. The
             gold below is darker than the brand gold for the same reason:
             composited over the backdrop the brand value measures 2.95:1. */}
@@ -62,51 +62,6 @@ export function Hero({ onBook }: { onBook: () => void }) {
                  className="object-cover object-[center_16%]" />
         </div>
 
-        <aside className="flex flex-col gap-3 rounded-[18px] bg-[#0e2439]/70 p-3 backdrop-blur-[20px]
-                          ring-1 ring-white/10">
-          <div className="rounded-[14px] bg-[#17344f]/70 p-5 font-[family-name:var(--font-display)] backdrop-blur-[12px]">
-            <p className="text-[.72rem] font-extrabold uppercase tracking-[.14em] text-gold-400">
-              Paul&apos;s perspective
-            </p>
-            <blockquote className="mt-3 text-[1.02rem] leading-snug text-white">
-              Better financial decisions begin with clarity — understanding the
-              commitment before making it.
-            </blockquote>
-            <p className="mt-4 text-[.86rem] font-semibold text-white">Paul Chege</p>
-            <p className="text-[.7rem] text-[#9fb0be]">Financial Advisor • Author • Educator</p>
-          </div>
-
-          <div className="rounded-[14px] p-4">
-            <p className="text-[.68rem] font-extrabold uppercase tracking-[.13em] text-[#8fa3bd]">
-              Start with what matters to you
-            </p>
-            <ul className="mt-3 space-y-2.5">
-              {[
-                ["Personal Finance", "Build clarity around your financial direction."],
-                ["Borrowing Decisions", "Understand loans before you commit."],
-                ["Business Finance", "Think clearly about capital and growth."],
-              ].map(([t, s], i) => (
-                <li key={t}>
-                  <button onClick={onBook} className="group flex w-full items-start gap-3 text-left">
-                    <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full border
-                                     border-gold-400/50 text-[.65rem] font-extrabold text-gold-400 tnum">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span className="min-w-0">
-                      <b className="block text-[.82rem] text-white">{t}</b>
-                      <small className="block text-[.68rem] leading-tight text-[#9fb0be]">{s}</small>
-                    </span>
-                    <i className="ml-auto not-italic text-gold-400 transition group-hover:translate-x-0.5">→</i>
-                  </button>
-                </li>
-              ))}
-            </ul>
-            <button onClick={onBook}
-                    className="magnetic mt-4 w-full rounded-[10px] bg-gold-bright py-3 text-[.85rem] font-extrabold text-navy">
-              Book a Consultation →
-            </button>
-          </div>
-        </aside>
       </div>
     </section>
   );
