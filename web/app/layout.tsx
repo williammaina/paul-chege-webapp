@@ -19,8 +19,7 @@ export const metadata: Metadata = {
   },
   description:
     "Practical financial guidance for individuals, professionals and business " +
-    "owners in Kenya. Licensed insurance broker with Bizsure, financial coach, " +
-    "and author of The Anatomy of Smart Borrowing.",
+    "owners in Kenya. Financial coach and author of The Anatomy of Smart Borrowing.",
   openGraph: {
     type: "website",
     locale: "en_KE",

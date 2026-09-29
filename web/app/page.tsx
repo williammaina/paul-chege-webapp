@@ -20,7 +20,6 @@ import { usePrices } from "@/lib/usePrices";
 export default function Home() {
   const [booking, setBooking] = useState<{ open: boolean; type?: "free" | "paid" }>({ open: false });
   const [buying, setBuying] = useState<"ebook" | "physical" | null>(null);
-  const { health } = usePrices();
 
   const openBooking = (type?: "free" | "paid") => setBooking({ open: true, type });
 
@@ -41,7 +40,7 @@ export default function Home() {
         <Contact onBook={openBooking} />
       </main>
 
-      <Footer licence={health?.payee?.licence} />
+      <Footer />
 
       <BookSession open={booking.open} initialType={booking.type}
                    onClose={() => setBooking({ open: false })} />

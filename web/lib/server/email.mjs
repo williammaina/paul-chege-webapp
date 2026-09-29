@@ -13,7 +13,7 @@
 
 const FROM_NAME = () => process.env.EMAIL_FROM_NAME || "Paul Chege Consultancy TV";
 const FROM_ADDR = () => process.env.EMAIL_FROM || "";
-const REPLY_TO = () => process.env.EMAIL_REPLY_TO || process.env.RECEIPT_REPLY_TO || "info@bizsure.co.ke";
+const REPLY_TO = () => process.env.EMAIL_REPLY_TO || process.env.RECEIPT_REPLY_TO || "hello@paulchege.co.ke";
 const BCC = () => process.env.EMAIL_BCC || "";     // Paul's own copy of everything
 
 export function configured() {

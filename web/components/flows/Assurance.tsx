@@ -1,5 +1,6 @@
 import type { Payee } from "@/lib/api";
 import { money } from "@/lib/api";
+import { site } from "@/lib/content/site";
 
 /**
  * What a buyer checks on their own handset before typing a PIN.
@@ -21,21 +22,21 @@ export function Assurance({ amount, payee }: { amount: number; payee: Payee | nu
       </h4>
       <ul className="mt-2.5 space-y-2.5">
         <Item>
-          The prompt will ask for <b>{money(amount)}</b>{code}, and will name{" "}
-          <b>{payee?.name || "Bizsure Insurance Brokers"}</b>. If it says any other name
-          or amount, cancel it and call us.
+          The prompt will ask for <b>{money(amount)}</b>{code}
+          {payee?.name ? <>, and will name <b>{payee.name}</b></> : null}.
+          {payee?.name
+            ? " If it says any other name or amount, cancel it and call us."
+            : " If the amount is not what you expected, cancel it and call us."}
         </Item>
         <Item>
           You enter your PIN on your own handset, never on this page.{" "}
           <b>Nobody here will ever ask you for your M-Pesa PIN.</b>
         </Item>
-        <Item>
-          A licensed insurance broker, at {payee?.location || "Ciata City Mall, Ridgeways, Nairobi"}.
-        </Item>
+        {payee?.location ? <Item>Registered at {payee.location}.</Item> : null}
       </ul>
       <p className="mt-3 rounded-[10px] bg-[rgba(0,166,81,.08)] px-3.5 py-2.5 text-[.82rem] leading-relaxed text-[#2c4a38]">
         If the money leaves your account and you do not get what you paid for, call{" "}
-        <b>{payee?.phone || "+254 710 890 994"}</b> with your M-Pesa message and it is
+        <b>{payee?.phone || site.phone}</b> with your M-Pesa message and it is
         refunded in full.
       </p>
     </div>
