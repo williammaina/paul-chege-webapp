@@ -1,6 +1,6 @@
 # Paul Chege Financial Advisory — Progress
 
-**Phase 1 of 3 · P1-M01 in progress · 0 of 6 milestones complete**
+**Phase 1 of 3 · P1-M02 next · 1 of 6 milestones complete**
 
 ## How this file works
 
@@ -13,16 +13,16 @@
 
 ## Phase 1 — The site and its till 🔄 IN PROGRESS
 
-### P1-M01 — The advisory site and its payment server 🔄 IN PROGRESS
+### P1-M01 — The advisory site and its payment server ✅ COMPLETE
 
-**Branch:** `feat/p1-m01-site-and-payments`
+**Branch:** `feat/p1-m01-site-and-payments` · merged into `development`
 
 Everything built before the repository existed, landing as one milestone.
 
 #### Tasks
-- [ ] Add the advisory site, its build scripts and its contrast audit
-- [ ] Add the payment, booking, Meet, email and YouTube server
-- [ ] Keep the earlier React prototype for reference
+- [x] Add the advisory site, its build scripts and its contrast audit
+- [x] Add the payment, booking, Meet, email and YouTube server
+- [x] Keep the earlier React prototype for reference
 
 ### P1-M02 — Go live on real credentials ⬜ NOT STARTED
 
