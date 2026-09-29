@@ -105,7 +105,7 @@ console.log("\n\x1b[1m2 · the booking confirmation\x1b[0m");
 /* ── 3 · the desk gets its own copy ── */
 console.log("\n\x1b[1m3 · the desk copy\x1b[0m");
 {
-  const desk = await to(process.env.DESK_EMAIL || "desk@bizsure.co.ke");
+  const desk = await to(process.env.DESK_EMAIL || "desk@paulchege.co.ke");
   ok("the desk is notified", desk.length >= 1, String(desk.length));
   ok("…with the client's phone, readable enough to dial", /\+254 \d{3} \d{3} \d{3}/.test(desk[0]?.text || ""),
      (desk[0]?.text || "").split("\n").slice(0, 4).join(" / "));
@@ -185,7 +185,7 @@ console.log("\n\x1b[1m6 · the free review\x1b[0m");
 console.log("\n\x1b[1m7 · leakage\x1b[0m");
 {
   const all = await inbox();
-  const desk = process.env.DESK_EMAIL || "desk@bizsure.co.ke";
+  const desk = process.env.DESK_EMAIL || "desk@paulchege.co.ke";
   const leaked = all.filter((m) => m.to !== desk).filter((m) => {
     const others = ["grace@example.com", "reader@example.com", "mary@example.com"].filter((a) => a !== m.to);
     return others.some((a) => (m.html + m.text).includes(a));

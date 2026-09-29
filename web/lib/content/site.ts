@@ -9,15 +9,15 @@
 export const site = {
   name: "Paul Chege",
   role: "Financial Advisor • Author • Educator • Speaker",
-  phone: "+254 710 890 994",
-  phoneHref: "tel:+254710890994",
-  email: "info@bizsure.co.ke",
-  broker: "Bizsure Insurance Brokers",
-  address: ["Ciata City Mall, Block A, 2nd Floor", "Ridgeways, Kiambu Road", "Nairobi, Kenya"],
+  phone: "+254 796 882 372",
+  phoneHref: "tel:+254796882372",
+  email: "hello@paulchege.co.ke",
+  // No street address until Paul gives one. The previous entry was the
+  // office of a brand he has worked with, not his own.
+  city: "Nairobi, Kenya",
   youtube: "https://www.youtube.com/@paulchege91",
   tiktok: "https://www.tiktok.com/@paulchegetv",
   facebook: "https://www.facebook.com/paulchegeconsultancyTv",
-  bizsure: "https://www.bizsure.co.ke",
 } as const;
 
 export const nav = [
@@ -41,7 +41,7 @@ export const brands = [
   { name: "Mjengo Flexi Limited", kind: "Construction finance", file: "mjengo-flexi.webp" },
   { name: "Nicmaa Home & Office Furniture", kind: "Workspace fit-out", file: "nicmaa.webp" },
   { name: "Chic Logistics", kind: "Transport & logistics", file: "chic-logistics.webp" },
-  { name: "Bizsure Insurance Brokers", kind: "Insurance partner", file: "bizsure.webp" },
+  { name: "Bizsure Insurance Brokers", kind: "Insurance", file: "bizsure.webp" },
   { name: "Marnju Tiles", kind: "Building & finishes", file: "marnju-tiles.webp" },
   { name: "Capital Mabati", kind: "Roofing & materials", file: "capital-mabati.webp" },
 ] as const;
@@ -61,7 +61,7 @@ export const services: Service[] = [
     body: "Where your money actually goes, what it is costing you, and the two or three changes that will matter most this year.",
     cta: "Book a session" },
   { n: "02", tone: "claims", kicker: "Cover & claims", title: "Declined Claims & Cover Placement",
-    body: "A claim turned down, or cover you are not certain you have. Paul places cover as a licensed broker through Bizsure and pursues declined claims to settlement.",
+    body: "A claim turned down, or cover you are not certain you have. Paul reads the policy with you, finds what it actually says, and tells you whether the refusal stands.",
     cta: "Book a session" },
   { n: "03", tone: "sand", icon: "%", title: "Smart Borrowing & Debt Strategy",
     body: "The offer letter, read out loud before you sign it — the real rate, the fees behind it, and whether the repayment survives a bad month.",

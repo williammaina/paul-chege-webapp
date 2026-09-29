@@ -34,7 +34,7 @@ export function StructuredData({ prices }: { prices: { coaching: number; ebook: 
         "@id": "https://paulchege.co.ke/#practice",
         name: "Paul Chege — Financial Advisory",
         description:
-          "Borrowing and financial coaching, and insurance placed through a licensed broker.",
+          "Borrowing and financial coaching, and practical financial education.",
         telephone: site.phone,
         email: site.email,
         url: "https://paulchege.co.ke",
@@ -43,11 +43,9 @@ export function StructuredData({ prices }: { prices: { coaching: number; ebook: 
         paymentAccepted: "M-Pesa",
         address: {
           "@type": "PostalAddress",
-          streetAddress: "Ciata City Mall, Block A, 2nd Floor, Ridgeways, Kiambu Road",
           addressLocality: "Nairobi",
           addressCountry: "KE",
         },
-        parentOrganization: { "@type": "Organization", name: site.broker, url: site.bizsure },
         hasOfferCatalog: {
           "@type": "OfferCatalog",
           name: "Consultations",

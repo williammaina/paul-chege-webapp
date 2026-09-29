@@ -58,7 +58,7 @@ export function Nav({ onBook }: { onBook: () => void }) {
           </span>
         </a>
 
-        <nav className="hidden items-center gap-[clamp(11px,1.1vw,23px)] text-[.72rem] lg:flex xl:text-[.94rem]">
+        <nav className="hidden items-center gap-[clamp(9px,1.05vw,23px)] text-[.7rem] md:flex lg:text-[.8rem] xl:text-[.94rem]">
           {nav.map(({ href, label }) => (
             <a key={href} href={href}
                className={`relative py-1 transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5
@@ -76,12 +76,12 @@ export function Nav({ onBook }: { onBook: () => void }) {
             Book a Consultation →
           </button>
           <button onClick={() => setOpen((v) => !v)} aria-label="Menu"
-                  className="text-2xl text-white lg:hidden">☰</button>
+                  className="text-2xl text-white md:hidden">☰</button>
         </div>
       </div>
 
       {open && (
-        <nav className="absolute inset-x-0 top-full flex flex-col bg-[#0c2238] shadow-2xl lg:hidden">
+        <nav className="absolute inset-x-0 top-full flex flex-col bg-[#0c2238] shadow-2xl md:hidden">
           {nav.map(({ href, label }) => (
             <a key={href} href={href} onClick={() => setOpen(false)}
                className={`border-b border-white/5 px-6 py-3.5 text-[.92rem] ${
