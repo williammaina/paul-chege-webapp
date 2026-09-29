@@ -1,0 +1,4 @@
+data/
+.env
+assets/*.pdf
+!assets/SAMPLE*.pdf
