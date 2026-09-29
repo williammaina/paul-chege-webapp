@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { bookFacts } from "@/lib/content/site";
 import { Reveal } from "@/components/motion/Reveal";
 import { usePrices } from "@/lib/usePrices";
+import { useAffordable3D } from "@/lib/useAffordable3D";
 
 // three.js is 550KB, so it is never in the first load and never fetched at
 // all on a device that will not run it.
@@ -14,6 +15,7 @@ const BookCanvas = dynamic(() => import("@/components/three/BookCanvas").then((m
 
 export function Book({ onBuy }: { onBuy: (sku: "ebook" | "physical") => void }) {
   const { fmt } = usePrices();
+  const gl = useAffordable3D();
 
   return (
     <section id="book" className="grain aurora relative isolate overflow-hidden py-[92px]
@@ -52,16 +54,18 @@ export function Book({ onBuy }: { onBuy: (sku: "ebook" | "physical") => void }) 
         </Reveal>
 
         <Reveal delay={120} className="relative mx-auto aspect-[1/1.18] w-[min(440px,92vw)]">
-          <BookCanvas />
-          {/* The still cover is what a phone, a reduced-motion reader and a
-              machine with no WebGL2 all see. It is not a placeholder. */}
-          <div className="pointer-events-none absolute inset-0 grid place-items-center">
-            <Image src="/img/book-cover.jpg" alt={`${bookFacts.title} — cover`} width={600} height={900}
-                   sizes="(max-width: 1024px) 80vw, 300px"
-                   className="h-auto w-[min(300px,68vw)] rounded-[4px_7px_7px_4px] shadow-2xl
-                              [transform:perspective(1200px)_rotateY(-13deg)_rotateX(3deg)]
-                              [.has-gl_&]:opacity-0" />
-          </div>
+          {gl ? (
+            <BookCanvas />
+          ) : (
+            /* Not a placeholder. This is what a phone, a reduced-motion
+               reader and a machine without WebGL2 are meant to see. */
+            <div className="grid h-full place-items-center">
+              <Image src="/img/book-cover.jpg" alt={`${bookFacts.title} — cover`} width={600} height={900}
+                     sizes="(max-width: 1024px) 80vw, 300px"
+                     className="h-auto w-[min(300px,68vw)] rounded-[4px_7px_7px_4px] shadow-2xl
+                                [transform:perspective(1200px)_rotateY(-13deg)_rotateX(3deg)]" />
+            </div>
+          )}
         </Reveal>
       </div>
     </section>

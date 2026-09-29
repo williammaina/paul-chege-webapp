@@ -75,12 +75,16 @@ function Book() {
   });
 
   if (!ready) return null;
-  const paper = <meshPhysicalMaterial map={pages.current} roughness={0.78} metalness={0} />;
 
   return (
     <mesh ref={mesh} castShadow>
       <boxGeometry args={[2.5, 3.75, 0.42]} />
-      {paper}
+      {/* One material per face, in BoxGeometry's group order: +X fore-edge,
+          -X spine, +Y head, -Y tail, +Z jacket, -Z back. Every one needs an
+          explicit `attach`; a bare material binds to `mesh.material` and
+          replaces the whole array, which silently collapses all six faces
+          onto one. */}
+      <meshPhysicalMaterial attach="material-0" map={pages.current} roughness={0.78} metalness={0} />
       <meshPhysicalMaterial attach="material-1" color="#7a1a1a" roughness={0.42} clearcoat={0.5} />
       <meshPhysicalMaterial attach="material-2" map={pages.current} roughness={0.78} />
       <meshPhysicalMaterial attach="material-3" map={pages.current} roughness={0.78} />
@@ -91,26 +95,13 @@ function Book() {
   );
 }
 
-/** Desktop only. 550KB of three.js over mobile data for one decorative
- *  object is not a trade worth making when the still cover is good. */
-function affordable() {
-  if (typeof window === "undefined") return false;
-  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
-  if (matchMedia("(pointer: coarse)").matches) return false;
-  const nav = navigator as Navigator & { deviceMemory?: number };
-  if ((nav.deviceMemory ?? 4) <= 3) return false;
-  if ((navigator.hardwareConcurrency || 4) <= 2) return false;
-  try { return !!document.createElement("canvas").getContext("webgl2"); } catch { return false; }
-}
-
 export function BookCanvas() {
-  const [on, setOn] = useState(false);
-  useEffect(() => setOn(affordable()), []);
-  if (!on) return null;
-
   return (
     <div className="absolute inset-0">
-      <Canvas shadows dpr={[1, 2]} camera={{ fov: 30, position: [0, 0, 10.4] }}
+      {/* `shadows` alone asks for PCFSoftShadowMap, which three r186 removed —
+          it warns and silently downgrades. Asking for the map that exists
+          keeps the console clean and the choice explicit. */}
+      <Canvas shadows="percentage" dpr={[1, 2]} camera={{ fov: 30, position: [0, 0, 10.4] }}
               gl={{ antialias: true, alpha: true, powerPreference: "high-performance",
                     toneMapping: THREE.ACESFilmicToneMapping, toneMappingExposure: 1.22 }}>
         <Environment preset="apartment" environmentIntensity={0.8} />
