@@ -6,6 +6,8 @@
  * with its last known figures, never an empty grid and never a wrong number
  * presented as live.
  */
+import { EPISODES } from "../../web/lib/server/episodes.mjs";   // the one baked list, not a copy
+
 const API = process.env.API || "http://localhost:4300";
 const YT = process.env.YT_MOCK || "http://localhost:4900";
 
@@ -88,10 +90,20 @@ console.log("\n\x1b[1m6 · what the page ships with\x1b[0m");
 {
   const html = await fetch(API + "/").then((r) => r.text());
   ok("the API key is not in the HTML", !/AIza[\w-]{10,}/.test(html));
+  // These two assert that the episodes and their figures are in the
+  // SERVER-RENDERED markup, so a reader with no JavaScript still sees
+  // them. They used to check `data-vid="` and `class="ep-meta"`, which
+  // tested one particular DOM rather than the property — and broke the
+  // moment the page became React, even though every episode was still
+  // rendered. React also splits adjacent text nodes with `<!-- -->`, so
+  // "19K views" is never one run of characters in the HTML.
+  const ids = EPISODES.map((e) => e.id);
+  const present = ids.filter((id) => html.includes(id));
   ok("episodes are in the markup, not only fetched",
-     (html.match(/data-vid="/g) || []).length === 9, String((html.match(/data-vid="/g) || []).length));
+     present.length === ids.length, `${present.length} of ${ids.length}`);
   ok("baked figures are present for a reader with no server",
-     /class="ep-meta">\d[\d.]*[KM]? views/.test(html));
+     EPISODES.every((e) => html.includes(e.views)),
+     EPISODES.filter((e) => !html.includes(e.views)).map((e) => e.views).join(", ") || "all present");
   // The player builds its iframe from a string at click time, so that
   // string legitimately contains "<iframe … youtube". What matters is that
   // no iframe exists in the markup the browser parses.
