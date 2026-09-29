@@ -64,49 +64,58 @@ export function Hero({ onBook }: { onBook: () => void }) {
 
         <aside className="flex flex-col gap-3 rounded-[18px] bg-[#0e2439]/70 p-3 backdrop-blur-[20px]
                           ring-1 ring-white/10">
-          <div className="rounded-[14px] bg-[#17344f]/70 p-5 font-[family-name:var(--font-display)] backdrop-blur-[12px]">
+          <div className="rounded-[14px] bg-[#17344f]/70 p-5 backdrop-blur-[12px]">
             <p className="text-[.72rem] font-extrabold uppercase tracking-[.14em] text-gold-400">
               Paul&apos;s perspective
             </p>
-            <blockquote className="mt-3 text-[1.02rem] leading-snug text-white">
-              Better financial decisions begin with clarity — understanding the
+            <span aria-hidden className="mt-2 block font-[family-name:var(--font-display)]
+                                         text-[2.4rem] leading-[0.6] text-gold-400">&ldquo;</span>
+            <blockquote className="mt-3 font-[family-name:var(--font-display)] text-[1.02rem]
+                                   leading-snug text-white">
+              Better financial decisions begin with clarity &mdash; understanding the
               commitment before making it.
             </blockquote>
-            <p className="mt-4 text-[.86rem] font-semibold text-white">Paul Chege</p>
-            <p className="text-[.7rem] text-[#9fb0be]">Financial Advisor • Author • Educator</p>
+            <p className="mt-4 font-[family-name:var(--font-display)] text-[.95rem] italic text-gold-bright">
+              Paul Chege
+            </p>
+            <p className="text-[.7rem] text-[#9fb0be]">Financial Advisor &bull; Author &bull; Educator</p>
           </div>
 
-          <div className="rounded-[14px] p-4">
+          <div className="flex flex-1 flex-col rounded-[14px] p-4">
+            <div aria-hidden className="mb-4 h-px bg-white/10" />
             <p className="text-[.68rem] font-extrabold uppercase tracking-[.13em] text-[#8fa3bd]">
               Start with what matters to you
             </p>
-            <ul className="mt-3 space-y-2.5">
+            <ul className="mt-3 space-y-0">
               {[
                 ["Personal Finance", "Build clarity around your financial direction."],
                 ["Borrowing Decisions", "Understand loans before you commit."],
                 ["Business Finance", "Think clearly about capital and growth."],
-              ].map(([t, s], i) => (
-                <li key={t}>
-                  <button onClick={onBook} className="group flex w-full items-start gap-3 text-left">
+              ].map(([t, sub], i) => (
+                <li key={t} className="border-b border-white/10 last:border-0">
+                  <button onClick={onBook} className="group flex w-full items-start gap-3 py-3 text-left">
                     <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full border
                                      border-gold-400/50 text-[.65rem] font-extrabold text-gold-400 tnum">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="min-w-0">
                       <b className="block text-[.82rem] text-white">{t}</b>
-                      <small className="block text-[.68rem] leading-tight text-[#9fb0be]">{s}</small>
+                      <small className="block text-[.68rem] leading-tight text-[#9fb0be]">{sub}</small>
                     </span>
-                    <i className="ml-auto not-italic text-gold-400 transition group-hover:translate-x-0.5">→</i>
+                    <i className="ml-auto self-center not-italic text-gold-400 transition
+                                  group-hover:translate-x-0.5">&rarr;</i>
                   </button>
                 </li>
               ))}
             </ul>
             <button onClick={onBook}
-                    className="magnetic mt-4 w-full rounded-[10px] bg-gold-bright py-3 text-[.85rem] font-extrabold text-navy">
-              Book a Consultation →
+                    className="magnetic mt-5 w-full rounded-[10px] bg-gold-bright py-3.5 text-[.9rem]
+                               font-extrabold text-navy transition hover:brightness-105">
+              Talk to Paul &rarr;
             </button>
           </div>
         </aside>
+
       </div>
     </section>
   );

@@ -51,11 +51,8 @@ export function About({ onBook }: { onBook: () => void }) {
                Master of Arts in Finance at KCA University.</p>
             <p>Drawing on his experience in one of Kenya&apos;s leading commercial banks, Paul
                has helped individuals and businesses make informed financial decisions.
-               Alongside the media work he places cover as a licensed broker in partnership
-               with <a href={site.bizsure} target="_blank" rel="noreferrer"
-                       className="font-semibold text-gold-ink underline underline-offset-2">Bizsure</a>,
-               coaches borrowers through offer letters and restructures, and pursues declined
-               claims to settlement.</p>
+               Alongside the media work he coaches borrowers through offer letters and
+               restructures, and helps people understand what their cover actually says.</p>
             <p>In September 2026 he launched <b>The Anatomy of Smart Borrowing</b> at Safari
                Park Hotel, Nairobi — foreword by H.E. Rigathi Gachagua, Deputy President of Kenya.</p>
           </div>

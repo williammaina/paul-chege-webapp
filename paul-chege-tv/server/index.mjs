@@ -46,12 +46,18 @@ const CATALOGUE = {
  *  useful thing you can give a Kenyan buyer to tell a real business from a
  *  scam. */
 const PAYEE = {
-  name: process.env.PAYEE_NAME || "Bizsure Insurance Brokers",
+  // This name is read out to the buyer before the prompt as the one they
+  // should expect on their handset, so it has to be the name registered
+  // to the shortcode — not a brand Paul has worked with. It defaulted to
+  // one, which would have told real buyers to cancel a genuine payment.
+  name: process.env.PAYEE_NAME || "Paul Chege",
   shortcode: process.env.MPESA_SHORTCODE || null,
   type: (process.env.MPESA_TX_TYPE || "CustomerPayBillOnline") === "CustomerBuyGoodsOnline" ? "till" : "paybill",
-  phone: process.env.OFFICE_PHONE || "+254 710 890 994",
-  email: process.env.RECEIPT_REPLY_TO || "info@bizsure.co.ke",
-  location: process.env.OFFICE_ADDRESS || "Ciata City Mall, Block A, 2nd Floor, Ridgeways, Kiambu Road, Nairobi",
+  phone: process.env.OFFICE_PHONE || "+254 796 882 372",
+  email: process.env.RECEIPT_REPLY_TO || "hello@paulchege.co.ke",
+  // No default: an address that is not his is worse than none, and the
+  // assurance panel omits the line when there is nothing to show.
+  location: process.env.OFFICE_ADDRESS || null,
   licence: process.env.IRA_LICENCE || null,
 };
 
