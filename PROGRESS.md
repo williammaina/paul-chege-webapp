@@ -1,6 +1,6 @@
 # Paul Chege Financial Advisory — Progress
 
-**Phase 2 of 4 · P2-M03 next · 3 of 10 milestones complete**
+**Phase 2 of 4 · P2-M10 next · 9 of 17 milestones complete**
 
 ## How this file works
 
@@ -84,13 +84,93 @@ and recorded here rather than left to look like the plan was followed.
 - [x] Give the API suite a harness that runs against Next
 - [x] Make the two markup-shaped assertions test behaviour instead
 
-### P2-M03 — Deploy to Vercel ⬜ NOT STARTED
+### P2-M03 — Bug hunt and flow verification ✅ COMPLETE
 
-**Branch:** `feat/p2-m03-vercel`
+**Branch:** `fix/p2-m03-bug-hunt` · merged into `development`
 
-The file-backed order and booking stores do not survive a serverless
-filesystem, so this milestone is a storage decision before it is a
-deployment one.
+Added as its own milestone rather than folded into P2-M02, which had
+already shipped. A round of fixing after delivery is new work, not an
+extension of the work that caused it.
+
+#### Tasks
+- [x] Teach the contrast audit to read `oklab`, which Tailwind v4 emits
+- [x] Show the book mesh instead of the still that was covering it
+- [x] Make the speaking icons visible on their dark panel
+- [x] Fetch `/api/health` once rather than once per component
+- [x] Walk every flow through the interface, not only the API
+
+### P2-M04 — Second hunt: the paths nobody takes ✅ COMPLETE
+
+**Branch:** `fix/p2-m04-hunt-round-two` · merged into `development`
+
+The first round walked the happy paths. This one went after the states a
+visitor only reaches when something is already wrong.
+
+#### Tasks
+- [x] Say something when the diary cannot be reached, instead of an empty grid
+- [x] Read the session price from the server in the advisory section
+- [x] Trap focus in the payment dialogs and restore it on close
+- [x] Remove the last type escape rather than silence it
+
+### P2-M05 — Third hunt: abandoning a payment ✅ COMPLETE
+
+**Branch:** `fix/p2-m05-hunt-round-three` · merged into `development`
+
+#### Tasks
+- [x] Ignore a checkout that resolves after its dialog was closed
+- [x] Stop a stray click dismissing a dialog while money is moving
+
+### P2-M06 — Fourth hunt: the server's edges ✅ COMPLETE
+
+**Branch:** `fix/p2-m06-hunt-round-four` · merged into `development`
+
+#### Tasks
+- [x] Answer HEAD, which monitors use and the router was refusing
+- [x] Stop returning an unexpected error's own message to the caller
+
+### P2-M07 — Fifth hunt: dead weight and dead frames ✅ COMPLETE
+
+**Branch:** `fix/p2-m07-hunt-round-five` · merged into `development`
+
+#### Tasks
+- [x] Give the dialogs an entrance and an exit instead of appearing
+- [x] Drop GSAP, which was installed and never used
+- [x] Re-check the static site with the corrected contrast parser
+
+### P2-M08 — Sixth hunt: what a stranger's machine sees ✅ COMPLETE
+
+**Branch:** `fix/p2-m08-hunt-round-six` · merged into `development`
+
+#### Tasks
+- [x] Add robots and a sitemap, and keep crawlers out of the API
+- [x] Replace Next's blank "Application error" with a page that helps
+- [x] Add structured data built only from claims the page already makes
+- [x] Add a skip link and declare the language as Kenyan English
+
+### P2-M09 — Map the flows ✅ COMPLETE
+
+**Branch:** `docs/p2-m09-flow-map` · merged into `development`
+
+#### Tasks
+- [x] Write down every path and every failure, from walking them
+
+### P2-M10 — Deploy to Vercel ⬜ NOT STARTED
+
+**Branch:** `feat/p2-m10-vercel`
+
+Two things make this a storage decision before it is a deployment one,
+and both let money go wrong rather than merely breaking a page:
+
+- **The order and booking stores are JSON files.** A serverless filesystem
+  is per-invocation, so a slot held by one request is invisible to the
+  next and two people can pay for the same hour.
+- **The rate limiter is an in-memory `Map`.** It resets on every cold
+  start and is per-instance, so the five-prompts-per-phone rule that
+  stops somebody using Paul's shortcode to spam STK pushes at a stranger
+  is unenforced the moment there is more than one instance.
+
+Both need shared storage — Postgres, Redis or Vercel KV — before this can
+be deployed rather than after.
 
 ---
 

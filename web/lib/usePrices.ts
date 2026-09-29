@@ -20,15 +20,28 @@ type Health = {
  */
 const FALLBACK: Record<string, number> = { physical: 1999, ebook: 999, coaching: 5000 };
 
+/**
+ * One request, however many components ask.
+ *
+ * Four components call this hook, and each was firing its own
+ * `/api/health` on mount — four identical round trips before the page had
+ * finished painting. The promise is shared; the result is not cached
+ * beyond the page's life, so a reload still gets fresh prices.
+ */
+let inflight: Promise<Health | null> | null = null;
+function healthOnce(): Promise<Health | null> {
+  inflight ??= fetch("/api/health")
+    .then((r) => (r.ok ? (r.json() as Promise<Health>) : null))
+    .catch(() => null);
+  return inflight;
+}
+
 export function usePrices() {
   const [health, setHealth] = useState<Health | null>(null);
 
   useEffect(() => {
     let alive = true;
-    fetch("/api/health")
-      .then((r) => (r.ok ? r.json() : null))
-      .then((h) => { if (alive && h) setHealth(h); })
-      .catch(() => {});
+    healthOnce().then((h) => { if (alive && h) setHealth(h); });
     return () => { alive = false; };
   }, []);
 

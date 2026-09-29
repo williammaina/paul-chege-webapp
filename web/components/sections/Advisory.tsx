@@ -4,6 +4,7 @@ import { services, type Service } from "@/lib/content/site";
 import { SectionHead } from "@/components/ui/SectionHead";
 import { Reveal } from "@/components/motion/Reveal";
 import { useCardDepth } from "@/components/motion/useCardDepth";
+import { usePrices } from "@/lib/usePrices";
 
 const TONE: Record<Service["tone"], string> = {
   dark:      "bg-navy text-white",
@@ -19,6 +20,7 @@ const SCRIM = new Set<Service["tone"]>(["claims", "planning", "education", "deci
 
 export function Advisory({ onBook }: { onBook: () => void }) {
   const depth = useCardDepth();
+  const { fmt } = usePrices();
 
   return (
     <section id="services" className="py-[76px]">
@@ -79,7 +81,9 @@ export function Advisory({ onBook }: { onBook: () => void }) {
         <Reveal className="mt-7 flex flex-wrap items-baseline gap-x-4 gap-y-1.5 rounded-[14px]
                            border border-[#e5e8eb] bg-white px-5 py-4 text-[.95rem] text-[#4a5865]">
           <b className="text-navy">The first 30 minutes are free.</b>
-          <span>A full 60-minute session is <b className="text-navy">KES 5,000</b>, paid by M-Pesa when you book.</span>
+          {/* The server owns prices. A figure typed in here is one the page can
+              advertise while the server charges something else. */}
+          <span>A full 60-minute session is <b className="text-navy">{fmt("coaching")}</b>, paid by M-Pesa when you book.</span>
           <button onClick={onBook} className="ml-auto font-bold text-gold-ink hover:underline">
             See the live diary →
           </button>
