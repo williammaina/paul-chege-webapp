@@ -9,7 +9,9 @@ const nextConfig: NextConfig = {
   // has to be told where the real project root is or the build ships a
   // route handler whose import is missing.
   outputFileTracingRoot: resolve(here, ".."),
-  serverExternalPackages: [],
+  // Next writes AGENTS.md and CLAUDE.md into the app on every build. They
+  // are generated, not authored, so they are not tracked here.
+  agentRules: false,
 };
 
 export default nextConfig;
