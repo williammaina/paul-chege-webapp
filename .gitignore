@@ -10,9 +10,15 @@ node_modules/
 # below is regenerated from it by the scripts in README-BUILD.md, and a
 # committed copy is a copy that drifts.
 client-site/Paul_Chege_Financial_Advisory_Website/
-client-site/viewable/js/
 client-site/build/
 client-site/.tw.css
+
+# `client-site/viewable/js/` is NOT ignored, though it is generated. The
+# site is static and can be deployed by copying `viewable/` to any host;
+# without these three bundles that deployment silently loses the smooth
+# scroll, the hero shader and the WebGL book, and degrades to the CSS
+# fallbacks with no error anywhere. A build step that is easy to forget is
+# not worth a broken deployment.
 *.zip
 
 # Runtime state, not source. The booking and order stores are written by the
