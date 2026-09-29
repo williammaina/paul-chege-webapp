@@ -98,9 +98,9 @@ export function Insights() {
           <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {speaking.map((s) => (
               <a key={s.title} href="#contact"
-                 className="rounded-[14px] border border-white/10 bg-white/5 p-4 transition
+                 className="rounded-[14px] border border-white/10 bg-white/5 p-4 text-white transition
                             hover:-translate-y-1 hover:border-gold-400/40 hover:bg-white/10">
-                <span className="block text-[1.25rem]">{s.icon}</span>
+                <span className="block text-[1.25rem] text-gold-400">{s.icon}</span>
                 <b className="mt-2 block text-[.9rem] text-white">{s.title}</b>
                 <small className="mt-1 block text-[.78rem] leading-relaxed text-[#a9bcd2]">{s.body}</small>
               </a>

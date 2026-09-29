@@ -95,7 +95,7 @@ extension of the work that caused it.
 #### Tasks
 - [x] Teach the contrast audit to read `oklab`, which Tailwind v4 emits
 - [x] Show the book mesh instead of the still that was covering it
-- [ ] Make the speaking icons visible on their dark panel
+- [x] Make the speaking icons visible on their dark panel
 - [ ] Fetch `/api/health` once rather than once per component
 - [ ] Walk every flow through the interface, not only the API
 
