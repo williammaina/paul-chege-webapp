@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Design tokens.
+
+   These are the values the approved design was built from, carried over
+   verbatim rather than re-picked, so the React rebuild is the same site
+   and not a lookalike. `--color-gold-ink` is the only one that is not a
+   brand colour: it is the darkest gold that clears WCAG AA as body text
+   on white, and small gold text uses it instead of `--color-gold`.
+   ══════════════════════════════════════════════════════════════════════════ */
+@theme {
+  --color-navy:      #0c2238;
+  --color-navy-deep: #03090f;
+  --color-navy-mid:  #17344f;
+  --color-navy-lift: #1f4a71;
+  --color-ink:       #192638;
+  --color-muted:     #687484;
+  --color-cream:     #faf8f4;
+  --color-sand:      #c8b293;
+
+  --color-gold:      #d8a638;
+  --color-gold-bright: #f1c35b;
+  --color-gold-400:  #e6b84c;
+  --color-gold-ink:  #7d5f1a;
+
+  --color-mpesa:     #00a651;
+
+  --font-sans:    "InterVar", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "SourceSerifVar", Georgia, "Times New Roman", serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@layer base {
+  html {
+    /* Lenis drives scrolling; leaving this on means the browser and the
+       library interpolate the same scroll at once and fight. */
+    scroll-behavior: auto;
+  }
+
+  body {
+    background: #fff;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-optical-sizing: auto;
+    font-synthesis-weight: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+  }
+
+  h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.028em; }
+
+  /* The sticky header must not sit on top of the heading you just jumped to. */
+  section[id], main[id] { scroll-margin-top: 86px; }
+
+  ::selection { background: var(--color-gold-400); color: var(--color-navy); }
+}
+
+@layer utilities {
+  .wrap { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
+  .tnum { font-variant-numeric: tabular-nums lining-nums; }
+}

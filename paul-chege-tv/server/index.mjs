@@ -11,14 +11,14 @@
 import { createServer } from "node:http";
 import { createReadStream, statSync, existsSync, realpathSync } from "node:fs";
 import { resolve, basename, join, extname, normalize } from "node:path";
-import { loadEnv } from "./env.mjs";
-import * as store from "./store.mjs";
-import * as daraja from "./daraja.mjs";
-import * as diary from "./bookings.mjs";
-import * as google from "./google.mjs";
-import * as email from "./email.mjs";
-import * as youtube from "./youtube.mjs";
-import * as tpl from "./templates.mjs";
+import { loadEnv } from "../../web/lib/server/env.mjs";
+import * as store from "../../web/lib/server/store.mjs";
+import * as daraja from "../../web/lib/server/daraja.mjs";
+import * as diary from "../../web/lib/server/bookings.mjs";
+import * as google from "../../web/lib/server/google.mjs";
+import * as email from "../../web/lib/server/email.mjs";
+import * as youtube from "../../web/lib/server/youtube.mjs";
+import * as tpl from "../../web/lib/server/templates.mjs";
 
 loadEnv();
 

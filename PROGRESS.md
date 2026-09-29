@@ -1,6 +1,6 @@
 # Paul Chege Financial Advisory — Progress
 
-**Phase 1 of 3 · P1-M02 next · 1 of 6 milestones complete**
+**Phase 2 of 4 · P2-M01 in progress · 1 of 10 milestones complete**
 
 ## How this file works
 
@@ -47,13 +47,52 @@ supply, and the site is honest but incomplete until they exist.
 
 ---
 
-## Phase 2 — Hardening ⬜ NOT STARTED
+## Phase 2 — The Next.js rebuild 🔄 IN PROGRESS
 
-### P2-M01 — Analytics and error reporting ⬜ NOT STARTED
-### P2-M02 — Deployment and CI ⬜ NOT STARTED
+Ships as `v0.2.0`. The static page and its hand-rolled server become a
+Next.js application: App Router, Tailwind, React Three Fiber, GSAP and
+Lenis, deployable to Vercel.
+
+The domain modules are **not** rewritten. `daraja`, `bookings`, `store`,
+`google`, `email`, `templates` and `youtube` carry 185 assertions between
+them, including the Daraja query that must not be read as a verdict while
+the buyer is still holding their phone. Only the HTTP layer changes.
+
+### P2-M01 — Scaffold and design tokens 🔄 IN PROGRESS
+
+**Branch:** `feat/p2-m01-nextjs-scaffold`
+
+#### Tasks
+- [x] Scaffold the app, the design tokens and the self-hosted fonts
+- [x] Move the domain modules under `web/lib/server`
+
+### P2-M02 — The API as Route Handlers ⬜ NOT STARTED
+
+**Branch:** `feat/p2-m02-route-handlers`
+
+#### Tasks
+- [ ] Port health, catalogue and the M-Pesa checkout with a live STK push
+- [ ] Port the booking diary, the callback and the download token
+- [ ] Port Meet provisioning, receipts and the YouTube figures
+- [ ] Prove the 185 assertions still pass against the new server
+
+### P2-M03 — The page as components ⬜ NOT STARTED
+
+**Branch:** `feat/p2-m03-sections`
+
+### P2-M04 — Motion and 3D ⬜ NOT STARTED
+
+**Branch:** `feat/p2-m04-motion-and-3d`
 
 ---
 
-## Phase 3 — After delivery ⬜ NOT STARTED
+## Phase 3 — Hardening ⬜ NOT STARTED
 
-### P3-M01 — Content editing without a developer ⬜ NOT STARTED
+### P3-M01 — Analytics and error reporting ⬜ NOT STARTED
+### P3-M02 — Deployment and CI ⬜ NOT STARTED
+
+---
+
+## Phase 4 — After delivery ⬜ NOT STARTED
+
+### P4-M01 — Content editing without a developer ⬜ NOT STARTED
