@@ -21,7 +21,7 @@ Everything built before the repository existed, landing as one milestone.
 
 #### Tasks
 - [x] Add the advisory site, its build scripts and its contrast audit
-- [ ] Add the payment, booking, Meet, email and YouTube server
+- [x] Add the payment, booking, Meet, email and YouTube server
 - [ ] Keep the earlier React prototype for reference
 
 ### P1-M02 — Go live on real credentials ⬜ NOT STARTED

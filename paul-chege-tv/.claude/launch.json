@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "paul-chege-prototype",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "4180", "--directory", "/home/user/Desktop/paul-chege-tv/public"],
+      "port": 4180
+    }
+  ]
+}
