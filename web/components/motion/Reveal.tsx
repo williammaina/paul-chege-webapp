@@ -1,6 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { createElement, useEffect, useRef, useState, type ReactNode } from "react";
+
+type Tag = "div" | "section" | "article" | "li";
 
 /**
  * Rise-in on first sight, once.
@@ -9,11 +11,16 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
  * cards this wraps often carry their own `transform` for tilt, and a
  * second `transform` on the same element replaces the first instead of
  * composing with it. `translate` composes.
+ *
+ * Rendered through `createElement` rather than `<Tag>` because the ref
+ * type of a union of four elements does not narrow, and the alternative
+ * was a `@ts-expect-error` — a silenced error is still an error, and it
+ * would go on silencing the next one too.
  */
 export function Reveal({
-  children, delay = 0, className = "", as: Tag = "div",
-}: { children: ReactNode; delay?: number; className?: string; as?: "div" | "section" | "article" | "li" }) {
-  const ref = useRef<HTMLElement>(null);
+  children, delay = 0, className = "", as = "div",
+}: { children: ReactNode; delay?: number; className?: string; as?: Tag }) {
+  const ref = useRef<HTMLElement | null>(null);
   const [seen, setSeen] = useState(false);
 
   useEffect(() => {
@@ -28,18 +35,17 @@ export function Reveal({
     return () => io.disconnect();
   }, []);
 
-  return (
-    <Tag
-      // @ts-expect-error — polymorphic ref across the four allowed tags
-      ref={ref}
-      className={className}
-      style={{
+  return createElement(
+    as,
+    {
+      ref: (node: HTMLElement | null) => { ref.current = node; },
+      className,
+      style: {
         opacity: seen ? 1 : 0,
         translate: seen ? "none" : "0 26px",
         transition: `opacity .8s var(--ease-out-expo) ${delay}ms, translate .8s var(--ease-out-expo) ${delay}ms`,
-      }}
-    >
-      {children}
-    </Tag>
+      },
+    },
+    children,
   );
 }

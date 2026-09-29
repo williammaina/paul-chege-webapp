@@ -1,6 +1,6 @@
 # Paul Chege Financial Advisory — Progress
 
-**Phase 2 of 4 · P2-M04 next · 4 of 11 milestones complete**
+**Phase 2 of 4 · P2-M04 in progress · 4 of 12 milestones complete**
 
 ## How this file works
 
@@ -99,9 +99,22 @@ extension of the work that caused it.
 - [x] Fetch `/api/health` once rather than once per component
 - [x] Walk every flow through the interface, not only the API
 
-### P2-M04 — Deploy to Vercel ⬜ NOT STARTED
+### P2-M04 — Second hunt: the paths nobody takes ✅ COMPLETE
 
-**Branch:** `feat/p2-m04-vercel`
+**Branch:** `fix/p2-m04-hunt-round-two` · merged into `development`
+
+The first round walked the happy paths. This one went after the states a
+visitor only reaches when something is already wrong.
+
+#### Tasks
+- [x] Say something when the diary cannot be reached, instead of an empty grid
+- [x] Read the session price from the server in the advisory section
+- [x] Trap focus in the payment dialogs and restore it on close
+- [x] Remove the last type escape rather than silence it
+
+### P2-M05 — Deploy to Vercel ⬜ NOT STARTED
+
+**Branch:** `feat/p2-m05-vercel`
 
 The file-backed order and booking stores do not survive a serverless
 filesystem, so this milestone is a storage decision before it is a
