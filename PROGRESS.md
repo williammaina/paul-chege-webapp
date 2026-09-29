@@ -1,6 +1,6 @@
 # Paul Chege Financial Advisory — Progress
 
-**Phase 2 of 4 · P2-M12 next · 11 of 19 milestones complete**
+**Phase 2 of 4 · P2-M13 next · 12 of 20 milestones complete**
 
 ## How this file works
 
@@ -183,9 +183,22 @@ Paul's request and to his wording.
 - [x] Use Paul's own contact details and payee name
 - [x] Restore the perspective panel to the hero
 
-### P2-M12 — Deploy to Vercel ⬜ NOT STARTED
+### P2-M12 — A list, and a button that follows ✅ COMPLETE
 
-**Branch:** `feat/p2-m12-vercel`
+**Branch:** `feat/p2-m12-chapter-and-sticky-bar` · merged into `development`
+
+Two of eight suggestions, chosen by Paul. Every other conversion on this
+page is a single payment, so somebody not ready to buy today left no
+trace; and the page is fifteen thousand pixels tall on a handset, where
+the only booking button was in the hero.
+
+#### Tasks
+- [x] Give away a chapter in exchange for an email address
+- [ ] Keep a booking button reachable on a phone
+
+### P2-M13 — Deploy to Vercel ⬜ NOT STARTED
+
+**Branch:** `feat/p2-m13-vercel`
 
 Two things make this a storage decision before it is a deployment one,
 and both let money go wrong rather than merely breaking a page:

@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { bookFacts } from "@/lib/content/site";
 import { Reveal } from "@/components/motion/Reveal";
 import { usePrices } from "@/lib/usePrices";
+import { FreeChapter } from "@/components/sections/FreeChapter";
 import { useAffordable3D } from "@/lib/useAffordable3D";
 
 // three.js is 550KB, so it is never in the first load and never fetched at
@@ -67,6 +68,10 @@ export function Book({ onBuy }: { onBuy: (sku: "ebook" | "physical") => void }) 
             </div>
           )}
         </Reveal>
+      </div>
+
+      <div className="wrap relative z-10">
+        <FreeChapter />
       </div>
     </section>
   );

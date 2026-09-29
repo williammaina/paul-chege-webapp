@@ -196,6 +196,47 @@ export function bookingConfirmation(b, { site, icsUrl }) {
   return { subject: "Confirmed — " + longDate(b.startsAt) + ", " + clockTime(b.startsAt) + " · " + b.ref, html, text };
 }
 
+/* ── the free chapter ──────────────────────────────────────────────────── */
+
+/**
+ * Nobody has paid anything here, so the message asks for nothing back and
+ * does not pretend a download is an order. It says what the link is, how
+ * long it lasts, and how to stop hearing from us — which is both decent
+ * and what a Kenyan data-protection notice expects.
+ */
+export function chapter(lead, { site, url, book }) {
+  const first = esc(lead.name?.split(" ")[0] || "there");
+  const body = `
+    <p style="margin:0 0 14px;">Hello ${first},</p>
+    <p style="margin:0 0 14px;">Here is the free chapter of <strong>${esc(book)}</strong>.
+       It is the part on reading a loan offer before you sign it — the rate you are
+       actually paying, the fees behind it, and whether the repayment survives a bad month.</p>
+    <p style="margin:0 0 6px;font-size:13px;color:${MUTED};">
+       The link works for thirty days. If you lose it, ask again on the site and
+       we will send a fresh one.</p>`;
+
+  const html = shell({
+    preheader: "Your free chapter of " + book,
+    kicker: "Free chapter", heading: "Here is your chapter", body, site,
+    cta: { label: "Download the chapter", href: url, colour: GOLD },
+    footerNote: `You are getting this because you asked for the chapter on
+      <strong>paulchege.co.ke</strong>. We will not add you to anything else without
+      asking. Reply to this email and we will remove your address.`,
+  });
+
+  const text = plain([
+    "Here is your chapter", "",
+    "The free chapter of " + book + " — reading a loan offer before you sign it.",
+    "", "Download: " + url,
+    "", "The link works for thirty days. If you lose it, ask again on the site.",
+    "", "You are getting this because you asked for the chapter on paulchege.co.ke.",
+    "Reply to this email and we will remove your address.",
+    "", site.org,
+  ]);
+
+  return { subject: "Your free chapter — " + book, html, text };
+}
+
 /* ── 3 · the reminders ─────────────────────────────────────────────────── */
 
 export function reminder(b, { site, kind }) {
