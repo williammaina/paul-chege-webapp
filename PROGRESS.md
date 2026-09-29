@@ -1,6 +1,6 @@
 # Paul Chege Financial Advisory — Progress
 
-**Phase 2 of 4 · P2-M03 next · 3 of 10 milestones complete**
+**Phase 2 of 4 · P2-M04 next · 4 of 11 milestones complete**
 
 ## How this file works
 
@@ -84,9 +84,24 @@ and recorded here rather than left to look like the plan was followed.
 - [x] Give the API suite a harness that runs against Next
 - [x] Make the two markup-shaped assertions test behaviour instead
 
-### P2-M03 — Deploy to Vercel ⬜ NOT STARTED
+### P2-M03 — Bug hunt and flow verification ✅ COMPLETE
 
-**Branch:** `feat/p2-m03-vercel`
+**Branch:** `fix/p2-m03-bug-hunt` · merged into `development`
+
+Added as its own milestone rather than folded into P2-M02, which had
+already shipped. A round of fixing after delivery is new work, not an
+extension of the work that caused it.
+
+#### Tasks
+- [x] Teach the contrast audit to read `oklab`, which Tailwind v4 emits
+- [x] Show the book mesh instead of the still that was covering it
+- [x] Make the speaking icons visible on their dark panel
+- [x] Fetch `/api/health` once rather than once per component
+- [x] Walk every flow through the interface, not only the API
+
+### P2-M04 — Deploy to Vercel ⬜ NOT STARTED
+
+**Branch:** `feat/p2-m04-vercel`
 
 The file-backed order and booking stores do not survive a serverless
 filesystem, so this milestone is a storage decision before it is a
