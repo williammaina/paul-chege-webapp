@@ -10,7 +10,15 @@ set -euo pipefail
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 ROOT="$(dirname "$HERE")"
-PORT="${PORT:-4310}"
+# A free port, chosen now, rather than a fixed one.
+#
+# A fixed port means a server somebody left running answers instead of the
+# one this script starts — `next start` prints EADDRINUSE and exits, the
+# suites happily test the stale server, and the failures look like code
+# regressions. That has cost three runs. The port is now picked at random
+# and the script refuses to continue unless the server it reaches is the
+# server it started.
+PORT="${PORT:-$(node -e "const s=require('net').createServer();s.listen(0,()=>{console.log(s.address().port);s.close()})")}"
 STORE="$(mktemp -d)"
 printf '{}\n' > "$STORE/bookings.json"
 printf '{}\n' > "$STORE/orders.json"
@@ -52,6 +60,26 @@ SERVER_PID=$!
 for _ in $(seq 1 40); do
   curl -sf -o /dev/null "http://localhost:$PORT/api/health" && break || sleep 1
 done
+
+# The server must be ours: alive, on our port, and with the test hooks the
+# suites need. Without this check a stale server answers and every failure
+# is attributed to the code.
+if ! kill -0 "$SERVER_PID" 2>/dev/null; then
+  echo "the server exited before it was ready:" >&2
+  tail -20 /tmp/pc-next-test.log >&2
+  exit 1
+fi
+if ! curl -sf -o /dev/null "http://localhost:$PORT/api/health"; then
+  echo "no server answered on $PORT" >&2; exit 1
+fi
+hooks=$(curl -s -o /dev/null -w '%{http_code}' -X POST -H 'Content-Type: application/json' \
+          -d '{"now":0}' "http://localhost:$PORT/api/_reminders/run")
+if [ "$hooks" != "200" ]; then
+  echo "the server on $PORT is not this harness's (test hooks answered $hooks, wanted 200)." >&2
+  echo "Something else is listening, or ALLOW_TEST_HOOKS did not reach it." >&2
+  exit 1
+fi
+echo "server $SERVER_PID on :$PORT"
 
 fail=0
 for t in test-flow test-booking test-meet test-email test-youtube; do
