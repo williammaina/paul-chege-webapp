@@ -1,6 +1,6 @@
 # Paul Chege Financial Advisory — Progress
 
-**Phase 2 of 4 · P2-M11 in progress · 10 of 19 milestones complete**
+**Phase 2 of 4 · P2-M12 next · 11 of 19 milestones complete**
 
 ## How this file works
 
@@ -165,9 +165,9 @@ three entry points all opened the same dialog the hero's own button does.
 #### Tasks
 - [x] Remove the side panel and give the hero two columns
 
-### P2-M11 — Correct the Bizsure relationship 🔄 IN PROGRESS
+### P2-M11 — Correct the Bizsure relationship ✅ COMPLETE
 
-**Branch:** `fix/p2-m11-bizsure-and-hero-panel`
+**Branch:** `fix/p2-m11-bizsure-and-hero-panel` · merged into `development`
 
 Paul told us Bizsure is a brand he has worked with, not part of his
 business. The site said otherwise in eleven places, and one of them was
@@ -181,7 +181,7 @@ Paul's request and to his wording.
 #### Tasks
 - [x] Remove every claim that Bizsure is part of the business
 - [x] Use Paul's own contact details and payee name
-- [ ] Restore the perspective panel to the hero
+- [x] Restore the perspective panel to the hero
 
 ### P2-M12 — Deploy to Vercel ⬜ NOT STARTED
 
