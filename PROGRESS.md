@@ -23,6 +23,7 @@ Everything built before the repository existed, landing as one milestone.
 - [x] Add the advisory site, its build scripts and its contrast audit
 - [x] Add the payment, booking, Meet, email and YouTube server
 - [x] Keep the earlier React prototype for reference
+- [x] Commit the built script bundles so a copied `viewable/` deploys whole
 
 ### P1-M02 — Go live on real credentials ⬜ NOT STARTED
 
