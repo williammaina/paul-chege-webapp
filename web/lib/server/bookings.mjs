@@ -16,9 +16,18 @@
  */
 import { randomBytes } from "node:crypto";
 import { readFileSync, writeFileSync, renameSync, mkdirSync, existsSync } from "node:fs";
-import { dirname, resolve } from "node:path";
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const FILE = resolve(process.env.BOOKING_STORE || new URL("./data/bookings.json", import.meta.url).pathname);
+/* `new URL("./x", import.meta.url).pathname` looks tidy and has two faults:
+   a bundler reads it as a static asset reference and fails the build when
+   the file is not there yet, and on Windows it yields "/C:/..." with a
+   leading slash that no filesystem call accepts. Resolve the directory
+   once, properly, instead. */
+const HERE = dirname(fileURLToPath(import.meta.url));
+
+
+const FILE = resolve(process.env.BOOKING_STORE || join(HERE, "data", "bookings.json"));
 
 /** EAT. Safaricom, the client and Paul are all in +03:00; the server may not be. */
 const TZ_OFFSET = 3;
