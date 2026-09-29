@@ -63,3 +63,50 @@
   .wrap { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
   .tnum { font-variant-numeric: tabular-nums lining-nums; }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Effects that are easier as CSS than as props.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* Grain over the dark bands. A 900px gradient across five near-identical
+   navies is exactly where an 8-bit panel draws stripes. */
+.grain::after {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  opacity: .22; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+
+/* Two slow blurred blooms. Large and dim enough that the eye reads depth
+   rather than movement. */
+.aurora::before {
+  content: ""; position: absolute; z-index: 0; pointer-events: none;
+  inset-block-start: -26%; inset-inline-end: -12%;
+  width: 54vw; height: 54vw; max-width: 760px; max-height: 760px;
+  border-radius: 50%; filter: blur(90px); opacity: .55;
+  background: radial-gradient(circle, rgba(230,184,76,.5), transparent 68%);
+  animation: drift 28s ease-in-out infinite alternate;
+}
+@keyframes drift {
+  from { transform: translate3d(0,0,0) scale(1); }
+  to   { transform: translate3d(-8%,10%,0) scale(1.18); }
+}
+
+/* The partner marquee. The row is duplicated, so -50% lands exactly on the
+   start of the copy and the loop has no seam. */
+.marquee-track { animation: marquee 38s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee {
+  from { transform: translate3d(0,0,0); }
+  to   { transform: translate3d(-50%,0,0); }
+}
+
+/* Magnetic buttons lean toward the cursor; --mag is written per frame, so
+   while the pointer is on the button the value must not also be
+   interpolated or it lags behind the cursor. */
+.magnetic { translate: var(--mag, 0 0); transition: translate .45s var(--ease-out-expo); }
+.magnetic:hover { transition: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora::before, .marquee-track { animation: none; }
+  .magnetic { translate: none; transition: none; }
+}
