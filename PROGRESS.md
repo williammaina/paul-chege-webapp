@@ -1,6 +1,6 @@
 # Paul Chege Financial Advisory — Progress
 
-**Phase 2 of 4 · P2-M07 next · 6 of 14 milestones complete**
+**Phase 2 of 4 · P2-M08 next · 7 of 15 milestones complete**
 
 ## How this file works
 
@@ -128,9 +128,18 @@ visitor only reaches when something is already wrong.
 - [x] Answer HEAD, which monitors use and the router was refusing
 - [x] Stop returning an unexpected error's own message to the caller
 
-### P2-M07 — Deploy to Vercel ⬜ NOT STARTED
+### P2-M07 — Fifth hunt: dead weight and dead frames ✅ COMPLETE
 
-**Branch:** `feat/p2-m07-vercel`
+**Branch:** `fix/p2-m07-hunt-round-five` · merged into `development`
+
+#### Tasks
+- [x] Give the dialogs an entrance and an exit instead of appearing
+- [x] Drop GSAP, which was installed and never used
+- [x] Re-check the static site with the corrected contrast parser
+
+### P2-M08 — Deploy to Vercel ⬜ NOT STARTED
+
+**Branch:** `feat/p2-m08-vercel`
 
 Two things make this a storage decision before it is a deployment one,
 and both let money go wrong rather than merely breaking a page:

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
+import { AnimatePresence, motion } from "motion/react";
 
 export function Modal({
   open, onClose, title, kicker, children, wide = false, locked = false,
@@ -60,13 +61,23 @@ export function Modal({
     };
   }, [open, onClose, locked]);
 
-  if (!open) return null;
-
+  /* AnimatePresence keeps the dialog mounted long enough to animate out.
+     Without it a payment confirmation vanished on the same frame as the
+     click, which reads as the page having lost it. Both transitions are
+     skipped under prefers-reduced-motion by Motion itself. */
   return (
-    <div className="fixed inset-0 z-[80] flex items-center justify-center bg-[rgba(2,10,18,.72)] p-5"
+    <AnimatePresence>
+      {open && (
+    <motion.div className="fixed inset-0 z-[80] flex items-center justify-center bg-[rgba(2,10,18,.72)] p-5"
+         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+         transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
          onClick={() => { if (!locked) onClose(); }} role="dialog" aria-modal aria-label={title}>
       {/* Lenis owns the page, not this panel. */}
-      <div ref={panel} tabIndex={-1} data-lenis-prevent onClick={(e) => e.stopPropagation()}
+      <motion.div ref={panel} tabIndex={-1} data-lenis-prevent onClick={(e) => e.stopPropagation()}
+           initial={{ opacity: 0, y: 18, scale: 0.98 }}
+           animate={{ opacity: 1, y: 0, scale: 1 }}
+           exit={{ opacity: 0, y: 10, scale: 0.99 }}
+           transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
            className={`max-h-[90vh] w-full overflow-auto rounded-[22px] bg-white p-7
                        shadow-[0_2px_6px_rgba(6,18,32,.16),0_60px_110px_-50px_rgba(6,18,32,.55)]
                        focus:outline-none ${wide ? "max-w-[900px]" : "max-w-[620px]"}`}>
@@ -79,7 +90,9 @@ export function Modal({
                   className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#eef2f5] hover:bg-[#e2e8ee]">✕</button>
         </div>
         {children}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
