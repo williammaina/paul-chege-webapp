@@ -11,7 +11,7 @@ export function BuyBook({
   sku, onClose,
 }: { sku: "ebook" | "physical" | null; onClose: () => void }) {
   const { price, health } = usePrices();
-  const { state, watch, reset } = usePayment();
+  const { state, watch, reset, busy: paying, generation } = usePayment();
   const [form, setForm] = useState({ name: "", phone: "", email: "", town: "" });
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -25,11 +25,15 @@ export function BuyBook({
   async function pay() {
     if (!sku) return;
     setBusy(true); setError(null);
+    const mine = generation.current;
     try {
       // Only the SKU goes up. The price is the server's to decide.
       const r = await api.checkout({ items: [{ sku, qty: 1 }], ...form });
+      // The dialog may have been closed while Safaricom was thinking.
+      if (generation.current !== mine) return;
       watch(r.orderId, r.amount);
     } catch (e) {
+      if (generation.current !== mine) return;
       setError(e instanceof Error ? e.message : "Something went wrong.");
     } finally { setBusy(false); }
   }
@@ -37,7 +41,8 @@ export function BuyBook({
   const label = physical ? "Paperback" : "eBook";
 
   return (
-    <Modal open={!!sku} onClose={close} kicker="The Anatomy of Smart Borrowing" title={`Buy the ${label}`}>
+    <Modal open={!!sku} onClose={close} locked={paying}
+           kicker="The Anatomy of Smart Borrowing" title={`Buy the ${label}`}>
       {state.phase === "idle" && (
         <>
           <div className="mt-4 flex items-baseline justify-between rounded-[13px] bg-[#f5f8fa] px-4 py-3">

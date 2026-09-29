@@ -1,6 +1,6 @@
 # Paul Chege Financial Advisory — Progress
 
-**Phase 2 of 4 · P2-M04 in progress · 4 of 12 milestones complete**
+**Phase 2 of 4 · P2-M06 next · 5 of 13 milestones complete**
 
 ## How this file works
 
@@ -112,9 +112,17 @@ visitor only reaches when something is already wrong.
 - [x] Trap focus in the payment dialogs and restore it on close
 - [x] Remove the last type escape rather than silence it
 
-### P2-M05 — Deploy to Vercel ⬜ NOT STARTED
+### P2-M05 — Third hunt: abandoning a payment ✅ COMPLETE
 
-**Branch:** `feat/p2-m05-vercel`
+**Branch:** `fix/p2-m05-hunt-round-three` · merged into `development`
+
+#### Tasks
+- [x] Ignore a checkout that resolves after its dialog was closed
+- [x] Stop a stray click dismissing a dialog while money is moving
+
+### P2-M06 — Deploy to Vercel ⬜ NOT STARTED
+
+**Branch:** `feat/p2-m06-vercel`
 
 The file-backed order and booking stores do not survive a serverless
 filesystem, so this milestone is a storage decision before it is a

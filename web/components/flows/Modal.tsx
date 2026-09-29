@@ -3,8 +3,15 @@
 import { useEffect, useRef, type ReactNode } from "react";
 
 export function Modal({
-  open, onClose, title, kicker, children, wide = false,
-}: { open: boolean; onClose: () => void; title: string; kicker?: string; children: ReactNode; wide?: boolean }) {
+  open, onClose, title, kicker, children, wide = false, locked = false,
+}: {
+  open: boolean; onClose: () => void; title: string; kicker?: string;
+  children: ReactNode; wide?: boolean;
+  /** True while money is moving. Escape and the backdrop stop dismissing,
+   *  because a stray click during an M-Pesa prompt loses the buyer the
+   *  only page that is tracking their payment. The close button stays. */
+  locked?: boolean;
+}) {
   const panel = useRef<HTMLDivElement>(null);
 
   /* Escape, a scroll lock, and a focus trap.
@@ -32,7 +39,7 @@ export function Modal({
     panel.current?.focus();
 
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") { onClose(); return; }
+      if (e.key === "Escape") { if (!locked) onClose(); return; }
       if (e.key !== "Tab") return;
       const items = focusable();
       if (!items.length) return;
@@ -51,13 +58,13 @@ export function Modal({
       document.body.style.overflow = prevOverflow;
       returnTo?.focus?.();
     };
-  }, [open, onClose]);
+  }, [open, onClose, locked]);
 
   if (!open) return null;
 
   return (
     <div className="fixed inset-0 z-[80] flex items-center justify-center bg-[rgba(2,10,18,.72)] p-5"
-         onClick={onClose} role="dialog" aria-modal aria-label={title}>
+         onClick={() => { if (!locked) onClose(); }} role="dialog" aria-modal aria-label={title}>
       {/* Lenis owns the page, not this panel. */}
       <div ref={panel} tabIndex={-1} data-lenis-prevent onClick={(e) => e.stopPropagation()}
            className={`max-h-[90vh] w-full overflow-auto rounded-[22px] bg-white p-7

@@ -32,7 +32,7 @@ export function BookSession({
   const [busy, setBusy] = useState(false);
   const [confirmed, setConfirmed] = useState<Booking | null>(null);
   const [diary, setDiary] = useState<"loading" | "ready" | "down">("loading");
-  const { state, watch, reset } = usePayment();
+  const { state, watch, reset, busy: paying, generation } = usePayment();
 
   useEffect(() => { if (initialType) setType(initialType); }, [initialType]);
 
@@ -82,15 +82,20 @@ export function BookSession({
   async function go() {
     if (!held) return;
     setBusy(true); setError(null);
+    const mine = generation.current;
     try {
       if (!held.amount) {
         const r = await api.confirmFree({ bookingRef: held.ref, ...form });
+        if (generation.current !== mine) return;
         setConfirmed(r.booking);
       } else {
         const r = await api.checkout({ bookingRef: held.ref, ...form });
+        // The dialog may have been closed while Safaricom was thinking.
+        if (generation.current !== mine) return;
         watch(r.orderId, r.amount);
       }
     } catch (e) {
+      if (generation.current !== mine) return;
       setError(e instanceof Error ? e.message : "Something went wrong.");
     } finally { setBusy(false); }
   }
@@ -99,7 +104,8 @@ export function BookSession({
   const mm = String(Math.floor(left / 60)); const ss = String(left % 60).padStart(2, "0");
 
   return (
-    <Modal open={open} onClose={close} kicker="Consultation" title="Book a Session with Paul">
+    <Modal open={open} onClose={close} locked={paying}
+           kicker="Consultation" title="Book a Session with Paul">
       {done ? (
         <Confirmed b={done} onClose={close} />
       ) : state.phase === "prompting" ? (
