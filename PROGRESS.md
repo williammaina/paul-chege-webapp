@@ -1,6 +1,6 @@
 # Paul Chege Financial Advisory — Progress
 
-**Phase 2 of 4 · P2-M02 in progress · 2 of 10 milestones complete**
+**Phase 2 of 4 · P2-M03 next · 3 of 10 milestones complete**
 
 ## How this file works
 
@@ -66,9 +66,9 @@ the buyer is still holding their phone. Only the HTTP layer changes.
 - [x] Scaffold the app, the design tokens and the self-hosted fonts
 - [x] Move the domain modules under `web/lib/server`
 
-### P2-M02 — The application 🔄 IN PROGRESS
+### P2-M02 — The application ✅ COMPLETE
 
-**Branch:** `feat/p2-m02-route-handlers`
+**Branch:** `feat/p2-m02-route-handlers` · merged into `development`
 
 Originally planned as three milestones — the API, the page, the motion.
 They were built and verified together against one running server, so
@@ -82,6 +82,7 @@ and recorded here rather than left to look like the plan was followed.
 - [x] Port the hero shader, the R3F book, Lenis, magnets and the skew
 - [x] Port the hold-then-pay booking flow and the book checkout
 - [x] Give the API suite a harness that runs against Next
+- [x] Make the two markup-shaped assertions test behaviour instead
 
 ### P2-M03 — Deploy to Vercel ⬜ NOT STARTED
 
