@@ -7,6 +7,7 @@ import { StickyBook } from "@/components/layout/StickyBook";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { Hero } from "@/components/sections/Hero";
+import { Proof } from "@/components/sections/Proof";
 import { Brands } from "@/components/sections/Brands";
 import { Advisory } from "@/components/sections/Advisory";
 import { About } from "@/components/sections/About";
@@ -32,6 +33,7 @@ export default function Home() {
 
       <main id="home">
         <Hero onBook={() => openBooking()} />
+        <Proof />
         <Brands />
         <Advisory onBook={() => openBooking()} />
         <About onBook={() => openBooking()} />

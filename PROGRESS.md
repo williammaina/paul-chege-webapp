@@ -1,6 +1,6 @@
 # Paul Chege Financial Advisory — Progress
 
-**Phase 2 of 4 · P2-M13 next · 12 of 20 milestones complete**
+**Phase 2 of 4 · P2-M14 in progress · 12 of 21 milestones complete**
 
 ## How this file works
 
@@ -214,14 +214,34 @@ and both let money go wrong rather than merely breaking a page:
 Both need shared storage — Postgres, Redis or Vercel KV — before this can
 be deployed rather than after.
 
+### P2-M14 — Proof first, three lanes, room for outcomes 🔄 IN PROGRESS
+
+**Branch:** `feat/p2-m14-proof-lanes-outcomes`
+
+Three of the improvements Paul picked from a list of nine, all of them
+about the same failure: the page asked to be trusted before it had said
+anything a stranger could check.
+
+- **The strongest fact was ranked last.** A sitting Deputy President
+  wrote the foreword, and that was a grey line of body copy three
+  screens down, under a marquee of six SME logos.
+- **Eight advisory cards, seven saying "Book a session".** Three of them
+  were different names for reading a loan document before signing it,
+  and nothing on the card told them apart.
+- **No third-party evidence at all.** Paul is a regulated intermediary,
+  so a testimonial needs written consent and nothing may be invented.
+
+#### Tasks
+- [x] Put the foreword credential directly under the hero
+- [ ] Collapse the eight advisory cards into three lanes
+- [ ] Build the case-outcome section, and leave it empty until Paul fills it
+
 ---
 
 ## Phase 3 — Hardening ⬜ NOT STARTED
 
 ### P3-M01 — Analytics and error reporting ⬜ NOT STARTED
 ### P3-M02 — Deployment and CI ⬜ NOT STARTED
-
----
 
 ## Phase 4 — After delivery ⬜ NOT STARTED
 

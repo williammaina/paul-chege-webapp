@@ -107,3 +107,23 @@ export const speaking = [
   { icon: "▣", title: "Financial Wellness", body: "Education around everyday money decisions." },
   { icon: "◉", title: "Media & Commentary", body: "Interviews and expert commentary." },
 ] as const;
+
+/**
+ * The credential band under the hero.
+ *
+ * Everything here is already elsewhere on the page — it was just in small
+ * grey type three screens down, below a carousel of six SME logos. A sitting
+ * Deputy President writing the foreword is the strongest single fact Paul
+ * has, and it was ranked below "Nicmaa Home & Office Furniture".
+ *
+ * Nothing goes in this array that Paul cannot evidence on request.
+ */
+export const proof = {
+  headline: "Foreword by H.E. Rigathi Gachagua",
+  headlineSub: "Deputy President of Kenya",
+  facts: [
+    { value: "Sept 2026", label: "Launched at Safari Park Hotel", sub: "Nairobi" },
+    { value: "546K+", label: "Combined audience", sub: "Read 28 Sep 2026" },
+    { value: "151", label: "Episodes published", sub: "YouTube" },
+  ],
+} as const;
