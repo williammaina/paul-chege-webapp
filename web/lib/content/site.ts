@@ -158,3 +158,38 @@ export const proof = {
     { value: "151", label: "Episodes published", sub: "YouTube" },
   ],
 } as const;
+
+/**
+ * Anonymised case outcomes — the honest substitute for testimonials.
+ *
+ * Paul is a regulated intermediary. Reviews need the client's written
+ * consent, and neither a review nor an outcome may be invented, so this
+ * array ships empty and the section does not render at all until Paul
+ * supplies real cases. That is deliberate: an empty section is a gap, an
+ * invented one is a false claim about a financial service.
+ *
+ * Each entry is one thing that actually happened, with identifying detail
+ * removed. Paul writes it; nobody else does. Shape:
+ *
+ *   {
+ *     tag: "Declined claim",
+ *     headline: "KES 380,000 reinstated after re-reading the exclusion.",
+ *     body: "The insurer refused on a clause that did not apply to the ...",
+ *     detail: "Nairobi · 2025",
+ *   }
+ *
+ * `disclaimer` renders whenever the section does, because a past outcome is
+ * not a promise of a future one and the page has to say so.
+ */
+export type CaseOutcome = {
+  tag: string;
+  headline: string;
+  body: string;
+  detail: string;
+};
+
+export const caseOutcomes: CaseOutcome[] = [];
+
+export const outcomesDisclaimer =
+  "Real cases, with identifying details removed and shared with permission. " +
+  "Every situation differs — a past outcome is not a guarantee of a future one.";

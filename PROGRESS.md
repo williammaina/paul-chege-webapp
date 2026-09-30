@@ -1,6 +1,6 @@
 # Paul Chege Financial Advisory — Progress
 
-**Phase 2 of 4 · P2-M14 in progress · 12 of 21 milestones complete**
+**Phase 2 of 4 · P2-M13 next · 13 of 21 milestones complete**
 
 ## How this file works
 
@@ -214,9 +214,9 @@ and both let money go wrong rather than merely breaking a page:
 Both need shared storage — Postgres, Redis or Vercel KV — before this can
 be deployed rather than after.
 
-### P2-M14 — Proof first, three lanes, room for outcomes 🔄 IN PROGRESS
+### P2-M14 — Proof first, three lanes, room for outcomes ✅ COMPLETE
 
-**Branch:** `feat/p2-m14-proof-lanes-outcomes`
+**Branch:** `feat/p2-m14-proof-lanes-outcomes` · merged into `development`
 
 Three of the improvements Paul picked from a list of nine, all of them
 about the same failure: the page asked to be trusted before it had said
@@ -234,7 +234,7 @@ anything a stranger could check.
 #### Tasks
 - [x] Put the foreword credential directly under the hero
 - [x] Collapse the eight advisory cards into three lanes
-- [ ] Build the case-outcome section, and leave it empty until Paul fills it
+- [x] Build the case-outcome section, and leave it empty until Paul fills it
 
 ---
 

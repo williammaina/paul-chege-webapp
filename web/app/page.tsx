@@ -10,6 +10,7 @@ import { Hero } from "@/components/sections/Hero";
 import { Proof } from "@/components/sections/Proof";
 import { Brands } from "@/components/sections/Brands";
 import { Advisory } from "@/components/sections/Advisory";
+import { Outcomes } from "@/components/sections/Outcomes";
 import { About } from "@/components/sections/About";
 import { Framework } from "@/components/sections/Framework";
 import { Book } from "@/components/sections/Book";
@@ -36,6 +37,7 @@ export default function Home() {
         <Proof />
         <Brands />
         <Advisory onBook={() => openBooking()} />
+        <Outcomes />
         <About onBook={() => openBooking()} />
         <Framework />
         <Book onBuy={setBuying} />
