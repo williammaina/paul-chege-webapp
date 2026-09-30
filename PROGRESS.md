@@ -233,7 +233,7 @@ anything a stranger could check.
 
 #### Tasks
 - [x] Put the foreword credential directly under the hero
-- [ ] Collapse the eight advisory cards into three lanes
+- [x] Collapse the eight advisory cards into three lanes
 - [ ] Build the case-outcome section, and leave it empty until Paul fills it
 
 ---
