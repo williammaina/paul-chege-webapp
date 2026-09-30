@@ -3,7 +3,7 @@ import { Reveal } from "@/components/motion/Reveal";
 
 export function Eyebrow({ children, dark = false }: { children: ReactNode; dark?: boolean }) {
   return (
-    <p className={`relative inline-block text-[.78rem] font-extrabold uppercase tracking-[.15em]
+    <p className={`relative inline-block text-[.7rem] font-extrabold uppercase tracking-[.18em]
                    ${dark ? "text-gold-400" : "text-gold-ink"}`}>
       {children}
     </p>
@@ -14,10 +14,10 @@ export function SectionHead({
   eyebrow, title, lede, dark = false,
 }: { eyebrow: string; title: ReactNode; lede?: ReactNode; dark?: boolean }) {
   return (
-    <Reveal className="mb-7 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+    <Reveal className="mb-11 flex flex-col justify-between gap-6 md:flex-row md:items-end lg:mb-14">
       <div>
         <Eyebrow dark={dark}>{eyebrow}</Eyebrow>
-        <h2 className={`mt-1 text-[clamp(2rem,3vw,3.2rem)] font-semibold leading-[1.05]
+        <h2 className={`mt-2.5 text-[clamp(2rem,.9rem+2.9vw,3.2rem)] font-semibold leading-[1.02]
                         ${dark ? "text-white" : ""}`}>
           {title}
         </h2>

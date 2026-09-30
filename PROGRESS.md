@@ -258,7 +258,7 @@ taste.
 
 #### Tasks
 - [x] Put every section, the hero included, on one vertical axis
-- [ ] Give the page a section rhythm instead of five arbitrary paddings
+- [x] Give the page a section rhythm instead of five arbitrary paddings
 - [ ] Make the foreword the focal point of the credential band
 
 

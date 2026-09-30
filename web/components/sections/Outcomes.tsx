@@ -20,7 +20,7 @@ export function Outcomes() {
   if (caseOutcomes.length === 0) return null;
 
   return (
-    <section id="outcomes" className="border-y border-[#e6eaef] bg-[#f7f8fa] py-[76px]">
+    <section id="outcomes" className="section border-y border-[#e6eaef] bg-[#f7f8fa]">
       <div className="wrap">
         <SectionHead
           eyebrow="What came of it"

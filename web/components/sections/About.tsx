@@ -37,7 +37,7 @@ export function About({ onBook }: { onBook: () => void }) {
   }, []);
 
   return (
-    <section ref={section} id="about" className="bg-cream py-[76px]">
+    <section ref={section} id="about" className="section-lg bg-cream">
       <div className="wrap grid gap-6 lg:grid-cols-[1.05fr_.75fr_.85fr]">
         <Reveal className="rounded-[18px] border border-[#e5e8eb] bg-white p-7 lg:p-[30px]">
           <p className="text-[.78rem] font-extrabold uppercase tracking-[.15em] text-gold-ink">About Paul Chege</p>

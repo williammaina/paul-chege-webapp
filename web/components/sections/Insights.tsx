@@ -51,7 +51,7 @@ export function Insights() {
   const [hero, ...rest] = shown;
 
   return (
-    <section id="insights" className="bg-cream py-[76px]">
+    <section id="insights" className="section bg-cream">
       <div className="wrap">
         <SectionHead eyebrow="Insights & speaking" title={<>Watch Before You Sign.</>}
           lede={<>Real episodes from Paul&apos;s channel — loans, shares, cover and the clauses

@@ -45,7 +45,7 @@ export function Advisory({ onBook }: { onBook: () => void }) {
   const { fmt } = usePrices();
 
   return (
-    <section id="services" className="py-[76px]">
+    <section id="services" className="section-lg">
       <div className="wrap">
         <SectionHead
           eyebrow="Advisory"
