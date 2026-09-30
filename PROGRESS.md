@@ -1,6 +1,6 @@
 # Paul Chege Financial Advisory — Progress
 
-**Phase 2 of 4 · P2-M13 next · 14 of 22 milestones complete**
+**Phase 2 of 4 · P2-M13 next · 15 of 23 milestones complete**
 
 ## How this file works
 
@@ -260,6 +260,24 @@ taste.
 - [x] Put every section, the hero included, on one vertical axis
 - [x] Give the page a section rhythm instead of five arbitrary paddings
 - [x] Make the foreword the focal point of the credential band
+
+### P2-M16 — Stop cropping the portrait ✅ COMPLETE
+
+**Branch:** `feat/p2-m14-proof-lanes-outcomes` · merged into `development`
+
+The portrait file is square, 2047x2048, and Paul occupies the middle
+1280px of it. The frame was a `min-h` with `object-[center_16%]`, which
+made it 0.58 aspect in the three-column layout and 2.1 once the columns
+stacked — cutting his shoulders at one breakpoint and cutting him off at
+the chest at the other. A neighbouring column growing taller made it
+worse, because a stretched frame is a narrower crop.
+
+The frame now carries a fixed ratio at every width and does not stretch,
+so no other column can squeeze it: 4:5 stacked, 2:3 on desktop, which is
+the tallest it can go before the crop reaches him.
+
+#### Tasks
+- [x] Fit the whole of Paul in the frame at every width, and grade the card
 
 
 ---
