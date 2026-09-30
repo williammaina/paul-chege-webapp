@@ -60,7 +60,22 @@
 }
 
 @layer utilities {
+  /* One vertical axis for the whole page.
+     Every section's content sits on this, the hero included. It used to
+     run on its own 1500px container with a 16px gutter, so the first
+     thing below the fold stepped 107px inward from the headline above
+     it — the kind of near-miss alignment that reads as carelessness
+     without the reader being able to name it. */
   .wrap { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
+
+  /* Section rhythm, in three volumes.
+     A page where every band has the same 76px of air has no dynamics —
+     it scrolls flat. The loud bands are the ones a visitor came for
+     (advisory, the book, booking); the quiet ones carry them between. */
+  .section    { padding-block: clamp(64px, 6.6vw, 104px); }
+  .section-lg { padding-block: clamp(80px, 8.8vw, 136px); }
+  .section-sm { padding-block: clamp(36px, 3.4vw, 52px); }
+
   .tnum { font-variant-numeric: tabular-nums lining-nums; }
 }
 

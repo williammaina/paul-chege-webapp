@@ -13,8 +13,12 @@ export function Hero({ onBook }: { onBook: () => void }) {
     <section className="hero-bg relative isolate overflow-hidden bg-navy py-12 lg:py-[46px] lg:pb-20">
       <HeroCanvas />
 
-      <div className="relative z-10 mx-auto grid w-[min(1500px,calc(100%-32px))] gap-4
-                      lg:grid-cols-[minmax(320px,.92fr)_minmax(340px,1.3fr)_minmax(205px,.58fr)]">
+      {/* On `.wrap`, like every other section. The columns are re-weighted
+          for the narrower axis: the headline column takes the space the
+          portrait used to have, because at 1180 a 377px text column
+          cannot hold a 70px display line. */}
+      <div className="relative z-10 wrap grid gap-4
+                      lg:grid-cols-[minmax(320px,1.55fr)_minmax(280px,.76fr)_minmax(215px,.59fr)]">
         {/* Frosted, so the shader behind is felt rather than hidden. The
             gold below is darker than the brand gold for the same reason:
             composited over the backdrop the brand value measures 2.95:1. */}
@@ -23,7 +27,7 @@ export function Hero({ onBook }: { onBook: () => void }) {
           <p className="text-[.78rem] font-extrabold uppercase tracking-[.15em] text-gold-ink">
             Financial clarity for a brighter tomorrow
           </p>
-          <h1 className="mt-2 text-[clamp(2.6rem,5vw,4.4rem)] font-semibold leading-[.96] tracking-[-.042em]">
+          <h1 className="mt-2 text-[clamp(2.3rem,1rem+2.5vw,3.3rem)] font-semibold leading-[.98] tracking-[-.04em]">
             Understand Money.<br />Borrow Intentionally.<br />
             <span className="text-[#996918]">Build With Confidence.</span>
           </h1>

@@ -1,6 +1,6 @@
 # Paul Chege Financial Advisory — Progress
 
-**Phase 2 of 4 · P2-M13 next · 13 of 21 milestones complete**
+**Phase 2 of 4 · P2-M15 in progress · 13 of 22 milestones complete**
 
 ## How this file works
 
@@ -235,6 +235,32 @@ anything a stranger could check.
 - [x] Put the foreword credential directly under the hero
 - [x] Collapse the eight advisory cards into three lanes
 - [x] Build the case-outcome section, and leave it empty until Paul fills it
+
+### P2-M15 — Layout principles 🔄 IN PROGRESS
+
+**Branch:** `feat/p2-m14-proof-lanes-outcomes`
+
+Paul supplied Flux Academy's *Principles of Layout* and asked for the
+page to be held against it. Audited at 1440 and 375, three of the nine
+principles were being broken measurably rather than as a matter of
+taste.
+
+- **Alignment.** The hero ran on its own 1500px container with a 16px
+  gutter while every other section used `.wrap` at 1180 with 20px, so
+  the content stepped 107px inward at the fold. The partners heading
+  was also the only one on the page centred rather than flush-left.
+- **White space and sequence.** Section padding was 46, 56, 76, 88 and
+  92 pixels with no system behind the differences, so the page scrolled
+  at one flat volume.
+- **Focal point and hierarchy.** In the credential band the three
+  supporting figures were set larger than the foreword credential they
+  support.
+
+#### Tasks
+- [x] Put every section, the hero included, on one vertical axis
+- [ ] Give the page a section rhythm instead of five arbitrary paddings
+- [ ] Make the foreword the focal point of the credential band
+
 
 ---
 
