@@ -17,7 +17,7 @@ export function SectionHead({
     <Reveal className="mb-11 flex flex-col justify-between gap-6 md:flex-row md:items-end lg:mb-14">
       <div>
         <Eyebrow dark={dark}>{eyebrow}</Eyebrow>
-        <h2 className={`mt-2.5 text-[clamp(2rem,.9rem+2.9vw,3.2rem)] font-semibold leading-[1.02]
+        <h2 className={`mt-2.5 text-[clamp(1.85rem,.85rem+2.4vw,2.6rem)] font-semibold leading-[1.02]
                         ${dark ? "text-white" : ""}`}>
           {title}
         </h2>

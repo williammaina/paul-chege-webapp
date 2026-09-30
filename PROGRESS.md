@@ -272,12 +272,21 @@ stacked — cutting his shoulders at one breakpoint and cutting him off at
 the chest at the other. A neighbouring column growing taller made it
 worse, because a stretched frame is a narrower crop.
 
-The frame now carries a fixed ratio at every width and does not stretch,
-so no other column can squeeze it: 4:5 stacked, 2:3 on desktop, which is
-the tallest it can go before the crop reaches him.
+Stacked, the frame is 4:5 and nothing is cut at all. On desktop Paul
+asked for it flush with the columns beside it, and no square can run a
+718px row at this column width without giving something up — holding all
+of him would need a 449px column, which only exists if the headline
+drops below the size of the section headings. The frame takes the width
+instead, so the crop is horizontal only: it never touches his head,
+face, hands or the length of him, and what leaves the frame is about
+100px of the outer edge of each sleeve.
+
+Separately, the headline had ended up smaller than the section headings
+it outranks, so `SectionHead` comes down to 2.6rem.
 
 #### Tasks
 - [x] Fit the whole of Paul in the frame at every width, and grade the card
+- [x] Run the frame flush with the columns beside it, and restore h1 over h2
 
 
 ---

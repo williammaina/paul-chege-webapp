@@ -18,7 +18,7 @@ export function Hero({ onBook }: { onBook: () => void }) {
           portrait used to have, because at 1180 a 377px text column
           cannot hold a 70px display line. */}
       <div className="relative z-10 wrap grid gap-4
-                      lg:grid-cols-[minmax(320px,1.46fr)_minmax(330px,.95fr)_minmax(230px,.64fr)]">
+                      lg:grid-cols-[minmax(320px,1.42fr)_minmax(340px,1.02fr)_minmax(230px,.65fr)]">
         {/* Frosted, so the shader behind is felt rather than hidden. The
             gold below is darker than the brand gold for the same reason:
             composited over the backdrop the brand value measures 2.95:1. */}
@@ -27,7 +27,7 @@ export function Hero({ onBook }: { onBook: () => void }) {
           <p className="text-[.78rem] font-extrabold uppercase tracking-[.15em] text-gold-ink">
             Financial clarity for a brighter tomorrow
           </p>
-          <h1 className="mt-2 text-[clamp(2.2rem,1rem+2.2vw,2.9rem)] font-semibold leading-[.98] tracking-[-.04em]">
+          <h1 className="mt-2 text-[clamp(2.2rem,1rem+2.15vw,2.85rem)] font-semibold leading-[.98] tracking-[-.04em]">
             Understand Money.<br />Borrow Intentionally.<br />
             <span className="text-[#996918]">Build With Confidence.</span>
           </h1>
@@ -71,18 +71,24 @@ export function Hero({ onBook }: { onBook: () => void }) {
             against the 1280px he actually spans — so all that leaves the
             frame is empty studio backdrop.
 
-            2:3 is the tallest the desktop frame can go: at 358px wide it
-            shows 1366px of the file's width centred on Paul at 52%, which
-            is [377, 1743] against the [420, 1700] he occupies. Any taller
-            and the frame starts taking his shoulders. */}
+            Stacked, the frame is 4:5 and nothing is cut at all.
+
+            On desktop it runs the full height of the row, which no square
+            can do at this column width without giving something up — the
+            row is 718px and holding all of him would need a 449px column,
+            which only exists if the headline drops below the size of the
+            section headings. So the frame takes the width instead: the
+            crop is horizontal only, it never touches his head, face,
+            hands or the length of him, and what leaves the frame is the
+            outer edge of each sleeve. */}
         <div className="group relative mx-auto aspect-[4/5] w-full max-w-[460px] overflow-hidden lg:aspect-[2/3]
                         rounded-[18px] bg-[linear-gradient(160deg,#dfe3e7,#c6ccd3)]
                         shadow-[0_2px_4px_rgba(3,11,22,.3),0_28px_64px_-30px_rgba(3,11,22,.85)]
                         ring-1 ring-white/12
-                        lg:max-w-none lg:self-center">
+                        lg:aspect-auto lg:h-full lg:max-w-none lg:self-stretch">
           <Image src="/img/paul-chege-portrait.jpg" alt="Paul Chege" fill priority
                  sizes="(max-width: 1024px) 92vw, 34vw"
-                 className="object-cover object-[52%_center] saturate-[1.06] contrast-[1.03]
+                 className="object-cover object-[54%_center] saturate-[1.06] contrast-[1.03]
                             transition-transform duration-[900ms] ease-out-expo
                             motion-safe:group-hover:scale-[1.03]" />
 
