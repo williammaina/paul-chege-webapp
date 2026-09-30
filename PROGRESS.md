@@ -1,6 +1,6 @@
 # Paul Chege Financial Advisory — Progress
 
-**Phase 2 of 4 · P2-M15 in progress · 13 of 22 milestones complete**
+**Phase 2 of 4 · P2-M13 next · 14 of 22 milestones complete**
 
 ## How this file works
 
@@ -236,9 +236,9 @@ anything a stranger could check.
 - [x] Collapse the eight advisory cards into three lanes
 - [x] Build the case-outcome section, and leave it empty until Paul fills it
 
-### P2-M15 — Layout principles 🔄 IN PROGRESS
+### P2-M15 — Layout principles ✅ COMPLETE
 
-**Branch:** `feat/p2-m14-proof-lanes-outcomes`
+**Branch:** `feat/p2-m14-proof-lanes-outcomes` · merged into `development`
 
 Paul supplied Flux Academy's *Principles of Layout* and asked for the
 page to be held against it. Audited at 1440 and 375, three of the nine
@@ -259,7 +259,7 @@ taste.
 #### Tasks
 - [x] Put every section, the hero included, on one vertical axis
 - [x] Give the page a section rhythm instead of five arbitrary paddings
-- [ ] Make the foreword the focal point of the credential band
+- [x] Make the foreword the focal point of the credential band
 
 
 ---
