@@ -284,9 +284,20 @@ face, hands or the length of him, and what leaves the frame is about
 Separately, the headline had ended up smaller than the section headings
 it outranks, so `SectionHead` comes down to 2.6rem.
 
+Measuring the file rather than eyeballing it then showed the estimate was
+wrong twice over: Paul runs x436 to x1780, so he is 1344px wide, not the
+1280 assumed, and his centre is 1108 against the file's 1023 — he is off
+centre to the right, which is why it was his right shoulder going. A
+frame holding him needs an aspect of 0.656 or wider, and the row at 718px
+could not give one. Slimming the side panel took the row to 596, and the
+width freed by narrowing both cards took the frame to 404x596, an aspect
+of 0.677, framed at 63 percent. Both shoulders now clear the edge with
+about 20px of backdrop to spare on each side, at every width.
+
 #### Tasks
 - [x] Fit the whole of Paul in the frame at every width, and grade the card
 - [x] Run the frame flush with the columns beside it, and restore h1 over h2
+- [x] Hold both shoulders in frame at full height, measured off the file
 
 
 ---
