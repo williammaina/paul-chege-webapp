@@ -124,7 +124,7 @@ export function Hero({ onBook }: { onBook: () => void }) {
 
           <div className="flex flex-1 flex-col rounded-[14px] px-4 pb-3 pt-1">
             <div aria-hidden className="mb-3 h-px bg-white/10" />
-            <p className="text-[.68rem] font-extrabold uppercase tracking-[.13em] text-[#8fa3bd]">
+            <p className="text-[.68rem] font-extrabold uppercase tracking-[.13em] text-text-muted">
               Start with what matters to you
             </p>
             <ul className="mt-2.5 space-y-0">
@@ -141,7 +141,7 @@ export function Hero({ onBook }: { onBook: () => void }) {
                     </span>
                     <span className="min-w-0">
                       <b className="block text-[.82rem] text-white">{t}</b>
-                      <small className="block text-[.65rem] leading-[1.3] text-[#9fb0be]">{sub}</small>
+                      <small className="block text-[.65rem] leading-[1.3] text-text-muted">{sub}</small>
                     </span>
                     <i className="ml-auto self-center not-italic text-gold-400 transition
                                   group-hover:translate-x-0.5">&rarr;</i>

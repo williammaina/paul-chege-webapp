@@ -61,9 +61,10 @@ export function Insights() {
           {categories.map((c) => (
             <button key={c.key} onClick={() => setCat(c.key)}
                     className={`rounded-full border px-4 py-2 text-[.82rem] font-semibold transition
+                      [transition-timing-function:var(--ease-out-soft)] duration-300
                       ${cat === c.key
-                        ? "border-[#12304d] bg-[#12304d] text-white shadow-lg"
-                        : "border-[#dfe5ec] bg-white text-[#4a5865] hover:-translate-y-px hover:border-gold"}`}>
+                        ? "border-surface-800 bg-surface-800 text-white shadow-lg shadow-black/20"
+                        : "border-[#dfe5ec] bg-white text-[#4a5865] hover:-translate-y-0.5 hover:border-accent-emerald hover:shadow-md motion-reduce:hover:translate-y-0"}`}>
               {c.label}
             </button>
           ))}
@@ -90,7 +91,7 @@ export function Insights() {
                 Bring this into your organisation.
               </h3>
             </div>
-            <p className="max-w-[30rem] text-[.92rem] leading-relaxed text-[#b3c4d8]">
+            <p className="max-w-[30rem] text-[.92rem] leading-relaxed text-text-tertiary">
               Keynotes, workshops and financial literacy sessions — the same material,
               delivered to your team.
             </p>
@@ -102,7 +103,7 @@ export function Insights() {
                             hover:-translate-y-1 hover:border-gold-400/40 hover:bg-white/10">
                 <span className="block text-[1.25rem] text-gold-400">{s.icon}</span>
                 <b className="mt-2 block text-[.9rem] text-white">{s.title}</b>
-                <small className="mt-1 block text-[.78rem] leading-relaxed text-[#a9bcd2]">{s.body}</small>
+                <small className="mt-1 block text-[.78rem] leading-relaxed text-text-tertiary">{s.body}</small>
               </a>
             ))}
           </div>
@@ -157,7 +158,12 @@ function Card({ ep, big = false, onPlay }: { ep: Episode; big?: boolean; onPlay:
       <button onClick={() => onPlay(ep)} onPointerEnter={start} onPointerLeave={stop}
               className="group block w-full text-left"
               aria-label={`Play: ${ep.title}`}>
-        <span className={`relative block overflow-hidden rounded-[16px] ${big ? "aspect-video" : "aspect-video"}`}>
+        <span className="relative block aspect-video overflow-hidden rounded-[16px]
+                         ring-1 ring-transparent transition-all duration-300
+                         [transition-timing-function:var(--ease-out-soft)]
+                         group-hover:-translate-y-1 group-hover:ring-accent-cyan/60
+                         group-hover:shadow-xl group-hover:shadow-black/25
+                         motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
           <Image src={`https://i.ytimg.com/vi/${ep.id}/maxresdefault.jpg`} alt="" fill unoptimized
                  sizes={big ? "(max-width:1024px) 100vw, 50vw" : "(max-width:1024px) 50vw, 25vw"}
                  className="object-cover transition-transform duration-700 group-hover:scale-105" />

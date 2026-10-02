@@ -28,7 +28,7 @@ export function Proof() {
                             ring-1 ring-white/15" />
 
           <div className="min-w-0">
-            <p className="text-[.63rem] font-extrabold uppercase tracking-[.14em] text-[#8fa3bd]">
+            <p className="text-[.63rem] font-extrabold uppercase tracking-[.14em] text-text-muted">
               {bookFacts.title}
             </p>
             {/* The focal point of the band, and it has to win on size.
@@ -60,7 +60,7 @@ export function Proof() {
                 <span className="mt-1.5 block text-[.78rem] font-semibold leading-tight text-white">
                   {f.label}
                 </span>
-                <span className="mt-0.5 block text-[.7rem] leading-tight text-[#93a7bd]">{f.sub}</span>
+                <span className="mt-0.5 block text-[.7rem] leading-tight text-text-muted">{f.sub}</span>
               </dd>
             </div>
           ))}

@@ -63,7 +63,7 @@ export function FreeChapter() {
                          font-semibold leading-tight text-white">
             The chapter on reading a loan offer — free.
           </h3>
-          <p className="mt-3 max-w-lg text-[.95rem] leading-relaxed text-[#b9c8dc]">
+          <p className="mt-3 max-w-lg text-[.95rem] leading-relaxed text-text-tertiary">
             The rate you are actually paying, the fees behind it, and whether the
             repayment survives a bad month. No payment, no card — an email address
             and it is yours.
@@ -80,27 +80,27 @@ export function FreeChapter() {
                 Download it now
               </a>
             )}
-            <p className="mt-3 text-[.75rem] leading-relaxed text-[#a9bcd2]">
+            <p className="mt-3 text-[.75rem] leading-relaxed text-text-tertiary">
               You will not be added to anything else without being asked.
             </p>
           </div>
         ) : (
           <form onSubmit={submit} className="grid gap-3">
             <label className="block">
-              <span className="mb-1.5 block text-[.76rem] font-semibold text-[#9db2c9]">
-                Your name <span className="font-normal text-[#8fa3bd]">(optional)</span>
+              <span className="mb-1.5 block text-[.76rem] font-semibold text-text-tertiary">
+                Your name <span className="font-normal text-text-muted">(optional)</span>
               </span>
               <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Jane Wanjiku"
                      className="w-full rounded-[10px] border border-white/15 bg-white/5 px-3.5 py-3
-                                text-[.92rem] text-white placeholder:text-[#6e8299] outline-none
+                                text-[.92rem] text-white placeholder:text-text-muted outline-none
                                 transition focus:border-gold-400 focus:ring-2 focus:ring-gold-400/20" />
             </label>
             <label className="block">
-              <span className="mb-1.5 block text-[.76rem] font-semibold text-[#9db2c9]">Email</span>
+              <span className="mb-1.5 block text-[.76rem] font-semibold text-text-tertiary">Email</span>
               <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
                      placeholder="you@example.com"
                      className="w-full rounded-[10px] border border-white/15 bg-white/5 px-3.5 py-3
-                                text-[.92rem] text-white placeholder:text-[#6e8299] outline-none
+                                text-[.92rem] text-white placeholder:text-text-muted outline-none
                                 transition focus:border-gold-400 focus:ring-2 focus:ring-gold-400/20" />
             </label>
 
@@ -116,7 +116,7 @@ export function FreeChapter() {
                                font-extrabold text-navy transition hover:brightness-105 disabled:opacity-60">
               {state.phase === "sending" ? "Sending…" : "Send me the chapter →"}
             </button>
-            <p className="text-[.72rem] leading-relaxed text-[#8fa3bd]">
+            <p className="text-[.72rem] leading-relaxed text-text-muted">
               One email with the chapter. Nothing else unless you ask.
             </p>
           </form>

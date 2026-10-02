@@ -23,7 +23,7 @@ export function SectionHead({
         </h2>
       </div>
       {lede && (
-        <p className={`max-w-[560px] ${dark ? "text-[#b3c4d8]" : "text-[#5f6c7d]"}`}>{lede}</p>
+        <p className={`max-w-[560px] ${dark ? "text-text-tertiary" : "text-[#5f6c7d]"}`}>{lede}</p>
       )}
     </Reveal>
   );

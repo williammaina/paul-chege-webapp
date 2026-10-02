@@ -12,6 +12,12 @@ const steps = [
   ["Leave with a decision", "Not a brochure. A number, a clause, and what to do about it."],
 ];
 
+const STEP_ACCENT = [
+  "var(--color-accent-gold)",
+  "var(--color-accent-emerald)",
+  "var(--color-accent-cyan)",
+];
+
 export function Contact({ onBook }: { onBook: (type?: "free" | "paid") => void }) {
   const { fmt } = usePrices();
 
@@ -35,7 +41,7 @@ export function Contact({ onBook }: { onBook: (type?: "free" | "paid") => void }
               <div key={c} className="flex items-start gap-3">
                 <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full
                                  bg-gold-400/20 text-[.66rem] font-extrabold text-gold-400">✓</span>
-                <span className="text-[.92rem] text-[#cfdcea]">{c}</span>
+                <span className="text-[.92rem] text-text-tertiary">{c}</span>
               </div>
             ))}
           </div>
@@ -51,7 +57,7 @@ export function Contact({ onBook }: { onBook: (type?: "free" | "paid") => void }
               60-min coaching — {fmt("coaching")}
             </button>
           </div>
-          <p className="mt-4 text-[.8rem] text-[#8fa3bd]">
+          <p className="mt-4 text-[.8rem] text-text-muted">
             Paid by M-Pesa at the time of booking. Refunded in full if Paul has to move
             the session and the new time does not work for you.
           </p>
@@ -64,20 +70,24 @@ export function Contact({ onBook }: { onBook: (type?: "free" | "paid") => void }
           <p className="text-[.66rem] font-extrabold uppercase tracking-[.18em] text-gold-400">What happens next</p>
           <ol className="mt-6 space-y-5">
             {steps.map(([t, s], i) => (
-              <li key={t} className="flex gap-4">
+              <li key={t} className="group flex gap-4"
+                  style={{ ["--accent" as string]: STEP_ACCENT[i] ?? "var(--color-accent-gold)" }}>
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border-[1.5px]
-                                 border-gold-400/55 text-[.8rem] font-extrabold text-gold-400 tnum">{i + 1}</span>
+                                 text-[.8rem] font-extrabold tnum transition-transform duration-300
+                                 [transition-timing-function:var(--ease-out-back)]
+                                 group-hover:scale-110 motion-reduce:transition-none
+                                 motion-reduce:group-hover:scale-100"
+                      style={{ borderColor: "var(--accent)", color: "var(--accent)" }}>{i + 1}</span>
                 <span>
-                  <b className="block text-[.96rem] text-white">{t}</b>
-                  <span className="mt-1 block text-[.85rem] leading-relaxed text-[#a9bcd2]">{s}</span>
+                  <b className="block text-[.96rem] text-text-primary">{t}</b>
+                  <span className="mt-1 block text-[.85rem] leading-relaxed text-text-tertiary">{s}</span>
                 </span>
               </li>
             ))}
           </ol>
           <div className="mt-7 flex items-center gap-3 border-t border-white/10 pt-5">
-            <span className="relative h-2.5 w-2.5 shrink-0 rounded-full bg-[#00c46a]
-                             after:absolute after:inset-0 after:animate-ping after:rounded-full after:bg-[#00c46a]" />
-            <span className="text-[.82rem] text-[#a9bcd2]">
+            <span className="pulse-dot h-2.5 w-2.5 shrink-0 rounded-full bg-accent-emerald text-accent-emerald" />
+            <span className="text-[.82rem] text-text-tertiary">
               Or call <a href={site.phoneHref} className="font-bold text-white underline underline-offset-4">{site.phone}</a>
               {" "}— a person answers.
             </span>

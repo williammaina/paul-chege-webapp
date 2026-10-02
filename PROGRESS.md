@@ -1,6 +1,6 @@
 # Paul Chege Financial Advisory — Progress
 
-**Phase 2 of 4 · P2-M13 next · 16 of 24 milestones complete**
+**Phase 2 of 4 · P2-M13 next · 17 of 24 milestones complete**
 
 ## How this file works
 
@@ -299,9 +299,9 @@ about 20px of backdrop to spare on each side, at every width.
 - [x] Run the frame flush with the columns beside it, and restore h1 over h2
 - [x] Hold both shoulders in frame at full height, measured off the file
 
-### P2-M17 — Kinetic layer and lane accents 🔄 IN PROGRESS
+### P2-M17 — Kinetic layer and lane accents ✅ COMPLETE
 
-**Branch:** `feat/p2-m14-proof-lanes-outcomes`
+**Branch:** `feat/p2-m14-proof-lanes-outcomes` · merged into `development`
 
 Paul supplied ten reference screenshots and two Dribbble links and asked
 for an award-style motion and visual pass. He chose to keep the hero's
@@ -318,7 +318,7 @@ tables, the motion contracts and the component source.
 - [x] Add `Kinetic` and `Counter`, and let `Reveal` carry a style
 - [x] Set the hero headline word by word, structure untouched
 - [x] Give each advisory lane its own accent on one shared surface
-- [ ] Carry the system through insights, the book, contact and the footer
+- [x] Carry the system through the framework, insights, the book and contact
 
 
 ---

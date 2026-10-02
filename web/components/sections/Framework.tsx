@@ -9,6 +9,16 @@ import { SectionHead } from "@/components/ui/SectionHead";
  * each step landing as the line reaches it. Below 1000px the grid wraps,
  * there is no line to follow, and the stagger switches off.
  */
+/* Understand, Borrow, Build, Protect, Grow — stepped across the accent set
+   so the rail and the rings agree about where in the journey you are. */
+const STEP_ACCENT = [
+  "var(--color-accent-gold)",
+  "color-mix(in oklab, var(--color-accent-gold), var(--color-accent-emerald))",
+  "var(--color-accent-emerald)",
+  "color-mix(in oklab, var(--color-accent-emerald), var(--color-accent-cyan))",
+  "var(--color-accent-cyan)",
+];
+
 export function Framework() {
   const ref = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
@@ -34,24 +44,34 @@ export function Framework() {
                  actually theirs.</>} />
 
         <div ref={ref} className="relative mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+          {/* The rail now travels the accent set rather than one gold, so the
+              five steps read as a progression instead of five of the same. */}
           <span aria-hidden
                 className="absolute left-[8%] right-[8%] top-[30px] hidden h-0.5 origin-left lg:block
-                           [background:linear-gradient(90deg,transparent,rgba(230,184,76,.55)_12%,rgba(230,184,76,.55)_88%,transparent)]"
+                           [background:linear-gradient(90deg,transparent,var(--color-accent-gold)_12%,var(--color-accent-emerald)_50%,var(--color-accent-cyan)_88%,transparent)]"
                 style={{ transform: `scaleX(${inView ? 1 : 0})`, transition: "transform 1.6s var(--ease-out-expo)" }} />
           {framework.map((f, i) => (
-            <div key={f.n} className="relative z-10 px-2 py-3.5 text-center"
+            <div key={f.n} className="group relative z-10 px-2 py-3.5 text-center"
                  style={{
+                   ["--accent" as string]: STEP_ACCENT[i],
                    opacity: inView ? 1 : 0,
                    translate: inView ? "none" : "0 16px",
                    transition: `opacity .7s ease ${140 + i * 260}ms, translate .7s var(--ease-out-expo) ${140 + i * 260}ms`,
                  }}>
               <div className="mx-auto mb-3 grid h-[54px] w-[54px] place-items-center rounded-full
-                              border border-gold-bright font-extrabold text-gold-bright tnum
-                              transition duration-500 hover:scale-110 hover:bg-gold-bright hover:text-navy">
+                              border font-extrabold tnum transition-all duration-500
+                              [transition-timing-function:var(--ease-out-back)]
+                              group-hover:scale-110 motion-reduce:transition-none
+                              motion-reduce:group-hover:scale-100"
+                   style={{
+                     borderColor: "var(--accent)",
+                     color: "var(--accent)",
+                     boxShadow: inView ? "0 0 0 0 transparent" : undefined,
+                   }}>
                 {f.n}
               </div>
-              <b className="block font-[family-name:var(--font-display)] text-[1.2rem] text-white">{f.title}</b>
-              <span className="mt-1.5 block text-[.88rem] text-[#b8c4ce]">{f.body}</span>
+              <b className="block font-[family-name:var(--font-display)] text-[1.2rem] text-text-primary">{f.title}</b>
+              <span className="mt-1.5 block text-[.88rem] leading-[1.6] text-text-tertiary">{f.body}</span>
             </div>
           ))}
         </div>
