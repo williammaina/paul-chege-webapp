@@ -81,7 +81,7 @@ export function Insights() {
         </div>
 
         <Reveal className="mt-11 rounded-[20px] border border-white/5 p-8
-          [background:radial-gradient(90%_80%_at_12%_0%,rgba(230,184,76,.14),transparent_60%),linear-gradient(160deg,#131319,#1c1c24)]">
+          [background:radial-gradient(90%_80%_at_12%_0%,rgba(230,184,76,.14),transparent_60%),linear-gradient(160deg,#0c2238,#17344f)]">
           <div className="flex flex-wrap items-end justify-between gap-x-9 gap-y-4">
             <div>
               <p className="text-[.78rem] font-extrabold uppercase tracking-[.15em] text-gold-400">
@@ -189,7 +189,7 @@ function Card({ ep, big = false, onPlay }: { ep: Episode; big?: boolean; onPlay:
           </span>
         </span>
         <span className="mt-3 block">
-          <span className={`block font-bold leading-snug text-[#1c1c24] ${big ? "text-[1.15rem]" : "text-[.93rem]"}`}>
+          <span className={`block font-bold leading-snug text-[#17344f] ${big ? "text-[1.15rem]" : "text-[.93rem]"}`}>
             {ep.title}
           </span>
           <span className="mt-1 block text-[.76rem] text-[#5f7085] tnum">{ep.views} views · {ep.age}</span>

@@ -39,8 +39,13 @@ export function About({ onBook }: { onBook: () => void }) {
 
   return (
     <section ref={section} id="about" className="section-lg bg-cream">
-      <div className="wrap grid gap-6 lg:grid-cols-[1.05fr_.75fr_.85fr]">
-        <Reveal className="rounded-[18px] border border-[#e5e8eb] bg-white p-7 lg:p-[30px]">
+      {/* A bento rather than three columns of equal weight.
+          Bentol and Health Care LA both build their "about" from cells of
+          different sizes — one dominant block of prose, a tall portrait,
+          a row of metric tiles, a wide strip beneath — which gives the
+          section a reading order. Three equal cards gave it none. */}
+      <div className="wrap grid gap-5 lg:grid-cols-12">
+        <Reveal className="rounded-[var(--radius-panel)] border border-[#e5e8eb] bg-white p-7 lg:col-span-7 lg:p-9">
           <p className="text-[.78rem] font-extrabold uppercase tracking-[.15em] text-gold-ink">About Paul Chege</p>
           <h2 className="mt-1.5 text-[2.5rem] font-semibold leading-[1.05]">
             The broker who reads the small print out loud.
@@ -58,28 +63,8 @@ export function About({ onBook }: { onBook: () => void }) {
                Park Hotel, Nairobi — foreword by H.E. Rigathi Gachagua, Deputy President of Kenya.</p>
           </div>
 
-          {/* Every figure here was read off the platform itself and is dated. */}
-          <div className="mt-7 grid grid-cols-2 gap-2.5 md:grid-cols-4">
-            {reach.map((r) => {
-              const inner = (
-                <>
-                  <b className="block font-[family-name:var(--font-display)] text-[1.32rem] leading-none text-[#1c1c24] tnum">
-                    <Counter value={r.value} />
-                  </b>
-                  <span className="mt-1.5 block text-[.76rem] font-bold text-[#4a5865]">{r.label}</span>
-                  <small className="mt-0.5 block text-[.68rem] text-[#5d6b7a]">{r.sub}</small>
-                </>
-              );
-              const cls = "block rounded-[13px] border border-[#e3e8ee] bg-white px-3 py-3.5 transition duration-300 [transition-timing-function:var(--ease-out-soft)]";
-              return r.href
-                ? <a key={r.label} href={r.href} target="_blank" rel="noreferrer"
-                     className={`${cls} hover:-translate-y-1 hover:border-amber-500/60 hover:shadow-lg hover:shadow-black/10 motion-reduce:hover:translate-y-0`}>{inner}</a>
-                : <div key={r.label} className={cls}>{inner}</div>;
-            })}
-          </div>
-
-          <div className="mt-7 flex flex-wrap gap-3">
-            <a href="#book" className="rounded-[10px] bg-gold-bright px-5 py-3 font-bold text-navy">Explore his book →</a>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a href="#book" className="magnetic rounded-[10px] bg-gold-bright px-5 py-3 font-bold text-navy">Explore his book →</a>
             <button onClick={onBook}
                     className="rounded-[10px] border border-[#cbd3dc] bg-white px-5 py-3 font-bold text-navy">
               Work with Paul
@@ -90,8 +75,8 @@ export function About({ onBook }: { onBook: () => void }) {
         {/* The portrait is a 2047x2048 square. Any frame that is not square
             makes object-fit:cover eat him alive — at 320x866 it showed a
             1:2.7 sliver. Square frame, zero crop, sticky so it follows. */}
-        <div className="self-start lg:sticky lg:top-24" style={{ ["--ap" as string]: read }}>
-          <figure className="relative aspect-square overflow-hidden rounded-[18px] bg-[#e9ecef]"
+        <div className="self-start lg:col-span-5 lg:row-span-2 lg:sticky lg:top-24" style={{ ["--ap" as string]: read }}>
+          <figure className="relative aspect-square overflow-hidden rounded-[var(--radius-panel)] bg-[#e9ecef]"
                   style={{ translate: `0 calc(var(--ap) * -12px)` }}>
             <Image src="/img/paul-chege-portrait.jpg" alt="Paul Chege, financial advisor and insurance broker"
                    fill sizes="(max-width: 1024px) 100vw, 30vw" className="object-cover object-top" />
@@ -105,16 +90,44 @@ export function About({ onBook }: { onBook: () => void }) {
           </div>
         </div>
 
-        <Reveal as="section" className="rounded-[18px] border border-[#e5e8eb] bg-white p-7 lg:p-[30px]">
+        {/* Metric tiles, as their own row. They were buried inside the
+            prose card, where a figure read off a platform and dated looks
+            like a sentence rather than evidence. */}
+        <Reveal className="grid grid-cols-2 gap-3 lg:col-span-7 md:grid-cols-4">
+          {reach.map((r) => {
+            const inner = (
+              <>
+                <b className="block font-[family-name:var(--font-display)] text-[1.6rem]
+                              leading-none text-navy tnum">
+                  <Counter value={r.value} />
+                </b>
+                <span className="mt-2 block text-[.76rem] font-bold text-[#4a5865]">{r.label}</span>
+                <small className="mt-0.5 block text-[.68rem] text-[#5d6b7a]">{r.sub}</small>
+              </>
+            );
+            const cls = `glow-card flex flex-col justify-end rounded-[var(--radius-card)]
+                         border border-[#e3e8ee] bg-white p-4 transition-all duration-300
+                         [transition-timing-function:var(--ease-out-soft)]`;
+            return r.href
+              ? <a key={r.label} href={r.href} target="_blank" rel="noreferrer"
+                   className={`${cls} hover:-translate-y-1 hover:border-gold/70 hover:shadow-lg
+                               hover:shadow-black/10 motion-reduce:hover:translate-y-0`}>{inner}</a>
+              : <div key={r.label} className={cls}>{inner}</div>;
+          })}
+        </Reveal>
+
+        <Reveal as="section" className="rounded-[var(--radius-panel)] border border-[#e5e8eb]
+                                        bg-white p-7 lg:col-span-12 lg:p-9">
           <p className="text-[.78rem] font-extrabold uppercase tracking-[.15em] text-gold-ink">Areas of expertise</p>
-          <ul className="mt-4 grid gap-4">
+          <ul className="mt-6 grid gap-x-6 gap-y-5 sm:grid-cols-2 lg:grid-cols-5">
             {expertise.map(([t, s], i) => (
-              <li key={t} className="grid grid-cols-[34px_1fr] items-start gap-2.5">
-                <i className="not-italic font-extrabold text-gold-ink tnum">{String(i + 1).padStart(2, "0")}</i>
-                <div>
-                  <b className="block">{t}</b>
-                  <small className="block text-[#5b6775]">{s}</small>
-                </div>
+              <li key={t} className="group border-t border-[#e8ecf0] pt-3.5 transition-colors
+                                     duration-300 hover:border-gold">
+                <i className="not-italic text-[.72rem] font-extrabold text-gold-ink tnum">
+                  {String(i + 1).padStart(2, "0")}
+                </i>
+                <b className="mt-1.5 block text-[.95rem] leading-snug">{t}</b>
+                <small className="mt-1 block leading-[1.6] text-[#5b6775]">{s}</small>
               </li>
             ))}
           </ul>

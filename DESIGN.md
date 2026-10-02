@@ -56,23 +56,26 @@ the three — gold measures 9.13 on the card here against 6.77 on petrol.
 
 | Token | Hex | Used for |
 |---|---|---|
-| `--surface-900` | `#0B0B10` | Hero base, the deepest point of the page |
-| `--surface-800` | `#131319` | Dark section bands |
-| `--surface-700` | `#1C1C24` | Elevated cards on dark |
-| `--surface-650` | `#26262F` | Card hover lift |
-| `--color-cream` | `#F7F4EF` | Warm light bands |
-| white | `#FFFFFF` | Light cards |
+| `--surface-900` | `#081726` | Hero base, the deepest point of the page |
+| `--surface-800` | `#0C2238` | Dark section bands — the brand navy |
+| `--surface-700` | `#17344F` | Elevated cards on dark |
+| `--surface-650` | `#1F4A71` | Card hover lift |
+| `--color-cream` | `#FAF8F4` | Light bands |
 
 ### Lane accents, measured
 
-| Token | Hex | Lane | on `#1C1C24` |
-|---|---|---|---|
-| `--color-accent-gold` | `#E6B84C` | Borrowing | 9.13 |
-| `--color-accent-coral` | `#FF8A6B` | Personal & planning | 7.33 |
-| `--color-accent-violet` | `#A78BFA` | Business & cover | 6.22 |
+Tone, not hue — all three are brand values.
 
-Text on the grounds: `#FAFAF7` 16.2, `#E4E4E7` 13.3, `#B9B9C4` 8.7,
-`#8E8E9C` 5.2 — worst pairing anywhere on the page is 4.92.
+| Token | Hex | Lane | on `#17344F` |
+|---|---|---|---|
+| `--color-accent-gold` | `#F1C35B` | Borrowing | 7.74 |
+| `--color-accent-coral` | `#E6B84C` | Personal & planning | 6.90 |
+| `--color-accent-violet` | `#C8B293` | Business & cover | 6.25 |
+
+Text on the grounds (900 / 800 / 700): `#FFFFFF` 18.1 / 16.1 / 12.8,
+`#DBE6F2` 14.3 / 12.8 / 10.1, `#B3C4D8` 10.2 / 9.1 / 7.2, `#8FA3BD`
+7.0 / 6.3 / 5.0. `#8FA3BD` falls to 3.58 on the 650 hover lift, so it
+is never text there.
 
 Borders on dark are `rgba(255,255,255,.10)`, lifting to
 `rgba(234,179,8,.45)` on hover. Never a solid grey stroke: at these

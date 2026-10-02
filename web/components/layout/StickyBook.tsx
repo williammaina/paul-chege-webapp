@@ -39,7 +39,7 @@ export function StickyBook({ onBook }: { onBook: () => void }) {
 
   return (
     <div aria-hidden={!show}
-         className={`fixed inset-x-0 bottom-0 z-[60] border-t border-white/10 bg-[#08080c]/95
+         className={`fixed inset-x-0 bottom-0 z-[60] border-t border-white/10 bg-[#03090f]/95
                      backdrop-blur-md transition-transform duration-300 md:hidden
                      ${show ? "translate-y-0" : "translate-y-full"}`}
          /* Clear of the home indicator on a notched phone. */

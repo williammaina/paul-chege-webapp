@@ -46,7 +46,7 @@ void main(){
   vec2 w = vec2(fbm(q * 1.6 + vec2(0.0, t)), fbm(q * 1.6 + vec2(4.7, -t)));
   float n = fbm(q * 2.1 + w * 1.5 + vec2(t * 0.7, 0.0)) * 0.5 + 0.5;
 
-  // Charcoal ramp: #08080C -> #131319 -> #26262F, lit by gold at the crest,
+  // Charcoal ramp: #03090f -> #0c2238 -> #26262F, lit by gold at the crest,
   // a coral bloom upper-left and a violet one lower-right. The ground is
   // neutral, so each accent reads as itself instead of tinting toward the
   // base the way they did over petrol.

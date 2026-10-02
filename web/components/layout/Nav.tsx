@@ -86,7 +86,7 @@ export function Nav({ onBook }: { onBook: () => void }) {
       </div>
 
       {open && (
-        <nav className="absolute inset-x-0 top-full flex flex-col bg-[#131319] shadow-2xl md:hidden">
+        <nav className="absolute inset-x-0 top-full flex flex-col bg-[#0c2238] shadow-2xl md:hidden">
           {nav.map(({ href, label }) => (
             <a key={href} href={href} onClick={() => setOpen(false)}
                className={`border-b border-white/5 px-6 py-3.5 text-[.92rem] ${

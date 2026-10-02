@@ -10,31 +10,32 @@
    on white, and small gold text uses it instead of `--color-gold`.
    ══════════════════════════════════════════════════════════════════════════ */
 @theme {
-  /* Charcoal, not navy and not green.
-     The petrol-and-lime set came from sampling the ten screenshots, and
-     Paul rejected it. The Dribbble finance-advisor grid he pointed at
-     answers differently and more consistently: near-black charcoal with
-     one hot accent — Jukov in black and yellow, Beyond Coins in black and
-     magenta, TGCFlow in dark and violet. Almost no green anywhere in it.
+  /* Navy and gold, as it started.
+     Two other grounds were tried and both are gone: petrol and lime, which
+     came from sampling the ten reference screenshots, and charcoal, which
+     came from the Dribbble finance-advisor grid. Paul kept the brand. What
+     the references contributed in the end is structure and motion, not
+     hue — which is the part of a reference that actually transfers.
 
-     Charcoal is also the most generous ground available. Being neutral it
-     holds any accent without a hue clash, and it gives the best contrast
-     headroom of the three palettes tried: gold measures 9.13 on the card
-     here against 6.77 on petrol. The logo's gold reads 7.6 to 8.8. */
-  --color-navy:      #131319;
-  --color-navy-deep: #08080c;
-  --color-navy-mid:  #1c1c24;
-  --color-navy-lift: #26262f;
-  --color-ink:       #0b0b10;
-  --color-muted:     #55555f;
-  --color-cream:     #f7f4ef;
+     The surface scale is drawn from the navy family rather than invented,
+     so `--color-surface-800` is the brand navy exactly. Measured on 900,
+     800 and 700: white 18.1/16.1/12.8, body 14.3/12.8/10.1, gold-400
+     9.8/8.7/6.9. `--color-text-muted` is 4.96 on 700 and only 3.58 on
+     650, so it is never text on a hover lift. */
+  --color-navy:      #0c2238;
+  --color-navy-deep: #03090f;
+  --color-navy-mid:  #17344f;
+  --color-navy-lift: #1f4a71;
+  --color-ink:       #192638;
+  --color-muted:     #687484;
+  --color-cream:     #faf8f4;
   --color-sand:      #c8b293;
 
   --color-gold:      #d8a638;
   --color-gold-bright: #f1c35b;
   --color-gold-400:  #e6b84c;
   --color-gold-ink:  #7d5f1a;
-  --color-plum-ink:  #5b3a86;
+  --color-gold-deep: #a8842a;
 
   --color-mpesa:     #00a651;
 
@@ -45,18 +46,18 @@
      hexes. Measured: the lightest three text tokens clear 9.8:1 on every
      surface below, and `--color-text-muted` clears 5.7:1 on the lightest
      of them, so nothing needs re-checking at the call site. */
-  --color-surface-900: #0b0b10;
-  --color-surface-800: #131319;
-  --color-surface-700: #1c1c24;
-  --color-surface-650: #26262f;
+  --color-surface-900: #081726;
+  --color-surface-800: #0c2238;
+  --color-surface-700: #17344f;
+  --color-surface-650: #1f4a71;
 
   /* Measured on every surface above: 16.0 / 13.1 / 9.1 / 4.9 at worst.
      `--color-text-muted` was #7E9A93 and landed at 4.14 on the card, so
      it is a step lighter than the sampled value. */
-  --color-text-primary:   #fafaf7;
-  --color-text-secondary: #e4e4e7;
-  --color-text-tertiary:  #b9b9c4;
-  --color-text-muted:     #8e8e9c;
+  --color-text-primary:   #ffffff;
+  --color-text-secondary: #dbe6f2;
+  --color-text-tertiary:  #b3c4d8;
+  --color-text-muted:     #8fa3bd;
 
   /* Excellent on dark. On white these measure 1.92:1 and 3.19:1, both
      under AA, so neither is ever text on a light surface — that is what
@@ -69,10 +70,13 @@
      emerald 7.61, cyan 8.09 — all clear AA as body text. On white they
      measure under 2.7:1, so like the golds they are dark-surface accents
      and never text on a light band. */
-  --color-accent-gold:   #e6b84c;  /* 9.13 on the card — brand, the book */
-  --color-accent-coral:  #ff8a6b;  /* 7.33 — warm, human                 */
-  --color-accent-violet: #a78bfa;  /* 6.22 — cool, analytical            */
-  --color-accent-amber:  #f0a13c;  /* 7.95 — urgency only                */
+  /* The lanes still need telling apart, so they vary by tone inside the
+     brand rather than by hue outside it. On `--color-surface-700` these
+     measure 7.74, 6.90 and 6.25. */
+  --color-accent-gold:   #f1c35b;  /* Borrowing — brightest, the book    */
+  --color-accent-coral:  #e6b84c;  /* Personal & planning                */
+  --color-accent-violet: #c8b293;  /* Business & cover — brand sand      */
+  --color-accent-amber:  #d8a638;  /* urgency only                       */
 
   /* Aliases, so nothing referencing an earlier name breaks. */
   --color-accent-lime:    var(--color-accent-coral);

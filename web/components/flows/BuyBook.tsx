@@ -47,7 +47,7 @@ export function BuyBook({
         <>
           <div className="mt-4 flex items-baseline justify-between rounded-[13px] bg-[#f5f8fa] px-4 py-3">
             <span className="text-[.9rem] text-[#6b7784]">{label}</span>
-            <b className="text-[1.1rem] text-[#1c1c24] tnum">{money(amount)}</b>
+            <b className="text-[1.1rem] text-[#17344f] tnum">{money(amount)}</b>
           </div>
 
           <div className="mt-4 grid gap-3.5 sm:grid-cols-2">
