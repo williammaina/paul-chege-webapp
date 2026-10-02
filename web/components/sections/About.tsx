@@ -63,7 +63,7 @@ export function About({ onBook }: { onBook: () => void }) {
             {reach.map((r) => {
               const inner = (
                 <>
-                  <b className="block font-[family-name:var(--font-display)] text-[1.32rem] leading-none text-[#12304d] tnum">
+                  <b className="block font-[family-name:var(--font-display)] text-[1.32rem] leading-none text-[#1c1c24] tnum">
                     <Counter value={r.value} />
                   </b>
                   <span className="mt-1.5 block text-[.76rem] font-bold text-[#4a5865]">{r.label}</span>

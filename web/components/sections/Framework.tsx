@@ -13,10 +13,10 @@ import { SectionHead } from "@/components/ui/SectionHead";
    so the rail and the rings agree about where in the journey you are. */
 const STEP_ACCENT = [
   "var(--color-accent-gold)",
-  "color-mix(in oklab, var(--color-accent-gold), var(--color-accent-emerald))",
-  "var(--color-accent-emerald)",
-  "color-mix(in oklab, var(--color-accent-emerald), var(--color-accent-cyan))",
-  "var(--color-accent-cyan)",
+  "color-mix(in oklab, var(--color-accent-gold), var(--color-accent-coral))",
+  "var(--color-accent-coral)",
+  "color-mix(in oklab, var(--color-accent-coral), var(--color-accent-violet))",
+  "var(--color-accent-violet)",
 ];
 
 export function Framework() {
@@ -35,7 +35,7 @@ export function Framework() {
 
   return (
     <section className="section grain aurora relative isolate overflow-hidden
-                        [background:radial-gradient(120%_90%_at_50%_-20%,rgba(230,184,76,.15),transparent_55%),linear-gradient(180deg,#03090f_0%,#081a2c_46%,#0c2340_100%)]">
+                        [background:radial-gradient(120%_90%_at_50%_-20%,rgba(230,184,76,.15),transparent_55%),linear-gradient(180deg,#08080c_0%,#17171e_46%,#1a1a21_100%)]">
       <div className="wrap relative z-10">
         <SectionHead dark eyebrow="The Paul Chege Financial Clarity Framework"
           title={<>A Simple Path to Better Financial Decisions.</>}
@@ -48,7 +48,7 @@ export function Framework() {
               five steps read as a progression instead of five of the same. */}
           <span aria-hidden
                 className="absolute left-[8%] right-[8%] top-[30px] hidden h-0.5 origin-left lg:block
-                           [background:linear-gradient(90deg,transparent,var(--color-accent-gold)_12%,var(--color-accent-emerald)_50%,var(--color-accent-cyan)_88%,transparent)]"
+                           [background:linear-gradient(90deg,transparent,var(--color-accent-gold)_12%,var(--color-accent-coral)_50%,var(--color-accent-violet)_88%,transparent)]"
                 style={{ transform: `scaleX(${inView ? 1 : 0})`, transition: "transform 1.6s var(--ease-out-expo)" }} />
           {framework.map((f, i) => (
             <div key={f.n} className="group relative z-10 px-2 py-3.5 text-center"

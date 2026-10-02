@@ -46,14 +46,20 @@ void main(){
   vec2 w = vec2(fbm(q * 1.6 + vec2(0.0, t)), fbm(q * 1.6 + vec2(4.7, -t)));
   float n = fbm(q * 2.1 + w * 1.5 + vec2(t * 0.7, 0.0)) * 0.5 + 0.5;
 
-  vec3 col = mix(vec3(0.006,0.027,0.058), vec3(0.055,0.156,0.266), smoothstep(0.18,0.66,n));
-  col = mix(col, vec3(0.122,0.290,0.443), smoothstep(0.55,0.96,n));
-  col += vec3(0.92,0.73,0.30) * smoothstep(0.68,0.99,n) * 0.46;
-  col += vec3(0.85,0.66,0.24) * 0.17 *
+  // Charcoal ramp: #08080C -> #131319 -> #26262F, lit by gold at the crest,
+  // a coral bloom upper-left and a violet one lower-right. The ground is
+  // neutral, so each accent reads as itself instead of tinting toward the
+  // base the way they did over petrol.
+  vec3 col = mix(vec3(0.031,0.031,0.047), vec3(0.075,0.075,0.098), smoothstep(0.18,0.66,n));
+  col = mix(col, vec3(0.149,0.149,0.184), smoothstep(0.55,0.96,n));
+  col += vec3(0.902,0.722,0.298) * smoothstep(0.72,0.99,n) * 0.26;
+  col += vec3(1.000,0.541,0.420) * 0.13 *
          smoothstep(0.55,0.0,distance(uv, vec2(0.16,0.12))) * (0.6 + 0.4*sin(uTime*0.25));
+  col += vec3(0.655,0.545,0.980) * 0.12 *
+         smoothstep(0.42,0.0,distance(uv, vec2(0.86,0.78))) * (0.55 + 0.45*sin(uTime*0.19 + 1.7));
 
   if (uMouse.x >= 0.0){
-    col += vec3(0.95,0.76,0.34) * 0.18 *
+    col += vec3(0.902,0.722,0.298) * 0.16 *
            smoothstep(0.45, 0.0, distance(q, uMouse * vec2(uRes.x/uRes.y, 1.0)));
   }
 

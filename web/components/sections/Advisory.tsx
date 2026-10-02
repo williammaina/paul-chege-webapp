@@ -23,8 +23,8 @@ import { usePrices } from "@/lib/usePrices";
    as one practice with three doors rather than three products. */
 const ACCENT: Record<Lane["tone"], string> = {
   borrowing: "var(--color-accent-gold)",
-  personal:  "var(--color-accent-emerald)",
-  business:  "var(--color-accent-cyan)",
+  personal:  "var(--color-accent-coral)",
+  business:  "var(--color-accent-violet)",
 };
 
 

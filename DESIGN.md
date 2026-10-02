@@ -42,16 +42,37 @@ badges with a pulsing radar dot. All of it is implemented below.
 
 ## 1. Colour tokens
 
+Three grounds were tried. Navy and gold was the inherited default. Petrol
+and lime came from sampling the ten screenshots — the largest chromatic
+cluster across all of them is the #003030 family at hue 180, with a
+lime/olive band at 60-90 — and Paul rejected it. Charcoal is where it
+landed, and it is the right answer: the Dribbble finance-advisor grid is
+overwhelmingly near-black with one hot accent (Jukov black/yellow, Beyond
+Coins black/magenta, TGCFlow dark/violet), a neutral ground holds any
+accent without a hue clash, and it gives the most contrast headroom of
+the three — gold measures 9.13 on the card here against 6.77 on petrol.
+
 ### Surfaces
 
 | Token | Hex | Used for |
 |---|---|---|
-| `--surface-900` | `#0B132B` | Hero base, the deepest point of the page |
-| `--surface-800` | `#0F172A` | Dark section bands (framework, the book, contact) |
-| `--surface-700` | `#1E293B` | Elevated cards on dark |
-| `--surface-650` | `#24334A` | Card hover lift |
-| `--color-cream` | `#FAF8F4` | Light section bands |
+| `--surface-900` | `#0B0B10` | Hero base, the deepest point of the page |
+| `--surface-800` | `#131319` | Dark section bands |
+| `--surface-700` | `#1C1C24` | Elevated cards on dark |
+| `--surface-650` | `#26262F` | Card hover lift |
+| `--color-cream` | `#F7F4EF` | Warm light bands |
 | white | `#FFFFFF` | Light cards |
+
+### Lane accents, measured
+
+| Token | Hex | Lane | on `#1C1C24` |
+|---|---|---|---|
+| `--color-accent-gold` | `#E6B84C` | Borrowing | 9.13 |
+| `--color-accent-coral` | `#FF8A6B` | Personal & planning | 7.33 |
+| `--color-accent-violet` | `#A78BFA` | Business & cover | 6.22 |
+
+Text on the grounds: `#FAFAF7` 16.2, `#E4E4E7` 13.3, `#B9B9C4` 8.7,
+`#8E8E9C` 5.2 — worst pairing anywhere on the page is 4.92.
 
 Borders on dark are `rgba(255,255,255,.10)`, lifting to
 `rgba(234,179,8,.45)` on hover. Never a solid grey stroke: at these

@@ -16,7 +16,7 @@ export function Brands() {
              className="group flex w-[210px] shrink-0 flex-col items-center gap-2 rounded-2xl border
                         border-[#e6eaef] bg-white px-5 py-6 text-center transition-all duration-300
                         [transition-timing-function:var(--ease-out-soft)]
-                        hover:-translate-y-1.5 hover:border-accent-emerald/70
+                        hover:-translate-y-1.5 hover:border-accent-coral/70
                         hover:shadow-xl hover:shadow-black/10
                         motion-reduce:transition-none motion-reduce:hover:translate-y-0
                         sm:w-[240px]">

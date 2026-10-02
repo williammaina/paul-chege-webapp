@@ -5,6 +5,7 @@ import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { StickyBook } from "@/components/layout/StickyBook";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
+import { ScrollProgress } from "@/components/motion/ScrollProgress";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { Hero } from "@/components/sections/Hero";
 import { Proof } from "@/components/sections/Proof";
@@ -29,6 +30,7 @@ export default function Home() {
   return (
     <>
       <SmoothScroll />
+      <ScrollProgress />
       <Magnetic />
       <Nav onBook={() => openBooking()} />
 

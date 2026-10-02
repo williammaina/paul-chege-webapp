@@ -124,7 +124,7 @@ export function BookSession({
             {(["free", "paid"] as const).map((k) => (
               <button key={k} onClick={() => { setType(k); setDate(null); setTime(null); }}
                       className={`flex-1 rounded-full px-3 py-2.5 text-[.85rem] font-semibold transition
-                        ${type === k ? "bg-[#12304d] text-white shadow" : "text-[#4a5865]"}`}>
+                        ${type === k ? "bg-[#1c1c24] text-white shadow" : "text-[#4a5865]"}`}>
                 {sessions[k]
                   ? `${sessions[k].label}${sessions[k].price ? " · " + money(sessions[k].price) : " · Free"}`
                   : k === "free" ? "30-minute review · Free" : "60-minute coaching"}
@@ -158,7 +158,7 @@ export function BookSession({
               return (
                 <button key={d.date} disabled={!free} onClick={() => { setDate(d.date); setTime(null); }}
                         className={`rounded-[10px] border px-1 py-2.5 text-[.72rem] transition
-                          ${date === d.date ? "border-[#12304d] bg-[#12304d] text-white"
+                          ${date === d.date ? "border-[#1c1c24] bg-[#1c1c24] text-white"
                             : free ? "border-[#dfe5ec] bg-white hover:border-gold" : "border-[#eef1f5] opacity-40"}`}>
                   <span className="block text-[#8d9aa8]">{d.weekday}</span>
                   <b className="block text-base tnum">{Number(dd)}</b>
@@ -177,7 +177,7 @@ export function BookSession({
                 {day.slots.map((s) => (
                   <button key={s.time} disabled={!s.available} onClick={() => setTime(s.time)}
                           className={`rounded-[10px] border px-1 py-2.5 text-[.82rem] tnum transition
-                            ${time === s.time ? "border-[#12304d] bg-[#12304d] text-white"
+                            ${time === s.time ? "border-[#1c1c24] bg-[#1c1c24] text-white"
                               : s.available ? "border-[#dfe5ec] bg-white hover:border-gold"
                               : "border-[#eef1f5] line-through opacity-40"}`}>
                     {s.time}
@@ -210,7 +210,7 @@ export function BookSession({
               <p className="text-[.7rem] text-[#8d9aa8]">Reference {held.ref}</p>
             </div>
             <div className="text-right">
-              <div className="text-[1.4rem] font-extrabold leading-none text-[#12304d] tnum">{mm}:{ss}</div>
+              <div className="text-[1.4rem] font-extrabold leading-none text-[#1c1c24] tnum">{mm}:{ss}</div>
               <div className="text-[.62rem] uppercase tracking-[.1em] text-[#8d9aa8]">held for you</div>
             </div>
           </div>
@@ -284,7 +284,7 @@ function Confirmed({ b, onClose }: { b: Booking; onClose: () => void }) {
 
 const Row = ({ k, v }: { k: string; v: string }) => (
   <div className="flex justify-between gap-4"><dt className="text-[#6b7784]">{k}</dt>
-    <dd className="text-right font-semibold text-[#12304d]">{v}</dd></div>
+    <dd className="text-right font-semibold text-[#1c1c24]">{v}</dd></div>
 );
 
 function F({ label, v, set, ph, type = "text" }: {

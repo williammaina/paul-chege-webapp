@@ -10,19 +10,31 @@
    on white, and small gold text uses it instead of `--color-gold`.
    ══════════════════════════════════════════════════════════════════════════ */
 @theme {
-  --color-navy:      #0c2238;
-  --color-navy-deep: #03090f;
-  --color-navy-mid:  #17344f;
-  --color-navy-lift: #1f4a71;
-  --color-ink:       #192638;
-  --color-muted:     #687484;
-  --color-cream:     #faf8f4;
+  /* Charcoal, not navy and not green.
+     The petrol-and-lime set came from sampling the ten screenshots, and
+     Paul rejected it. The Dribbble finance-advisor grid he pointed at
+     answers differently and more consistently: near-black charcoal with
+     one hot accent — Jukov in black and yellow, Beyond Coins in black and
+     magenta, TGCFlow in dark and violet. Almost no green anywhere in it.
+
+     Charcoal is also the most generous ground available. Being neutral it
+     holds any accent without a hue clash, and it gives the best contrast
+     headroom of the three palettes tried: gold measures 9.13 on the card
+     here against 6.77 on petrol. The logo's gold reads 7.6 to 8.8. */
+  --color-navy:      #131319;
+  --color-navy-deep: #08080c;
+  --color-navy-mid:  #1c1c24;
+  --color-navy-lift: #26262f;
+  --color-ink:       #0b0b10;
+  --color-muted:     #55555f;
+  --color-cream:     #f7f4ef;
   --color-sand:      #c8b293;
 
   --color-gold:      #d8a638;
   --color-gold-bright: #f1c35b;
   --color-gold-400:  #e6b84c;
   --color-gold-ink:  #7d5f1a;
+  --color-plum-ink:  #5b3a86;
 
   --color-mpesa:     #00a651;
 
@@ -33,15 +45,18 @@
      hexes. Measured: the lightest three text tokens clear 9.8:1 on every
      surface below, and `--color-text-muted` clears 5.7:1 on the lightest
      of them, so nothing needs re-checking at the call site. */
-  --color-surface-900: #0b132b;
-  --color-surface-800: #0f172a;
-  --color-surface-700: #1e293b;
-  --color-surface-650: #24334a;
+  --color-surface-900: #0b0b10;
+  --color-surface-800: #131319;
+  --color-surface-700: #1c1c24;
+  --color-surface-650: #26262f;
 
-  --color-text-primary:   #f8fafc;
-  --color-text-secondary: #e2e8f0;
-  --color-text-tertiary:  #cbd5e1;
-  --color-text-muted:     #94a3b8;
+  /* Measured on every surface above: 16.0 / 13.1 / 9.1 / 4.9 at worst.
+     `--color-text-muted` was #7E9A93 and landed at 4.14 on the card, so
+     it is a step lighter than the sampled value. */
+  --color-text-primary:   #fafaf7;
+  --color-text-secondary: #e4e4e7;
+  --color-text-tertiary:  #b9b9c4;
+  --color-text-muted:     #8e8e9c;
 
   /* Excellent on dark. On white these measure 1.92:1 and 3.19:1, both
      under AA, so neither is ever text on a light surface — that is what
@@ -54,9 +69,16 @@
      emerald 7.61, cyan 8.09 — all clear AA as body text. On white they
      measure under 2.7:1, so like the golds they are dark-surface accents
      and never text on a light band. */
-  --color-accent-gold:    #e6b84c;
-  --color-accent-emerald: #34d399;
-  --color-accent-cyan:    #22d3ee;
+  --color-accent-gold:   #e6b84c;  /* 9.13 on the card — brand, the book */
+  --color-accent-coral:  #ff8a6b;  /* 7.33 — warm, human                 */
+  --color-accent-violet: #a78bfa;  /* 6.22 — cool, analytical            */
+  --color-accent-amber:  #f0a13c;  /* 7.95 — urgency only                */
+
+  /* Aliases, so nothing referencing an earlier name breaks. */
+  --color-accent-lime:    var(--color-accent-coral);
+  --color-accent-aqua:    var(--color-accent-violet);
+  --color-accent-emerald: var(--color-accent-coral);
+  --color-accent-cyan:    var(--color-accent-violet);
 
   /* One easing scale. Every transition on the page picks from these, so
      two elements answering the same gesture cannot disagree about it. */
@@ -216,8 +238,16 @@
 }
 
 /* Word-by-word reveal. The span is the moving part and the clip is on the
-   parent, so descenders are never shaved by the mask. */
-.kinetic-word { display: inline-block; overflow: hidden; vertical-align: top; }
+   parent.
+
+   The padding is load-bearing: the headline runs `line-height: .98`, which
+   is shorter than the glyph box, so a clip at the content edge cut the
+   descender off every "y" and "g". The negative margin gives the mask the
+   room back without moving the line. */
+.kinetic-word {
+  display: inline-block; overflow: hidden; vertical-align: top;
+  padding-block: .18em .16em; margin-block: -.18em -.16em;
+}
 .kinetic-word > span {
   display: inline-block;
   translate: 0 110%;

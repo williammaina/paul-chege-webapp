@@ -16,8 +16,8 @@ const BookCanvas = dynamic(() => import("@/components/three/BookCanvas").then((m
 
 const CHIP_ACCENT = [
   "var(--color-accent-gold)",
-  "var(--color-accent-emerald)",
-  "var(--color-accent-cyan)",
+  "var(--color-accent-coral)",
+  "var(--color-accent-violet)",
 ];
 
 export function Book({ onBuy }: { onBuy: (sku: "ebook" | "physical") => void }) {
@@ -26,7 +26,7 @@ export function Book({ onBuy }: { onBuy: (sku: "ebook" | "physical") => void }) 
 
   return (
     <section id="book" className="section-lg grain aurora relative isolate overflow-hidden
-      [background:radial-gradient(90%_70%_at_78%_8%,rgba(230,184,76,.18),transparent_58%),linear-gradient(180deg,#03090f_0%,#081a2c_52%,#0b2038_100%)]">
+      [background:radial-gradient(90%_70%_at_78%_8%,rgba(230,184,76,.18),transparent_58%),linear-gradient(180deg,#08080c_0%,#17171e_52%,#1c1c24_100%)]">
       <div className="wrap relative z-10 grid items-center gap-12 lg:grid-cols-[1.05fr_.95fr]">
         <Reveal>
           <p className="text-[.78rem] font-extrabold uppercase tracking-[.15em] text-gold-400">Featured book</p>

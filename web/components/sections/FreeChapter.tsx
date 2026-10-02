@@ -53,7 +53,7 @@ export function FreeChapter() {
 
   return (
     <Reveal className="mt-12 rounded-[20px] border border-gold-400/25 p-7 lg:p-9
-      [background:radial-gradient(90%_80%_at_10%_0%,rgba(230,184,76,.12),transparent_60%),linear-gradient(160deg,#0c2138,#0b2038)]">
+      [background:radial-gradient(90%_80%_at_10%_0%,rgba(230,184,76,.12),transparent_60%),linear-gradient(160deg,#131319,#1c1c24)]">
       <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_.9fr]">
         <div>
           <p className="text-[.72rem] font-extrabold uppercase tracking-[.16em] text-gold-400">

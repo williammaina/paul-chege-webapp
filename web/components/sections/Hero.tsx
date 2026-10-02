@@ -104,9 +104,9 @@ export function Hero({ onBook }: { onBook: () => void }) {
                                       ring-1 ring-inset ring-white/14" />
         </div>
 
-        <aside className="flex flex-col gap-2.5 rounded-[18px] bg-[#0e2439]/70 p-3 backdrop-blur-[20px]
+        <aside className="flex flex-col gap-2.5 rounded-[18px] bg-[#17171e]/70 p-3 backdrop-blur-[20px]
                           ring-1 ring-white/10">
-          <div className="rounded-[14px] bg-[#17344f]/70 p-4 backdrop-blur-[12px]">
+          <div className="rounded-[14px] bg-[#1c1c24]/70 p-4 backdrop-blur-[12px]">
             <p className="text-[.72rem] font-extrabold uppercase tracking-[.14em] text-gold-400">
               Paul&apos;s perspective
             </p>
