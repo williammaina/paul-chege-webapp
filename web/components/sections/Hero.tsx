@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { HeroCanvas } from "@/components/three/HeroCanvas";
+import { Kinetic } from "@/components/motion/Kinetic";
 
 const trust = [
   "Personalised financial guidance",
@@ -27,10 +28,12 @@ export function Hero({ onBook }: { onBook: () => void }) {
           <p className="text-[.78rem] font-extrabold uppercase tracking-[.15em] text-gold-ink">
             Financial clarity for a brighter tomorrow
           </p>
-          <h1 className="mt-2 text-[clamp(2.2rem,1rem+2.15vw,2.85rem)] font-semibold leading-[.98] tracking-[-.04em]">
-            Understand Money.<br />Borrow Intentionally.<br />
-            <span className="text-[#996918]">Build With Confidence.</span>
-          </h1>
+          <Kinetic as="h1" step={60} start={120}
+                   className="mt-2 text-[clamp(2.2rem,1rem+2.15vw,2.85rem)] font-semibold
+                              leading-[.98] tracking-[-.04em]">
+            {"Understand Money."}<br />{"Borrow Intentionally."}<br />
+            <span className="text-[#996918]">{"Build With Confidence."}</span>
+          </Kinetic>
           <p className="mt-5 max-w-[520px] text-[1.05rem] text-[#4b5c6e]">
             Practical financial guidance for individuals, professionals and business
             owners to make better borrowing and financial decisions.

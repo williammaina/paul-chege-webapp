@@ -29,8 +29,44 @@
   --font-sans:    "InterVar", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-display: "SourceSerifVar", Georgia, "Times New Roman", serif;
 
+  /* Surfaces, text and accents as a scale rather than a bag of one-off
+     hexes. Measured: the lightest three text tokens clear 9.8:1 on every
+     surface below, and `--color-text-muted` clears 5.7:1 on the lightest
+     of them, so nothing needs re-checking at the call site. */
+  --color-surface-900: #0b132b;
+  --color-surface-800: #0f172a;
+  --color-surface-700: #1e293b;
+  --color-surface-650: #24334a;
+
+  --color-text-primary:   #f8fafc;
+  --color-text-secondary: #e2e8f0;
+  --color-text-tertiary:  #cbd5e1;
+  --color-text-muted:     #94a3b8;
+
+  /* Excellent on dark. On white these measure 1.92:1 and 3.19:1, both
+     under AA, so neither is ever text on a light surface — that is what
+     `--color-gold-ink` (5.96:1 on white) is for. Borders and fills only. */
+  --color-amber-500: #eab308;
+  --color-amber-600: #d97706;
+
+  /* A three-accent set, so the advisory lanes can differ by hue while
+     sharing one surface. Measured on `--color-surface-700`: gold 7.89,
+     emerald 7.61, cyan 8.09 — all clear AA as body text. On white they
+     measure under 2.7:1, so like the golds they are dark-surface accents
+     and never text on a light band. */
+  --color-accent-gold:    #e6b84c;
+  --color-accent-emerald: #34d399;
+  --color-accent-cyan:    #22d3ee;
+
+  /* One easing scale. Every transition on the page picks from these, so
+     two elements answering the same gesture cannot disagree about it. */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
+
+  --radius-card: 18px;
+  --radius-panel: 24px;
 }
 
 @layer base {
@@ -124,4 +160,73 @@
 @media (prefers-reduced-motion: reduce) {
   .aurora::before, .marquee-track { animation: none; }
   .magnetic { translate: none; transition: none; }
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Kinetic layer.
+
+   Everything here is transform/opacity only and sits behind a reduced-motion
+   guard. Nothing animates a layout property: a hover that moves `top` or
+   `height` costs a layout pass per frame on a mid-range Android, which is
+   most of this audience.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* A card that lights up under the cursor. `useCardDepth` already publishes
+   --px/--py on `.card-tilt`; this spends them on a radial highlight instead
+   of a second transform, so the two effects compose rather than fight. */
+.glow-card { position: relative; isolation: isolate; }
+.glow-card::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  border-radius: inherit; opacity: 0;
+  transition: opacity .45s var(--ease-out-soft);
+  /* --accent is set per card, so the light each one throws is its own hue. */
+  background: radial-gradient(
+    42% 38% at calc(50% + var(--px, 0) * 50%) calc(50% + var(--py, 0) * 50%),
+    color-mix(in oklab, var(--accent, #eab308) 20%, transparent), transparent 70%);
+}
+.glow-card:hover::before { opacity: 1; }
+
+/* A gradient hairline that does not need a second background. The card
+   paints its own surface over the gradient and leaves one pixel showing. */
+.edge-accent {
+  background-image:
+    linear-gradient(var(--edge-surface, #1e293b), var(--edge-surface, #1e293b)),
+    linear-gradient(135deg,
+      color-mix(in oklab, var(--accent, #eab308) 85%, transparent),
+      color-mix(in oklab, var(--accent, #eab308) 14%, transparent) 45%,
+      transparent 70%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  border: 1px solid transparent;
+}
+
+/* Status dot with a radar ping. Two rings so the pulse reads at a glance
+   without the dot itself moving. */
+.pulse-dot { position: relative; display: inline-block; }
+.pulse-dot::after {
+  content: ""; position: absolute; inset: 0; border-radius: 9999px;
+  background: currentColor; opacity: .55;
+  animation: ping 2.4s var(--ease-out-expo) infinite;
+}
+@keyframes ping {
+  0%   { transform: scale(1);   opacity: .55; }
+  70%  { transform: scale(2.6); opacity: 0; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+/* Word-by-word reveal. The span is the moving part and the clip is on the
+   parent, so descenders are never shaved by the mask. */
+.kinetic-word { display: inline-block; overflow: hidden; vertical-align: top; }
+.kinetic-word > span {
+  display: inline-block;
+  translate: 0 110%;
+  transition: translate .9s var(--ease-out-expo) var(--kin-delay, 0ms);
+}
+.kinetic-on .kinetic-word > span { translate: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-card::before { display: none; }
+  .pulse-dot::after { animation: none; }
+  .kinetic-word > span { translate: none; transition: none; }
 }

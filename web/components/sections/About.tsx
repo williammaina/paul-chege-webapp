@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { reach, site } from "@/lib/content/site";
+import { Counter } from "@/components/motion/Counter";
 import { Reveal } from "@/components/motion/Reveal";
 
 const expertise = [
@@ -62,15 +63,17 @@ export function About({ onBook }: { onBook: () => void }) {
             {reach.map((r) => {
               const inner = (
                 <>
-                  <b className="block font-[family-name:var(--font-display)] text-[1.32rem] leading-none text-[#12304d] tnum">{r.value}</b>
+                  <b className="block font-[family-name:var(--font-display)] text-[1.32rem] leading-none text-[#12304d] tnum">
+                    <Counter value={r.value} />
+                  </b>
                   <span className="mt-1.5 block text-[.76rem] font-bold text-[#4a5865]">{r.label}</span>
                   <small className="mt-0.5 block text-[.68rem] text-[#5d6b7a]">{r.sub}</small>
                 </>
               );
-              const cls = "block rounded-[13px] border border-[#e3e8ee] bg-white px-3 py-3.5 transition";
+              const cls = "block rounded-[13px] border border-[#e3e8ee] bg-white px-3 py-3.5 transition duration-300 [transition-timing-function:var(--ease-out-soft)]";
               return r.href
                 ? <a key={r.label} href={r.href} target="_blank" rel="noreferrer"
-                     className={`${cls} hover:-translate-y-0.5 hover:border-gold hover:shadow-md`}>{inner}</a>
+                     className={`${cls} hover:-translate-y-1 hover:border-amber-500/60 hover:shadow-lg hover:shadow-black/10 motion-reduce:hover:translate-y-0`}>{inner}</a>
                 : <div key={r.label} className={cls}>{inner}</div>;
             })}
           </div>
