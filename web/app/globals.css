@@ -10,6 +10,18 @@
    on white, and small gold text uses it instead of `--color-gold`.
    ══════════════════════════════════════════════════════════════════════════ */
 @theme {
+  /* Navy and gold, as it started.
+     Two other grounds were tried and both are gone: petrol and lime, which
+     came from sampling the ten reference screenshots, and charcoal, which
+     came from the Dribbble finance-advisor grid. Paul kept the brand. What
+     the references contributed in the end is structure and motion, not
+     hue — which is the part of a reference that actually transfers.
+
+     The surface scale is drawn from the navy family rather than invented,
+     so `--color-surface-800` is the brand navy exactly. Measured on 900,
+     800 and 700: white 18.1/16.1/12.8, body 14.3/12.8/10.1, gold-400
+     9.8/8.7/6.9. `--color-text-muted` is 4.96 on 700 and only 3.58 on
+     650, so it is never text on a hover lift. */
   --color-navy:      #0c2238;
   --color-navy-deep: #03090f;
   --color-navy-mid:  #17344f;
@@ -23,14 +35,64 @@
   --color-gold-bright: #f1c35b;
   --color-gold-400:  #e6b84c;
   --color-gold-ink:  #7d5f1a;
+  --color-gold-deep: #a8842a;
 
   --color-mpesa:     #00a651;
 
   --font-sans:    "InterVar", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-display: "SourceSerifVar", Georgia, "Times New Roman", serif;
 
+  /* Surfaces, text and accents as a scale rather than a bag of one-off
+     hexes. Measured: the lightest three text tokens clear 9.8:1 on every
+     surface below, and `--color-text-muted` clears 5.7:1 on the lightest
+     of them, so nothing needs re-checking at the call site. */
+  --color-surface-900: #081726;
+  --color-surface-800: #0c2238;
+  --color-surface-700: #17344f;
+  --color-surface-650: #1f4a71;
+
+  /* Measured on every surface above: 16.0 / 13.1 / 9.1 / 4.9 at worst.
+     `--color-text-muted` was #7E9A93 and landed at 4.14 on the card, so
+     it is a step lighter than the sampled value. */
+  --color-text-primary:   #ffffff;
+  --color-text-secondary: #dbe6f2;
+  --color-text-tertiary:  #b3c4d8;
+  --color-text-muted:     #8fa3bd;
+
+  /* Excellent on dark. On white these measure 1.92:1 and 3.19:1, both
+     under AA, so neither is ever text on a light surface — that is what
+     `--color-gold-ink` (5.96:1 on white) is for. Borders and fills only. */
+  --color-amber-500: #eab308;
+  --color-amber-600: #d97706;
+
+  /* A three-accent set, so the advisory lanes can differ by hue while
+     sharing one surface. Measured on `--color-surface-700`: gold 7.89,
+     emerald 7.61, cyan 8.09 — all clear AA as body text. On white they
+     measure under 2.7:1, so like the golds they are dark-surface accents
+     and never text on a light band. */
+  /* The lanes still need telling apart, so they vary by tone inside the
+     brand rather than by hue outside it. On `--color-surface-700` these
+     measure 7.74, 6.90 and 6.25. */
+  --color-accent-gold:   #f1c35b;  /* Borrowing — brightest, the book    */
+  --color-accent-coral:  #e6b84c;  /* Personal & planning                */
+  --color-accent-violet: #c8b293;  /* Business & cover — brand sand      */
+  --color-accent-amber:  #d8a638;  /* urgency only                       */
+
+  /* Aliases, so nothing referencing an earlier name breaks. */
+  --color-accent-lime:    var(--color-accent-coral);
+  --color-accent-aqua:    var(--color-accent-violet);
+  --color-accent-emerald: var(--color-accent-coral);
+  --color-accent-cyan:    var(--color-accent-violet);
+
+  /* One easing scale. Every transition on the page picks from these, so
+     two elements answering the same gesture cannot disagree about it. */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
+
+  --radius-card: 18px;
+  --radius-panel: 24px;
 }
 
 @layer base {
@@ -60,7 +122,22 @@
 }
 
 @layer utilities {
+  /* One vertical axis for the whole page.
+     Every section's content sits on this, the hero included. It used to
+     run on its own 1500px container with a 16px gutter, so the first
+     thing below the fold stepped 107px inward from the headline above
+     it — the kind of near-miss alignment that reads as carelessness
+     without the reader being able to name it. */
   .wrap { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
+
+  /* Section rhythm, in three volumes.
+     A page where every band has the same 76px of air has no dynamics —
+     it scrolls flat. The loud bands are the ones a visitor came for
+     (advisory, the book, booking); the quiet ones carry them between. */
+  .section    { padding-block: clamp(64px, 6.6vw, 104px); }
+  .section-lg { padding-block: clamp(80px, 8.8vw, 136px); }
+  .section-sm { padding-block: clamp(36px, 3.4vw, 52px); }
+
   .tnum { font-variant-numeric: tabular-nums lining-nums; }
 }
 
@@ -109,4 +186,82 @@
 @media (prefers-reduced-motion: reduce) {
   .aurora::before, .marquee-track { animation: none; }
   .magnetic { translate: none; transition: none; }
+}
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Kinetic layer.
+
+   Everything here is transform/opacity only and sits behind a reduced-motion
+   guard. Nothing animates a layout property: a hover that moves `top` or
+   `height` costs a layout pass per frame on a mid-range Android, which is
+   most of this audience.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* A card that lights up under the cursor. `useCardDepth` already publishes
+   --px/--py on `.card-tilt`; this spends them on a radial highlight instead
+   of a second transform, so the two effects compose rather than fight. */
+.glow-card { position: relative; isolation: isolate; }
+.glow-card::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  border-radius: inherit; opacity: 0;
+  transition: opacity .45s var(--ease-out-soft);
+  /* --accent is set per card, so the light each one throws is its own hue. */
+  background: radial-gradient(
+    42% 38% at calc(50% + var(--px, 0) * 50%) calc(50% + var(--py, 0) * 50%),
+    color-mix(in oklab, var(--accent, var(--color-accent-gold)) 20%, transparent), transparent 70%);
+}
+.glow-card:hover::before { opacity: 1; }
+
+/* A gradient hairline that does not need a second background. The card
+   paints its own surface over the gradient and leaves one pixel showing. */
+.edge-accent {
+  background-image:
+    linear-gradient(var(--edge-surface, var(--color-surface-700)),
+                    var(--edge-surface, var(--color-surface-700))),
+    linear-gradient(135deg,
+      color-mix(in oklab, var(--accent, var(--color-accent-gold)) 85%, transparent),
+      color-mix(in oklab, var(--accent, var(--color-accent-gold)) 14%, transparent) 45%,
+      transparent 70%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  border: 1px solid transparent;
+}
+
+/* Status dot with a radar ping. Two rings so the pulse reads at a glance
+   without the dot itself moving. */
+.pulse-dot { position: relative; display: inline-block; }
+.pulse-dot::after {
+  content: ""; position: absolute; inset: 0; border-radius: 9999px;
+  background: currentColor; opacity: .55;
+  animation: ping 2.4s var(--ease-out-expo) infinite;
+}
+@keyframes ping {
+  0%   { transform: scale(1);   opacity: .55; }
+  70%  { transform: scale(2.6); opacity: 0; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+/* Word-by-word reveal. The span is the moving part and the clip is on the
+   parent.
+
+   The padding is load-bearing: the headline runs `line-height: .98`, which
+   is shorter than the glyph box, so a clip at the content edge cut the
+   descender off every "y" and "g". The negative margin gives the mask the
+   room back without moving the line. */
+.kinetic-word {
+  display: inline-block; overflow: hidden; vertical-align: top;
+  padding-block: .18em .16em; margin-block: -.18em -.16em;
+}
+.kinetic-word > span {
+  display: inline-block;
+  translate: 0 110%;
+  transition: translate .9s var(--ease-out-expo) var(--kin-delay, 0ms);
+}
+.kinetic-on .kinetic-word > span { translate: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-card::before { display: none; }
+  .pulse-dot::after { animation: none; }
+  .kinetic-word > span { translate: none; transition: none; }
 }

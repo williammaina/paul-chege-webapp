@@ -1,6 +1,7 @@
 "use client";
 
-import { createElement, useEffect, useRef, useState, type ReactNode } from "react";
+import { createElement, useEffect, useRef, useState,
+         type CSSProperties, type ReactNode } from "react";
 
 type Tag = "div" | "section" | "article" | "li";
 
@@ -18,8 +19,13 @@ type Tag = "div" | "section" | "article" | "li";
  * would go on silencing the next one too.
  */
 export function Reveal({
-  children, delay = 0, className = "", as = "div",
-}: { children: ReactNode; delay?: number; className?: string; as?: Tag }) {
+  children, delay = 0, className = "", as = "div", style,
+}: {
+  children: ReactNode; delay?: number; className?: string; as?: Tag;
+  /** Merged under the entrance styles, so callers can pass custom
+      properties — a per-card accent, say — without losing the reveal. */
+  style?: CSSProperties;
+}) {
   const ref = useRef<HTMLElement | null>(null);
   const [seen, setSeen] = useState(false);
 
@@ -41,6 +47,7 @@ export function Reveal({
       ref: (node: HTMLElement | null) => { ref.current = node; },
       className,
       style: {
+        ...style,
         opacity: seen ? 1 : 0,
         translate: seen ? "none" : "0 26px",
         transition: `opacity .8s var(--ease-out-expo) ${delay}ms, translate .8s var(--ease-out-expo) ${delay}ms`,

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { episodes as baked, categories, type Episode } from "@/lib/content/episodes";
-import { speaking, site } from "@/lib/content/site";
+import { speaking } from "@/lib/content/site";
 import { SectionHead } from "@/components/ui/SectionHead";
 import { Reveal } from "@/components/motion/Reveal";
 
@@ -51,7 +51,7 @@ export function Insights() {
   const [hero, ...rest] = shown;
 
   return (
-    <section id="insights" className="bg-cream py-[76px]">
+    <section id="insights" className="section bg-cream">
       <div className="wrap">
         <SectionHead eyebrow="Insights & speaking" title={<>Watch Before You Sign.</>}
           lede={<>Real episodes from Paul&apos;s channel — loans, shares, cover and the clauses
@@ -61,9 +61,10 @@ export function Insights() {
           {categories.map((c) => (
             <button key={c.key} onClick={() => setCat(c.key)}
                     className={`rounded-full border px-4 py-2 text-[.82rem] font-semibold transition
+                      [transition-timing-function:var(--ease-out-soft)] duration-300
                       ${cat === c.key
-                        ? "border-[#12304d] bg-[#12304d] text-white shadow-lg"
-                        : "border-[#dfe5ec] bg-white text-[#4a5865] hover:-translate-y-px hover:border-gold"}`}>
+                        ? "border-surface-800 bg-surface-800 text-white shadow-lg shadow-black/20"
+                        : "border-[#dfe5ec] bg-white text-[#4a5865] hover:-translate-y-0.5 hover:border-accent-coral hover:shadow-md motion-reduce:hover:translate-y-0"}`}>
               {c.label}
             </button>
           ))}
@@ -80,17 +81,22 @@ export function Insights() {
         </div>
 
         <Reveal className="mt-11 rounded-[20px] border border-white/5 p-8
-          [background:radial-gradient(90%_80%_at_12%_0%,rgba(230,184,76,.14),transparent_60%),linear-gradient(160deg,#0c2138,#123049)]">
-          <div className="flex flex-wrap items-end justify-between gap-x-9 gap-y-4">
+          [background:radial-gradient(90%_80%_at_12%_0%,rgba(230,184,76,.14),transparent_60%),linear-gradient(160deg,#0c2238,#17344f)]">
+          {/* Two columns that each fill their half, rather than two blocks
+              of content width with a 279px hole between them. `justify-between`
+              put the edges where they belong and left the middle empty; a
+              grid makes the halves the thing being distributed. */}
+          <div className="grid items-end gap-x-9 gap-y-4 md:grid-cols-[1.15fr_1fr]">
             <div>
               <p className="text-[.78rem] font-extrabold uppercase tracking-[.15em] text-gold-400">
                 Speaking &amp; financial education
               </p>
-              <h3 className="mt-1.5 font-[family-name:var(--font-display)] text-[1.8rem] text-white">
+              <h3 className="mt-1.5 font-[family-name:var(--font-display)]
+                             text-[clamp(1.8rem,1.1rem+1.5vw,2.5rem)] leading-[1.1] text-white">
                 Bring this into your organisation.
               </h3>
             </div>
-            <p className="max-w-[30rem] text-[.92rem] leading-relaxed text-[#b3c4d8]">
+            <p className="text-[.95rem] leading-[1.6] text-text-tertiary">
               Keynotes, workshops and financial literacy sessions — the same material,
               delivered to your team.
             </p>
@@ -102,18 +108,12 @@ export function Insights() {
                             hover:-translate-y-1 hover:border-gold-400/40 hover:bg-white/10">
                 <span className="block text-[1.25rem] text-gold-400">{s.icon}</span>
                 <b className="mt-2 block text-[.9rem] text-white">{s.title}</b>
-                <small className="mt-1 block text-[.78rem] leading-relaxed text-[#a9bcd2]">{s.body}</small>
+                <small className="mt-1 block text-[.78rem] leading-relaxed text-text-tertiary">{s.body}</small>
               </a>
             ))}
           </div>
         </Reveal>
 
-        <div className="mt-8 text-center">
-          <a href={site.youtube} target="_blank" rel="noreferrer"
-             className="inline-block rounded-[10px] border border-[#cbd3dc] bg-white px-5 py-3 font-bold text-navy">
-            All episodes on YouTube →
-          </a>
-        </div>
       </div>
 
       {playing && <Player ep={playing} onClose={() => setPlaying(null)} />}
@@ -157,7 +157,12 @@ function Card({ ep, big = false, onPlay }: { ep: Episode; big?: boolean; onPlay:
       <button onClick={() => onPlay(ep)} onPointerEnter={start} onPointerLeave={stop}
               className="group block w-full text-left"
               aria-label={`Play: ${ep.title}`}>
-        <span className={`relative block overflow-hidden rounded-[16px] ${big ? "aspect-video" : "aspect-video"}`}>
+        <span className="relative block aspect-video overflow-hidden rounded-[16px]
+                         ring-1 ring-transparent transition-all duration-300
+                         [transition-timing-function:var(--ease-out-soft)]
+                         group-hover:-translate-y-1 group-hover:ring-accent-violet/60
+                         group-hover:shadow-xl group-hover:shadow-black/25
+                         motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
           <Image src={`https://i.ytimg.com/vi/${ep.id}/maxresdefault.jpg`} alt="" fill unoptimized
                  sizes={big ? "(max-width:1024px) 100vw, 50vw" : "(max-width:1024px) 50vw, 25vw"}
                  className="object-cover transition-transform duration-700 group-hover:scale-105" />
@@ -183,7 +188,7 @@ function Card({ ep, big = false, onPlay }: { ep: Episode; big?: boolean; onPlay:
           </span>
         </span>
         <span className="mt-3 block">
-          <span className={`block font-bold leading-snug text-[#12304d] ${big ? "text-[1.15rem]" : "text-[.93rem]"}`}>
+          <span className={`block font-bold leading-snug text-[#17344f] ${big ? "text-[1.15rem]" : "text-[.93rem]"}`}>
             {ep.title}
           </span>
           <span className="mt-1 block text-[.76rem] text-[#5f7085] tnum">{ep.views} views · {ep.age}</span>

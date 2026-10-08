@@ -3,11 +3,15 @@
 import { useState } from "react";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
+import { StickyBook } from "@/components/layout/StickyBook";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
+import { ScrollProgress } from "@/components/motion/ScrollProgress";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { Hero } from "@/components/sections/Hero";
+import { Proof } from "@/components/sections/Proof";
 import { Brands } from "@/components/sections/Brands";
 import { Advisory } from "@/components/sections/Advisory";
+import { Outcomes } from "@/components/sections/Outcomes";
 import { About } from "@/components/sections/About";
 import { Framework } from "@/components/sections/Framework";
 import { Book } from "@/components/sections/Book";
@@ -26,13 +30,16 @@ export default function Home() {
   return (
     <>
       <SmoothScroll />
+      <ScrollProgress />
       <Magnetic />
       <Nav onBook={() => openBooking()} />
 
       <main id="home">
         <Hero onBook={() => openBooking()} />
+        <Proof />
         <Brands />
         <Advisory onBook={() => openBooking()} />
+        <Outcomes />
         <About onBook={() => openBooking()} />
         <Framework />
         <Book onBuy={setBuying} />
@@ -41,6 +48,8 @@ export default function Home() {
       </main>
 
       <Footer />
+
+      <StickyBook onBook={() => openBooking()} />
 
       <BookSession open={booking.open} initialType={booking.type}
                    onClose={() => setBooking({ open: false })} />

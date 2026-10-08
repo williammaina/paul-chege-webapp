@@ -50,9 +50,11 @@ export function Nav({ onBook }: { onBook: () => void }) {
         <a href="#home" className="flex min-w-0 items-center gap-3">
           <Image src="/img/logo-navy.webp" alt="" width={120} height={94} priority
                  className="h-[42px] w-auto drop-shadow-[0_1px_6px_rgba(0,0,0,.35)] lg:h-[54px]" />
-          <span className="min-w-0">
+          {/* The wordmark truncated to "PAUL CH…" on a phone. The logo
+              already says who this is; the text needs room to earn its place. */}
+          <span className="min-w-0 max-[430px]:hidden">
             <strong className="block truncate text-[1.05rem] tracking-[.04em] text-white">PAUL CHEGE</strong>
-            <small className="hidden truncate text-[.62rem] text-[#9fb0be] lg:block">{/* role */}
+            <small className="hidden truncate text-[.62rem] text-text-muted lg:block">{/* role */}
               Financial Advisor • Author • Educator • Speaker
             </small>
           </span>
@@ -63,7 +65,7 @@ export function Nav({ onBook }: { onBook: () => void }) {
             <a key={href} href={href}
                className={`relative py-1 transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5
                  after:origin-left after:scale-x-0 after:bg-gold-400 after:transition-transform after:duration-300
-                 ${active === href ? "text-gold-400 after:scale-x-100" : "text-[#cfdcea] hover:text-gold-400"}`}>
+                 ${active === href ? "text-gold-400 after:scale-x-100" : "text-text-tertiary hover:text-gold-400"}`}>
               {label}
             </a>
           ))}
@@ -71,9 +73,12 @@ export function Nav({ onBook }: { onBook: () => void }) {
 
         <div className="flex items-center gap-2">
           <button onClick={onBook}
-                  className="magnetic rounded-[10px] bg-gold-bright px-3 py-2.5 text-[.7rem] font-extrabold text-navy
-                             transition hover:brightness-105 lg:text-[.8rem]">
-            Book a Consultation →
+                  className="magnetic whitespace-nowrap rounded-full bg-gold-bright px-4 py-2.5 text-[.75rem]
+                             font-extrabold text-navy transition hover:brightness-105 lg:px-5 lg:text-[.8rem]">
+            {/* The full label wrapped onto two lines on a phone, doubling
+                the header height. */}
+            <span className="hidden sm:inline">Book a Consultation →</span>
+            <span className="sm:hidden">Book →</span>
           </button>
           <button onClick={() => setOpen((v) => !v)} aria-label="Menu"
                   className="text-2xl text-white md:hidden">☰</button>
@@ -85,7 +90,7 @@ export function Nav({ onBook }: { onBook: () => void }) {
           {nav.map(({ href, label }) => (
             <a key={href} href={href} onClick={() => setOpen(false)}
                className={`border-b border-white/5 px-6 py-3.5 text-[.92rem] ${
-                 active === href ? "bg-gold-400/10 text-gold-400" : "text-[#cfdcea]"}`}>
+                 active === href ? "bg-gold-400/10 text-gold-400" : "text-text-tertiary"}`}>
               {label}
             </a>
           ))}
