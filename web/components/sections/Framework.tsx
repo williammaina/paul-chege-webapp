@@ -35,7 +35,7 @@ export function Framework() {
 
   return (
     <section className="section grain aurora relative isolate overflow-hidden
-                        [background:radial-gradient(120%_90%_at_50%_-20%,rgba(230,184,76,.15),transparent_55%),linear-gradient(180deg,#03090f_0%,#0e2439_46%,#0c2340_100%)]">
+                        [background:radial-gradient(120%_90%_at_50%_-20%,rgba(230,184,76,.15),transparent_55%),linear-gradient(180deg,#0c2238_0%,#17344f_50%,#0c2238_100%)]">
       <div className="wrap relative z-10">
         <SectionHead dark eyebrow="The Paul Chege Financial Clarity Framework"
           title={<>A Simple Path to Better Financial Decisions.</>}

@@ -26,7 +26,7 @@ export function Book({ onBuy }: { onBuy: (sku: "ebook" | "physical") => void }) 
 
   return (
     <section id="book" className="section-lg grain aurora relative isolate overflow-hidden
-      [background:radial-gradient(90%_70%_at_78%_8%,rgba(230,184,76,.18),transparent_58%),linear-gradient(180deg,#03090f_0%,#0e2439_52%,#17344f_100%)]">
+      [background:radial-gradient(90%_70%_at_78%_8%,rgba(230,184,76,.18),transparent_58%),linear-gradient(180deg,#0c2238_0%,#17344f_50%,#0c2238_100%)]">
       <div className="wrap relative z-10 grid items-center gap-12 lg:grid-cols-[1.05fr_.95fr]">
         <Reveal>
           <p className="text-[.78rem] font-extrabold uppercase tracking-[.15em] text-gold-400">Featured book</p>

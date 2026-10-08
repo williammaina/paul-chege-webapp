@@ -18,7 +18,7 @@ export function Proof() {
   return (
     <section aria-label="Credentials"
              className="relative isolate overflow-hidden border-b border-white/10 bg-navy
-                        [background:linear-gradient(180deg,#081726,#0c2238)]">
+                        [background:linear-gradient(180deg,#0c2238_0%,#17344f_50%,#0c2238_100%)]">
       <Reveal className="wrap section-sm grid items-center gap-8
                          lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-11">
         <div className="flex items-center gap-5">

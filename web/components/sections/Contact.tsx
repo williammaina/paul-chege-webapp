@@ -23,7 +23,7 @@ export function Contact({ onBook }: { onBook: (type?: "free" | "paid") => void }
 
   return (
     <section id="contact" className="section-lg grain aurora relative isolate overflow-hidden
-      [background:radial-gradient(85%_70%_at_18%_6%,rgba(230,184,76,.17),transparent_58%),linear-gradient(180deg,#050f1c_0%,#17344f_52%,#071726_100%)]">
+      [background:radial-gradient(85%_70%_at_18%_6%,rgba(230,184,76,.17),transparent_58%),linear-gradient(180deg,#0c2238_0%,#17344f_50%,#0c2238_100%)]">
       <div className="wrap relative z-10 grid items-center gap-12 lg:grid-cols-[1.02fr_.98fr]">
         <Reveal>
           <p className="text-[.78rem] font-extrabold uppercase tracking-[.15em] text-gold-400">Work with Paul</p>

@@ -4,7 +4,7 @@ import { nav, site } from "@/lib/content/site";
 export function Footer() {
   return (
     <footer className="relative isolate overflow-hidden pb-24 pt-14
-      [background:radial-gradient(120%_90%_at_50%_-20%,rgba(230,184,76,.15),transparent_55%),linear-gradient(180deg,#03090f_0%,#0e2439_46%,#0c2340_100%)]">
+      [background:radial-gradient(120%_90%_at_50%_-20%,rgba(230,184,76,.15),transparent_55%),linear-gradient(180deg,#0c2238_0%,#17344f_50%,#0c2238_100%)]">
       <div className="wrap relative z-10">
         <div className="flex flex-wrap items-center justify-between gap-7">
           <a href="#home" className="flex items-center gap-3">
