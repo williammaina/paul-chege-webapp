@@ -209,7 +209,7 @@
   /* --accent is set per card, so the light each one throws is its own hue. */
   background: radial-gradient(
     42% 38% at calc(50% + var(--px, 0) * 50%) calc(50% + var(--py, 0) * 50%),
-    color-mix(in oklab, var(--accent, #eab308) 20%, transparent), transparent 70%);
+    color-mix(in oklab, var(--accent, var(--color-accent-gold)) 20%, transparent), transparent 70%);
 }
 .glow-card:hover::before { opacity: 1; }
 
@@ -217,10 +217,11 @@
    paints its own surface over the gradient and leaves one pixel showing. */
 .edge-accent {
   background-image:
-    linear-gradient(var(--edge-surface, #1e293b), var(--edge-surface, #1e293b)),
+    linear-gradient(var(--edge-surface, var(--color-surface-700)),
+                    var(--edge-surface, var(--color-surface-700))),
     linear-gradient(135deg,
-      color-mix(in oklab, var(--accent, #eab308) 85%, transparent),
-      color-mix(in oklab, var(--accent, #eab308) 14%, transparent) 45%,
+      color-mix(in oklab, var(--accent, var(--color-accent-gold)) 85%, transparent),
+      color-mix(in oklab, var(--accent, var(--color-accent-gold)) 14%, transparent) 45%,
       transparent 70%);
   background-origin: border-box;
   background-clip: padding-box, border-box;

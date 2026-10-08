@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { episodes as baked, categories, type Episode } from "@/lib/content/episodes";
-import { speaking, site } from "@/lib/content/site";
+import { speaking } from "@/lib/content/site";
 import { SectionHead } from "@/components/ui/SectionHead";
 import { Reveal } from "@/components/motion/Reveal";
 
@@ -109,12 +109,6 @@ export function Insights() {
           </div>
         </Reveal>
 
-        <div className="mt-8 text-center">
-          <a href={site.youtube} target="_blank" rel="noreferrer"
-             className="inline-block rounded-[10px] border border-[#cbd3dc] bg-white px-5 py-3 font-bold text-navy">
-            All episodes on YouTube →
-          </a>
-        </div>
       </div>
 
       {playing && <Player ep={playing} onClose={() => setPlaying(null)} />}
