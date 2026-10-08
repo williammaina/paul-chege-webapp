@@ -1,6 +1,6 @@
 # Paul Chege Financial Advisory — Progress
 
-**Phase 2 of 4 · P2-M13 next · 17 of 24 milestones complete**
+**Phase 2 of 4 · P2-M13 next · 18 of 25 milestones complete**
 
 ## How this file works
 
@@ -319,6 +319,35 @@ tables, the motion contracts and the component source.
 - [x] Set the hero headline word by word, structure untouched
 - [x] Give each advisory lane its own accent on one shared surface
 - [x] Carry the system through the framework, insights, the book and contact
+
+### P2-M18 — CI on GitHub Actions ✅ COMPLETE
+
+**Branch:** `feat/p2-m18-github-actions` · merged into `development`
+
+The commit format was enforced by a local hook and nothing else, and the
+185 API assertions only ever ran when somebody remembered to run them. A
+hook binds the machine it is installed on; neither survives a clone.
+
+- **`ci.yml`** — one job: install, typecheck, production build and the
+  API suite on every pull request and every push to the three protected
+  branches. The suite starts its own mocks and refuses to continue unless
+  the server it reaches is the one it started, and there is no
+  `.env.local` on a runner, so CI can never reach real Safaricom.
+- **`commit-format.yml`** — the backticked header and the 100-character
+  limit, applied to every commit on a pull request. Tested against the
+  last 25 real commits before it shipped: 14 accepted, none wrongly
+  rejected, and it correctly caught that PR #25's own title ran to 108
+  characters.
+- **`workflow:github-actions`** — the skill that says what belongs on the
+  server, what stays local, and why releases are not automated.
+
+Releases stay out of CI on purpose. A tag names something somebody chose
+to ship, and a workflow that tags on merge starts naming accidents.
+
+#### Tasks
+- [x] Add the CI workflow
+- [x] Add the commit-format workflow and test it against real history
+- [x] Write the `github-actions` skill and bump the plugin to 0.7.0
 
 
 ---
