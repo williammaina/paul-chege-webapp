@@ -82,16 +82,21 @@ export function Insights() {
 
         <Reveal className="mt-11 rounded-[20px] border border-white/5 p-8
           [background:radial-gradient(90%_80%_at_12%_0%,rgba(230,184,76,.14),transparent_60%),linear-gradient(160deg,#0c2238,#17344f)]">
-          <div className="flex flex-wrap items-end justify-between gap-x-9 gap-y-4">
+          {/* Two columns that each fill their half, rather than two blocks
+              of content width with a 279px hole between them. `justify-between`
+              put the edges where they belong and left the middle empty; a
+              grid makes the halves the thing being distributed. */}
+          <div className="grid items-end gap-x-9 gap-y-4 md:grid-cols-[1.15fr_1fr]">
             <div>
               <p className="text-[.78rem] font-extrabold uppercase tracking-[.15em] text-gold-400">
                 Speaking &amp; financial education
               </p>
-              <h3 className="mt-1.5 font-[family-name:var(--font-display)] text-[1.8rem] text-white">
+              <h3 className="mt-1.5 font-[family-name:var(--font-display)]
+                             text-[clamp(1.8rem,1.1rem+1.5vw,2.5rem)] leading-[1.1] text-white">
                 Bring this into your organisation.
               </h3>
             </div>
-            <p className="max-w-[30rem] text-[.92rem] leading-relaxed text-text-tertiary">
+            <p className="text-[.95rem] leading-[1.6] text-text-tertiary">
               Keynotes, workshops and financial literacy sessions — the same material,
               delivered to your team.
             </p>
