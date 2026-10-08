@@ -1,0 +1,55 @@
+# The house commit format, enforced on the server as well as the machine.
+#
+# A local hook already refuses a bad message, but a hook only binds the
+# machine it is installed on. This is the same rule applied to whatever
+# actually arrives in a pull request.
+name: Commit format
+
+on:
+  pull_request:
+    branches: [development, staging, main]
+
+permissions:
+  contents: read
+
+jobs:
+  header:
+    name: Backticked header, under 100 characters
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check each commit on the branch
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          fail=0
+          while read -r sha; do
+            [ -z "$sha" ] && continue
+            subject=$(git log -1 --format=%s "$sha")
+            # Merge commits are GitHub's, not ours.
+            case "$subject" in "Merge "*) continue ;; esac
+
+            if ! printf '%s' "$subject" \
+               | grep -qE '^(feat|fix|refactor|style|chore|perf|test|docs|build|ci|pr)\(`[^`]+`\): .*`[^`]+`'; then
+              echo "::error::$sha  header is not type(\`path\`): description with a backticked \`file\`"
+              echo "           $subject"
+              fail=1
+            fi
+
+            # GitHub appends " (#123)" to a squash commit's subject. That
+            # is its addition, not ours, so the limit applies to what was
+            # written rather than to what the merge produced.
+            written=$(printf '%s' "$subject" | sed -E 's/ \(#[0-9]+\)$//')
+            if [ "${#written}" -gt 100 ]; then
+              echo "::error::$sha  header is ${#written} characters, the limit is 100"
+              echo "           $written"
+              fail=1
+            fi
+          done < <(git rev-list "$BASE".."$HEAD")
+          exit $fail
