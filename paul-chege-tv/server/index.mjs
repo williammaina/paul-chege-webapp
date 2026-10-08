@@ -22,6 +22,7 @@ import * as email from "../../web/lib/server/email.mjs";
 import * as youtube from "../../web/lib/server/youtube.mjs";
 import * as tpl from "../../web/lib/server/templates.mjs";
 import { EPISODES } from "../../web/lib/server/episodes.mjs";
+import * as leads from "../../web/lib/server/leads.mjs";
 
 loadEnv();
 
@@ -63,6 +64,11 @@ const PAYEE = {
 
 const EBOOK = resolve(process.env.EBOOK_PATH || join(HERE, "assets", "anatomy-of-smart-borrowing.pdf"));
 const EBOOK_NAME = process.env.EBOOK_FILENAME || "The Anatomy of Smart Borrowing — Paul Chege.pdf";
+
+/* The free chapter. Named SAMPLE-* so the server's gitignore keeps the
+   paid book out of the repository while letting the giveaway in. */
+const CHAPTER = resolve(process.env.CHAPTER_PATH || join(HERE, "assets", "SAMPLE-chapter.pdf"));
+const CHAPTER_NAME = process.env.CHAPTER_FILENAME || "The Anatomy of Smart Borrowing — free chapter.pdf";
 
 /** Identity block every email signs off with. */
 const SITE_ID = () => ({
@@ -148,6 +154,7 @@ function health(res) {
     ok: true,
     live: daraja.configured(),
     ebookReady: existsSync(EBOOK),
+    chapterReady: existsSync(CHAPTER),
     shortcode: process.env.MPESA_SHORTCODE || null,
     payee: PAYEE,
     sessions: diary.SESSIONS,
@@ -419,6 +426,64 @@ function download(res, token) {
   });
   console.log("[download]", check.order.id, "copy", check.order.downloads + 1, "of", basename(EBOOK));
   createReadStream(EBOOK).pipe(res);
+}
+
+
+/* ── the free chapter ─────────────────────────────────────────────────────
+   An address in exchange for a chapter. The file is never attached to the
+   email: a link keeps the message small enough to reach an inbox rather
+   than a spam folder, and means a lost email can be re-sent without
+   re-sending a megabyte.
+   ──────────────────────────────────────────────────────────────────────── */
+async function chapterRequest(req, res) {
+  const ip = clientIp(req);
+  if (!limit("chapter:" + ip, 6, RATE_WINDOW)) {
+    throw new HttpError(429, "That is a lot of requests from one connection. Please wait a few minutes.");
+  }
+  if (!existsSync(CHAPTER)) {
+    throw new HttpError(503, "The chapter is not ready to download yet. Please try again shortly.");
+  }
+
+  const body = await readJson(req);
+  if (!leads.validEmail(body.email)) {
+    throw new HttpError(400, "That does not look like an email address we can send to.");
+  }
+
+  const lead = leads.capture(body.email, { name: body.name, source: body.source });
+  const url = PUBLIC_URL + "/api/chapter/" + lead.token;
+
+  const sent = await mail(lead.email, tpl.chapter(lead, { site: SITE_ID(), url, book: EBOOK_NAME }),
+                          "chapter " + lead.email);
+
+  // The address is captured either way. An email provider having a bad
+  // minute is not a reason to lose the lead or to make them ask twice.
+  json(res, 200, {
+    ok: true,
+    emailed: !!sent.ok,
+    downloadUrl: url,
+    message: sent.ok
+      ? "Sent. Check your inbox — the link is good for thirty days."
+      : "Your chapter is ready below. We could not send the email just now.",
+  });
+}
+
+function chapterDownload(res, token) {
+  const check = leads.redeem(token);
+  if (!check.ok) throw new HttpError(403, check.reason);
+  if (!existsSync(CHAPTER)) throw new HttpError(503, "The chapter is not available right now.");
+
+  const size = statSync(CHAPTER).size;
+  const ascii = CHAPTER_NAME.replace(/[^\x20-\x7e]/g, "-").replace(/"/g, "");
+  res.writeHead(200, {
+    "Content-Type": "application/pdf",
+    "Content-Length": size,
+    "Content-Disposition":
+      'attachment; filename="' + ascii + '"; filename*=UTF-8\'\'' + encodeURIComponent(CHAPTER_NAME),
+    "Cache-Control": "no-store",
+    "X-Content-Type-Options": "nosniff",
+  });
+  console.log("[chapter]", check.lead.email, "copy", check.lead.downloads);
+  createReadStream(CHAPTER).pipe(res);
 }
 
 /* ── email ────────────────────────────────────────────────────────────── */
@@ -776,6 +841,11 @@ export const handleRequest = async (req, res) => {
       const sent = await runReminders(body.now ? Number(body.now) : Date.now());
       return json(res, 200, { sent });
     }
+
+    if (req.method === "POST" && path === "/api/chapter") return await chapterRequest(req, res);
+
+    const chap = path.match(/^\/api\/chapter\/([A-Za-z0-9_-]{1,128})$/);
+    if (req.method === "GET" && chap) return chapterDownload(res, chap[1]);
 
     if (req.method === "POST" && path === "/api/booking/hold") return await holdSlot(req, res);
     if (req.method === "POST" && path === "/api/booking/confirm") return await confirmFree(req, res);
