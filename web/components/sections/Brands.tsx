@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { brands } from "@/lib/content/site";
+import { SectionHead } from "@/components/ui/SectionHead";
 import { Reveal } from "@/components/motion/Reveal";
 
 /**
@@ -13,8 +14,12 @@ export function Brands() {
       {brands.map((b) => (
         <div key={(hidden ? "b-" : "a-") + b.file}
              className="group flex w-[210px] shrink-0 flex-col items-center gap-2 rounded-2xl border
-                        border-[#e6eaef] bg-white px-5 py-6 text-center transition
-                        hover:-translate-y-1 hover:border-gold/60 hover:shadow-lg sm:w-[240px]">
+                        border-[#e6eaef] bg-white px-5 py-6 text-center transition-all duration-300
+                        [transition-timing-function:var(--ease-out-soft)]
+                        hover:-translate-y-1.5 hover:border-accent-coral/70
+                        hover:shadow-xl hover:shadow-black/10
+                        motion-reduce:transition-none motion-reduce:hover:translate-y-0
+                        sm:w-[240px]">
           <Image src={`/img/brands/${b.file}`} alt={b.name} width={150} height={56}
                  className="h-14 w-auto max-w-[150px] object-contain" />
           <b className="text-[.78rem] font-bold leading-tight text-[#24384f]">{b.name}</b>
@@ -25,17 +30,18 @@ export function Brands() {
   );
 
   return (
-    <section id="brands" className="border-b border-[#e6eaef] bg-white py-14">
-      <Reveal className="wrap mx-auto mb-8 max-w-[620px] text-center">
-        <Eyebrowish>Trusted partners</Eyebrowish>
-        <h2 className="mt-1.5 text-[clamp(1.35rem,1rem+1.4vw,2rem)] font-semibold leading-tight">
-          The businesses Paul works alongside.
-        </h2>
-        <p className="mt-2 text-[.95rem] leading-relaxed text-[#63707f]">
-          Insurance placed through a licensed broker, and advisory work with
-          businesses building, financing and growing across Kenya.
-        </p>
-      </Reveal>
+    <section id="brands" className="section border-b border-[#e6eaef] bg-white">
+      {/* Flush-left, on the shared axis, like every other section head.
+          This one was centred in a 620px measure, which made it the only
+          heading on the page that did not begin where the others do. */}
+      <div className="wrap">
+        <SectionHead
+          eyebrow="Trusted partners"
+          title={<>The businesses Paul works alongside.</>}
+          lede={<>Insurance placed through a licensed broker, and advisory work with
+                 businesses building, financing and growing across Kenya.</>}
+        />
+      </div>
 
       <div className="marquee relative overflow-hidden
                       [mask-image:linear-gradient(90deg,transparent,#000_6%,#000_94%,transparent)]">
@@ -45,11 +51,5 @@ export function Brands() {
         </div>
       </div>
     </section>
-  );
-}
-
-function Eyebrowish({ children }: { children: React.ReactNode }) {
-  return (
-    <p className="text-[.78rem] font-extrabold uppercase tracking-[.15em] text-gold-ink">{children}</p>
   );
 }

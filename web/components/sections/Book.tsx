@@ -14,13 +14,19 @@ const BookCanvas = dynamic(() => import("@/components/three/BookCanvas").then((m
   ssr: false,
 });
 
+const CHIP_ACCENT = [
+  "var(--color-accent-gold)",
+  "var(--color-accent-coral)",
+  "var(--color-accent-violet)",
+];
+
 export function Book({ onBuy }: { onBuy: (sku: "ebook" | "physical") => void }) {
   const { fmt } = usePrices();
   const gl = useAffordable3D();
 
   return (
-    <section id="book" className="grain aurora relative isolate overflow-hidden py-[92px]
-      [background:radial-gradient(90%_70%_at_78%_8%,rgba(230,184,76,.18),transparent_58%),linear-gradient(180deg,#03090f_0%,#081a2c_52%,#0b2038_100%)]">
+    <section id="book" className="section-lg grain aurora relative isolate overflow-hidden
+      [background:radial-gradient(90%_70%_at_78%_8%,rgba(230,184,76,.18),transparent_58%),linear-gradient(180deg,#0c2238_0%,#17344f_50%,#0c2238_100%)]">
       <div className="wrap relative z-10 grid items-center gap-12 lg:grid-cols-[1.05fr_.95fr]">
         <Reveal>
           <p className="text-[.78rem] font-extrabold uppercase tracking-[.15em] text-gold-400">Featured book</p>
@@ -28,7 +34,7 @@ export function Book({ onBuy }: { onBuy: (sku: "ebook" | "physical") => void }) 
                          font-semibold leading-[1.06] text-white">
             The Anatomy of<br /><span className="text-gold-400">Smart Borrowing</span>
           </h2>
-          <p className="mt-4 max-w-md text-[1.02rem] leading-relaxed text-[#b9c8dc]">{bookFacts.blurb}</p>
+          <p className="mt-4 max-w-md text-[1.02rem] leading-relaxed text-text-tertiary">{bookFacts.blurb}</p>
 
           <div className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-3">
             <Fact label="Foreword" value={bookFacts.foreword} />
@@ -36,9 +42,18 @@ export function Book({ onBuy }: { onBuy: (sku: "ebook" | "physical") => void }) 
             <Fact label="ISBN" value={bookFacts.isbn} mono />
           </div>
 
-          <ul className="mt-8 grid grid-cols-2 gap-x-6 gap-y-2.5 text-[.88rem] text-[#c3d1e2]">
-            {bookFacts.topics.map((t) => (
-              <li key={t} className="flex gap-2.5"><span className="text-gold-400">✓</span>{t}</li>
+          <ul className="mt-8 flex flex-wrap gap-2">
+            {bookFacts.topics.map((t, i) => (
+              <li key={t}
+                  style={{ ["--accent" as string]: CHIP_ACCENT[i % CHIP_ACCENT.length] }}
+                  className="rounded-full border border-white/10 bg-white/[.04] px-3.5 py-1.5
+                             text-[.8rem] text-text-tertiary transition-all duration-300
+                             [transition-timing-function:var(--ease-out-soft)]
+                             hover:-translate-y-0.5 hover:border-[color:var(--accent)]
+                             hover:text-text-primary motion-reduce:transition-none
+                             motion-reduce:hover:translate-y-0">
+                <span className="mr-1.5" style={{ color: "var(--accent)" }}>✓</span>{t}
+              </li>
             ))}
           </ul>
 
@@ -80,7 +95,7 @@ export function Book({ onBuy }: { onBuy: (sku: "ebook" | "physical") => void }) 
 function Fact({ label, value, mono = false }: { label: string; value: string; mono?: boolean }) {
   return (
     <div>
-      <div className="text-[.66rem] font-extrabold uppercase tracking-[.16em] text-[#8fa3bd]">{label}</div>
+      <div className="text-[.66rem] font-extrabold uppercase tracking-[.16em] text-text-muted">{label}</div>
       <div className={`mt-1 text-[.92rem] font-semibold text-white ${mono ? "font-mono text-[.86rem] tnum" : ""}`}>
         {value}
       </div>

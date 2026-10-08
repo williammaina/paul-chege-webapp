@@ -54,7 +54,7 @@ export function Nav({ onBook }: { onBook: () => void }) {
               already says who this is; the text needs room to earn its place. */}
           <span className="min-w-0 max-[430px]:hidden">
             <strong className="block truncate text-[1.05rem] tracking-[.04em] text-white">PAUL CHEGE</strong>
-            <small className="hidden truncate text-[.62rem] text-[#9fb0be] lg:block">{/* role */}
+            <small className="hidden truncate text-[.62rem] text-text-muted lg:block">{/* role */}
               Financial Advisor • Author • Educator • Speaker
             </small>
           </span>
@@ -65,7 +65,7 @@ export function Nav({ onBook }: { onBook: () => void }) {
             <a key={href} href={href}
                className={`relative py-1 transition-colors after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5
                  after:origin-left after:scale-x-0 after:bg-gold-400 after:transition-transform after:duration-300
-                 ${active === href ? "text-gold-400 after:scale-x-100" : "text-[#cfdcea] hover:text-gold-400"}`}>
+                 ${active === href ? "text-gold-400 after:scale-x-100" : "text-text-tertiary hover:text-gold-400"}`}>
               {label}
             </a>
           ))}
@@ -90,7 +90,7 @@ export function Nav({ onBook }: { onBook: () => void }) {
           {nav.map(({ href, label }) => (
             <a key={href} href={href} onClick={() => setOpen(false)}
                className={`border-b border-white/5 px-6 py-3.5 text-[.92rem] ${
-                 active === href ? "bg-gold-400/10 text-gold-400" : "text-[#cfdcea]"}`}>
+                 active === href ? "bg-gold-400/10 text-gold-400" : "text-text-tertiary"}`}>
               {label}
             </a>
           ))}

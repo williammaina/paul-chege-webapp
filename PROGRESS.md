@@ -1,6 +1,6 @@
 # Paul Chege Financial Advisory — Progress
 
-**Phase 2 of 4 · P2-M13 next · 12 of 20 milestones complete**
+**Phase 2 of 4 · P2-M13 next · 17 of 24 milestones complete**
 
 ## How this file works
 
@@ -214,14 +214,119 @@ and both let money go wrong rather than merely breaking a page:
 Both need shared storage — Postgres, Redis or Vercel KV — before this can
 be deployed rather than after.
 
+### P2-M14 — Proof first, three lanes, room for outcomes ✅ COMPLETE
+
+**Branch:** `feat/p2-m14-proof-lanes-outcomes` · merged into `development`
+
+Three of the improvements Paul picked from a list of nine, all of them
+about the same failure: the page asked to be trusted before it had said
+anything a stranger could check.
+
+- **The strongest fact was ranked last.** A sitting Deputy President
+  wrote the foreword, and that was a grey line of body copy three
+  screens down, under a marquee of six SME logos.
+- **Eight advisory cards, seven saying "Book a session".** Three of them
+  were different names for reading a loan document before signing it,
+  and nothing on the card told them apart.
+- **No third-party evidence at all.** Paul is a regulated intermediary,
+  so a testimonial needs written consent and nothing may be invented.
+
+#### Tasks
+- [x] Put the foreword credential directly under the hero
+- [x] Collapse the eight advisory cards into three lanes
+- [x] Build the case-outcome section, and leave it empty until Paul fills it
+
+### P2-M15 — Layout principles ✅ COMPLETE
+
+**Branch:** `feat/p2-m14-proof-lanes-outcomes` · merged into `development`
+
+Paul supplied Flux Academy's *Principles of Layout* and asked for the
+page to be held against it. Audited at 1440 and 375, three of the nine
+principles were being broken measurably rather than as a matter of
+taste.
+
+- **Alignment.** The hero ran on its own 1500px container with a 16px
+  gutter while every other section used `.wrap` at 1180 with 20px, so
+  the content stepped 107px inward at the fold. The partners heading
+  was also the only one on the page centred rather than flush-left.
+- **White space and sequence.** Section padding was 46, 56, 76, 88 and
+  92 pixels with no system behind the differences, so the page scrolled
+  at one flat volume.
+- **Focal point and hierarchy.** In the credential band the three
+  supporting figures were set larger than the foreword credential they
+  support.
+
+#### Tasks
+- [x] Put every section, the hero included, on one vertical axis
+- [x] Give the page a section rhythm instead of five arbitrary paddings
+- [x] Make the foreword the focal point of the credential band
+
+### P2-M16 — Stop cropping the portrait ✅ COMPLETE
+
+**Branch:** `feat/p2-m14-proof-lanes-outcomes` · merged into `development`
+
+The portrait file is square, 2047x2048, and Paul occupies the middle
+1280px of it. The frame was a `min-h` with `object-[center_16%]`, which
+made it 0.58 aspect in the three-column layout and 2.1 once the columns
+stacked — cutting his shoulders at one breakpoint and cutting him off at
+the chest at the other. A neighbouring column growing taller made it
+worse, because a stretched frame is a narrower crop.
+
+Stacked, the frame is 4:5 and nothing is cut at all. On desktop Paul
+asked for it flush with the columns beside it, and no square can run a
+718px row at this column width without giving something up — holding all
+of him would need a 449px column, which only exists if the headline
+drops below the size of the section headings. The frame takes the width
+instead, so the crop is horizontal only: it never touches his head,
+face, hands or the length of him, and what leaves the frame is about
+100px of the outer edge of each sleeve.
+
+Separately, the headline had ended up smaller than the section headings
+it outranks, so `SectionHead` comes down to 2.6rem.
+
+Measuring the file rather than eyeballing it then showed the estimate was
+wrong twice over: Paul runs x436 to x1780, so he is 1344px wide, not the
+1280 assumed, and his centre is 1108 against the file's 1023 — he is off
+centre to the right, which is why it was his right shoulder going. A
+frame holding him needs an aspect of 0.656 or wider, and the row at 718px
+could not give one. Slimming the side panel took the row to 596, and the
+width freed by narrowing both cards took the frame to 404x596, an aspect
+of 0.677, framed at 63 percent. Both shoulders now clear the edge with
+about 20px of backdrop to spare on each side, at every width.
+
+#### Tasks
+- [x] Fit the whole of Paul in the frame at every width, and grade the card
+- [x] Run the frame flush with the columns beside it, and restore h1 over h2
+- [x] Hold both shoulders in frame at full height, measured off the file
+
+### P2-M17 — Kinetic layer and lane accents ✅ COMPLETE
+
+**Branch:** `feat/p2-m14-proof-lanes-outcomes` · merged into `development`
+
+Paul supplied ten reference screenshots and two Dribbble links and asked
+for an award-style motion and visual pass. He chose to keep the hero's
+structure and take the overhaul everywhere else, and later opened the
+palette beyond navy and gold.
+
+`DESIGN.md` carries the analysis of the references, the measured contrast
+tables, the motion contracts and the component source.
+
+#### Tasks
+- [x] Analyse the references and write `DESIGN.md`
+- [x] Add the surface, text, amber and lane-accent scales to `globals.css`
+- [x] Build the kinetic layer — glow, gradient edge, radar ping, word reveal
+- [x] Add `Kinetic` and `Counter`, and let `Reveal` carry a style
+- [x] Set the hero headline word by word, structure untouched
+- [x] Give each advisory lane its own accent on one shared surface
+- [x] Carry the system through the framework, insights, the book and contact
+
+
 ---
 
 ## Phase 3 — Hardening ⬜ NOT STARTED
 
 ### P3-M01 — Analytics and error reporting ⬜ NOT STARTED
 ### P3-M02 — Deployment and CI ⬜ NOT STARTED
-
----
 
 ## Phase 4 — After delivery ⬜ NOT STARTED
 

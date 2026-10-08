@@ -47,7 +47,7 @@ export function StickyBook({ onBook }: { onBook: () => void }) {
       <div className="flex items-center gap-3 px-4 py-3">
         <div className="min-w-0 flex-1">
           <p className="truncate text-[.82rem] font-bold text-white">Talk it through with Paul</p>
-          <p className="truncate text-[.72rem] text-[#9db2c9]">
+          <p className="truncate text-[.72rem] text-text-tertiary">
             First 30 minutes free · then {fmt("coaching")}
           </p>
         </div>
